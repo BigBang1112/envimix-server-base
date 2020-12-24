@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<manialink version="3">
+	<frame id="FRAME_DASHBOARD">
+		<frame pos="0 -5">
+			<frame pos="0 -75" id="FRAME_TIME" clip="True" clipsizen="60 20">
+				<quad z-index="0" size="60 15" bgcolor="FFFA" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="60 15" bgcolor="FFFA" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+				<label pos="0 -0.5" z-index="2" size="55 10" text="0:00.000" halign="center" valign="center2" textfont="RajdhaniMono" textsize="8" textcolor="F00" scale="1.05" hidden="1" id="LABEL_TIME_RED"/>
+				<label pos="0 -0.5" z-index="2" size="55 10" text="0:00.000" halign="center" valign="center2" textfont="RajdhaniMono" textsize="8" textcolor="00F" scale="1.05" hidden="1" id="LABEL_TIME_BLUE"/>
+				<label pos="0 -0.5" z-index="3" size="55 10" text="0:00.000" halign="center" valign="center2" textfont="RajdhaniMono" textsize="8" textcolor="EEE" id="LABEL_TIME"/>
+				<quad pos="0 7.25" z-index="0" size="29 0.75" bgcolor="FFFA" halign="right" valign="bottom" id="QUAD_STEER_LEFT" style="Bgs1" substyle="BgWindow4"/>
+				<quad pos="0 7.25" z-index="0" size="29 0.75" bgcolor="FFFA" halign="left" valign="bottom" id="QUAD_STEER_RIGHT" style="Bgs1" substyle="BgWindow4"/>
+				<quad pos="0 -7.5" z-index="1" size="58 1" halign="center" valign="bottom" id="QUAD_BRAKE" opacity="0" style="Bgs1" substyle="BgMetalBar" colorize="F00"/>
+			</frame>
+			<frame pos="-45 -77.5" id="FRAME_CHECKPOINT" clip="True" clipsizen="40 15">
+				<quad z-index="0" size="30 10" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="30 10" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+				
+				<label pos="0 -0.4" z-index="3" size="22 5" text="-:--.---" halign="center" valign="center2" textfont="RajdhaniMono" textsize="3" opacity=".9" id="LABEL_CP" textcolor="EEE"/>
+				
+				<quad z-index="2" size="29 9" valign="center" halign="center" style="Bgs1InRace" substyle="BgWindow4" colorize="03F" id="QUAD_CP" opacity="0"/>
+			</frame>
+			<frame pos="-45 -70.5" id="FRAME_CHECKPOINT_COUNTER" clip="True" clipsizen="30 6">
+				<quad z-index="0" size="25 4" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="25 4" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+				<label pos="0 -0.15" z-index="3" size="20 5" textprefix="$t" text="Checkpoint $o?/?" halign="center" valign="center2" textfont="Oswald" textsize="0.3" id="LABEL_CHECKPOINT_COUNTER"/>
+			</frame>
+			<frame pos="45 -77.5" id="FRAME_SPEED" clip="True" clipsizen="40 15">
+				<quad z-index="0" size="30 10" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="30 10" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+				<quad z-index="5" size="30 10" valign="center" halign="center" style="Bgs1" substyle="BgWindow4" colorize="F00" opacity="0" id="QUAD_SPEED_FREEWHEELING"/>
+				<label pos="0 0.5" z-index="4" size="25 5" text="123" halign="center" valign="center2" textfont="RajdhaniMono" textsize="3" id="LABEL_SPEED" textcolor="EEE"/>
+				<gauge pos="0 -3" z-index="3" size="28 6.5" style="EnergyBar" halign="center" drawbg="0" valign="center" id="GAUGE_RPM" centered="1"/>
+			</frame>
+			<frame pos="45 -70.5" id="FRAME_DISTANCE" clip="True" clipsizen="30 6">
+				<quad z-index="0" size="25 4" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="25 4" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+				<label pos="0 -0.15" z-index="3" size="20 5" textprefix="$t" text="Distance: $o?" halign="center" valign="center2" textfont="OswaldMono" textsize="0.3" id="LABEL_DISTANCE"/>
+			</frame>
+			<frame pos="66 -78.5" id="FRAME_GEAR" clip="True" clipsizen="13 10">
+				<quad z-index="0" size="12 8" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="12 8" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+				<label pos="0 -.3" z-index="3" size="12 8" text="1" halign="center" valign="center2" textfont="RajdhaniMono" textsize="2" id="LABEL_GEAR" textcolor="EEE"/>
+			</frame>
+			<frame pos="-66 -78.5" clip="True" clipsizen="13 10" id="FRAME_INFO">
+				<quad z-index="0" size="12 8" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="12 8" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+				<quad z-index="2" size="12 8" valign="center" halign="center" style="Bgs1" substyle="BgCardInventoryItem" scriptevents="1" colorize="036" opacity=".75" hidden="1"/>
+				<label pos="0 -.3" z-index="3" size="12 8" text="?" halign="center" valign="center2" textfont="RajdhaniMono" textsize="1.5" id="LABEL_DISTANCE" textcolor="EEE" hidden="1"/>
+			</frame>
+			<frame pos="-66 -78.5" z-index="1">
+				<frame clip="True" clipsizen="5 4" id="FRAME_STEEPNESS">
+					<frame pos="-2.5 -1.5" z-index="0" rot="-10" id="FRAME_STEEPNESS_ZERO_MINUS_ONE">
+						<quad size="20 5" bgcolor="FFFD" halign="center"/>
+						<label pos="2.75 0" z-index="0" size="8 3" text="?°" valign="bottom" halign="center" textsize="0.2" textfont="Oswald" opacity=".75" id="LABEL_STEEPNESS_ZERO_MINUS_ONE"/>
+					</frame>
+					<frame pos="2.5 -1.5" z-index="0" rot="10" id="FRAME_STEEPNESS_ZERO_ONE" hidden="1">
+						<quad size="20 5" bgcolor="FFFD" halign="center"/>
+						<label pos="-2.25 0" z-index="0" size="8 3" text="?°" valign="bottom" halign="center" textsize="0.2" textfont="Oswald" opacity=".75" id="LABEL_STEEPNESS_ZERO_ONE"/>
+					</frame>
+					<quad pos="2.5 1.5" z-index="0" size="20 5" bgcolor="FFFD" halign="center" rot="170" hidden="1"/>
+					<quad pos="-2.5 1.5" z-index="0" size="20 5" bgcolor="FFFD" halign="center" rot="190" hidden="1"/>
+				</frame>
+			</frame>
+		</frame>
+	</frame>
+	<script><!--
+		#Include "TextLib" as TextLib
+		#Include "MathLib" as MathLib
+		#Include "AnimLib" as AnimLib
+
+		Text TimeToTextWithMilli(Integer _Time) {
+			return TextLib::TimeToText(_Time, True) ^ MathLib::Abs(_Time % 10);
+		}
+
+		CTmMlPlayer GetOwner() {
+			wait(GUIPlayer != Null || InputPlayer != Null);
+			if(GUIPlayer != Null) return GUIPlayer;
+			return InputPlayer;
+		}
+
+		Boolean IsVisible() {
+			return !IsInGameMenuDisplayed && !IsSpectator;
+		}
+
+		main() {
+			declare Start = Now+500;
+
+			declare Integer PlayerTime;
+			declare Integer IndependantLapsOffset;
+			declare Real DistanceOffset;
+
+			declare CTmMlPlayer::ERaceState PreviousRaceState;
+			declare Boolean PreviousBrakeState;
+
+			declare Frame_Dashboard = (Page.GetFirstChild("FRAME_DASHBOARD") as CMlFrame);
+
+			declare Frame_Time = (Page.GetFirstChild("FRAME_TIME") as CMlFrame);
+			declare Frame_Checkpoint = (Page.GetFirstChild("FRAME_CHECKPOINT") as CMlFrame);
+			declare Frame_Speed = (Page.GetFirstChild("FRAME_SPEED") as CMlFrame);
+			declare Frame_Gear = (Page.GetFirstChild("FRAME_GEAR") as CMlFrame);
+			declare Frame_Info = (Page.GetFirstChild("FRAME_INFO") as CMlFrame);
+			declare Frame_Checkpoint_Counter = (Page.GetFirstChild("FRAME_CHECKPOINT_COUNTER") as CMlFrame);
+			declare Frame_Distance = (Page.GetFirstChild("FRAME_DISTANCE") as CMlFrame);
+
+			declare Frame_Steepness = (Page.GetFirstChild("FRAME_STEEPNESS") as CMlFrame);
+			declare Frame_Steepness_Zero_Minus_One = (Page.GetFirstChild("FRAME_STEEPNESS_ZERO_MINUS_ONE") as CMlFrame);
+			declare Frame_Steepness_Zero_One = (Page.GetFirstChild("FRAME_STEEPNESS_ZERO_ONE") as CMlFrame);
+			declare Label_Steepness_Zero_Minus_One = (Page.GetFirstChild("LABEL_STEEPNESS_ZERO_MINUS_ONE") as CMlLabel);
+			declare Label_Steepness_Zero_One = (Page.GetFirstChild("LABEL_STEEPNESS_ZERO_ONE") as CMlLabel);
+
+			declare Label_Time = (Page.GetFirstChild("LABEL_TIME") as CMlLabel);
+			declare Label_Speed = (Page.GetFirstChild("LABEL_SPEED") as CMlLabel);
+			declare Label_Distance = (Page.GetFirstChild("LABEL_DISTANCE") as CMlLabel);
+			declare Label_Checkpoint_Counter = (Page.GetFirstChild("LABEL_CHECKPOINT_COUNTER") as CMlLabel);
+			declare Gauge_RPM = (Page.GetFirstChild("GAUGE_RPM") as CMlGauge);
+			declare Quad_Steer_Left = (Page.GetFirstChild("QUAD_STEER_LEFT") as CMlQuad);
+			declare Quad_Steer_Right = (Page.GetFirstChild("QUAD_STEER_RIGHT") as CMlQuad);
+			declare Quad_Brake = (Page.GetFirstChild("QUAD_BRAKE") as CMlQuad);
+			declare Label_Gear = (Page.GetFirstChild("LABEL_GEAR") as CMlLabel);
+
+			declare Label_CP = (Page.GetFirstChild("LABEL_CP") as CMlLabel);
+			declare Quad_CP = (Page.GetFirstChild("QUAD_CP") as CMlQuad);
+
+			declare Integer TimeResetRaceTime;
+			declare Integer TimeResetStamp;
+			declare Integer TimeResetLength = 500;
+
+			Frame_Time.ClipWindowRelativePosition.Y = -20.;
+			Frame_Checkpoint.ClipWindowRelativePosition.X = 32.;
+			//Frame_Distance.ClipWindowRelativePosition.X = -32.;
+
+			Frame_Checkpoint_Counter.ClipWindowRelativePosition.Y = -6.;
+			Frame_Distance.ClipWindowRelativePosition.Y = -6.;
+
+			declare LastGear = GetOwner().EngineCurGear;
+
+			declare CPCounter = 0;
+
+			Frame_Dashboard.Visible = IsVisible();
+			declare PreviousIsVisible = IsVisible();
+
+			while(True) {
+				foreach(Event in PendingEvents) {
+					switch(Event.Type) {
+						case CMlScriptEvent::Type::PluginCustomEvent: {
+							switch(Event.CustomEventType) {
+								case "Show": {
+									Start = Now;
+
+									Label_Gear.Opacity = 1.;
+									Quad_Brake.Opacity = 0.;
+								}
+							}
+						}
+					}
+				}
+
+				foreach(Event in RaceEvents) {
+					switch(Event.Type) {
+						case CTmRaceClientEvent::EType::WayPoint: {
+							if(Event.Player.User.Login == LocalUser.Login) {
+								if(Event.IsEndRace) {
+									PlayerTime = Event.RaceTime;
+								}
+								else {
+									CPCounter += 1;
+
+									if(Event.IsEndLap) {
+										if(IndependantLaps) {
+											IndependantLapsOffset = Event.RaceTime;
+											CPCounter = 0;
+											DistanceOffset = GetOwner().Distance;
+										}
+									}
+								}
+								//PlayAudio(Sound_TimeChange);
+
+								if(Event.Player.Score != Null)
+								if(Event.Player.Score.BestRace.Checkpoints.count == 0) {
+									Label_CP.Opacity = 0.;
+									AnimMgr.Add(Label_CP, "<label opacity=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+									Quad_CP.Opacity = 0.;
+									if(IndependantLaps)
+										Label_CP.Value = TimeToTextWithMilli(Event.LapTime);
+									else
+										Label_CP.Value = TimeToTextWithMilli(Event.RaceTime);
+								}
+								else {
+									declare Integer Difference;
+									if(IndependantLaps)
+										Difference = Event.LapTime - Event.Player.Score.BestRace.Checkpoints[Event.CheckpointInLap];
+									else
+										Difference = Event.RaceTime - Event.Player.Score.BestRace.Checkpoints[Event.CheckpointInRace];
+
+									if(Difference > 0) {
+										Label_CP.SetText("+"^TimeToTextWithMilli(Difference));
+										Quad_CP.Colorize = <1.,.1,0.>;
+									}
+									else if(Difference < 0) {
+										Label_CP.SetText(TimeToTextWithMilli(Difference));
+										Quad_CP.Colorize = <0.,.1,1.>;
+									}
+									else {
+										Label_CP.SetText(TimeToTextWithMilli(Difference));
+										Quad_CP.Colorize = <1.,.0,1.>;
+									}
+
+									Label_CP.Opacity = 0.;
+									AnimMgr.Add(Label_CP, "<label opacity=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+
+									Quad_CP.Opacity = 0.;
+									AnimMgr.Add(Quad_CP, "<quad opacity=\"0.5\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+								}
+							}
+						}
+						case CTmRaceClientEvent::EType::Respawn: {
+							if(Event.Player.User.Login == LocalUser.Login) {
+								if(Event.Player.CurRace.Time == -1) { // If fully respawned to start
+									if(PlayerTime > 0)
+									for(I,0,5) {
+										Audio.PlaySoundEvent(CAudioManager::ELibSound::ScoreIncrease, 0, .5, I*80);
+									}
+
+									if(Label_CP.Value != "-:--.---") {
+										Label_CP.Opacity = 0.;
+										AnimMgr.Add(Label_CP, "<label opacity=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+									}
+									Label_CP.Value = "-:--.---";
+									Quad_CP.Opacity = 0.;
+
+									CPCounter = 0;
+									IndependantLapsOffset = 0;
+									DistanceOffset = 0.;
+								}
+							}
+						}
+					}
+				}
+
+				if(IsVisible() != PreviousIsVisible) {
+					Start = Now;
+					Frame_Dashboard.Visible = IsVisible();
+					PreviousIsVisible = IsVisible();
+				}
+
+				Frame_Time.ClipWindowRelativePosition.Y = AnimLib::EaseOutQuad(Now - Start, -20., 20., 500);
+				Frame_Checkpoint.ClipWindowRelativePosition.X = AnimLib::EaseOutQuad(Now - Start-100, 40., -40., 500);
+				Frame_Speed.ClipWindowRelativePosition.X = AnimLib::EaseOutQuad(Now - Start-100, -40., 40., 500);
+				Frame_Gear.ClipWindowRelativePosition.X = AnimLib::EaseOutQuad(Now - Start-100, -30., 30., 1000);
+				Frame_Info.ClipWindowRelativePosition.X = AnimLib::EaseOutQuad(Now - Start-100, 30., -30., 1000);
+				Frame_Checkpoint_Counter.ClipWindowRelativePosition.Y = AnimLib::EaseOutQuad(Now - Start-400, -6., 6., 500);
+				Frame_Distance.ClipWindowRelativePosition.Y = AnimLib::EaseOutQuad(Now - Start-400, -6., 6., 500);
+
+				foreach(Control in Frame_Steepness.Controls) {
+					if(Control is CMlFrame) {
+						foreach(Control2 in (Control as CMlFrame).Controls) {
+							if(Control2 is CMlQuad) {
+								(Control2 as CMlQuad).Opacity = AnimLib::EaseOutQuad(Now - Start-800, 0., 1., 200);
+							}
+							else if(Control2 is CMlLabel) {
+								(Control2 as CMlLabel).Opacity = AnimLib::EaseOutQuad(Now - Start-800, 0., 1., 200);
+							}
+						}
+					}
+				}
+
+				declare RpmRatio = MathLib::Clamp((GetOwner().EngineRpm-1000)/9000,0.,1.);
+
+				switch(GetOwner().RaceState) {
+					case CTmMlPlayer::ERaceState::BeforeStart: {
+						if(PreviousRaceState == CTmMlPlayer::ERaceState::Running) {
+							TimeResetRaceTime = PlayerTime - IndependantLapsOffset;
+							TimeResetStamp = Now;
+
+							PreviousRaceState = CTmMlPlayer::ERaceState::BeforeStart;
+						}
+						
+						PlayerTime = MathLib::NearestInteger(AnimLib::EaseOutQuad(Now - TimeResetStamp, TimeResetRaceTime+.0, -TimeResetRaceTime+.0, TimeResetLength));
+					}
+					case CTmMlPlayer::ERaceState::Running: {
+						if(PreviousRaceState == CTmMlPlayer::ERaceState::BeforeStart) {
+							Label_Time.RelativeScale = 1.25;
+							AnimMgr.Add(Label_Time, "<label scale=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+
+							PreviousRaceState = CTmMlPlayer::ERaceState::Running;
+						}
+
+						PlayerTime = MathLib::Max(0, GameTime - GetOwner().RaceStartTime);
+					}
+					case CTmMlPlayer::ERaceState::Finished: {
+						
+					}
+				}
+
+				Label_Time.SetText(TimeToTextWithMilli(PlayerTime - IndependantLapsOffset));
+				Label_Speed.SetText(""^GetOwner().DisplaySpeed);
+				Label_Speed.RelativeScale = RpmRatio*.2+0.9;
+				Label_Distance.Value = TextLib::GetTranslatedText("Distance")^": $o"^TextLib::FormatReal(GetOwner().Distance-DistanceOffset, 2, False, False)^"$tm";
+
+				declare CheckpointCount = 0;
+				if(IndependantLaps)
+					CheckpointCount = MapCheckpointPos.count;
+				else
+					CheckpointCount = MapCheckpointPos.count*NbLaps+NbLaps-1;
+
+				if(CheckpointCount == 0)
+					Label_Checkpoint_Counter.Value = "No checkpoints";
+				else
+					Label_Checkpoint_Counter.Value = "Checkpoint $o"^CPCounter^"/"^CheckpointCount;
+
+				if(CheckpointCount > 0 && CheckpointCount == CPCounter)
+					Label_Checkpoint_Counter.TextColor = <1.,1.,0.>;
+				else Label_Checkpoint_Counter.TextColor = <1.,1.,1.>;
+
+				Gauge_RPM.Ratio = RpmRatio;
+				Gauge_RPM.RelativeScale = GetOwner().EngineTurboRatio*.15+1;
+
+				if(GetOwner().EngineCurGear != LastGear) {
+					Label_Gear.Opacity = 0.;
+					AnimMgr.Add(Label_Gear, "<label opacity=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+					if(GetOwner().EngineCurGear > 0)
+						Label_Gear.SetText(""^GetOwner().EngineCurGear);
+					else
+						Label_Gear.SetText("R");
+					LastGear = GetOwner().EngineCurGear;
+				}
+
+				Quad_Steer_Left.Size.X = MathLib::Clamp(-GetOwner().InputSteer,0.,1.)*28;
+				Quad_Steer_Right.Size.X = MathLib::Clamp(GetOwner().InputSteer,0.,1.)*28;
+
+				// If player started or stopped braking
+				if(GetOwner().InputIsBraking != PreviousBrakeState) {
+					if(GetOwner().InputIsBraking) {
+						AnimMgr.Add(Quad_Brake, "<quad opacity=\"1\"/>", 100, CAnimManager::EAnimManagerEasing::QuadOut);
+					}
+					else {
+						AnimMgr.Add(Quad_Brake, "<quad opacity=\"0\"/>", 100, CAnimManager::EAnimManagerEasing::QuadOut);
+					}
+					PreviousBrakeState = GetOwner().InputIsBraking;
+				}
+
+				if(GetOwner().FreeWheelingDuration > 0)
+					(Page.GetFirstChild("QUAD_SPEED_FREEWHEELING") as CMlQuad).Opacity = (MathLib::Sin(GetOwner().FreeWheelingDuration/100.+180)+1)/2.*.25;
+				else
+					(Page.GetFirstChild("QUAD_SPEED_FREEWHEELING") as CMlQuad).Opacity = 0.;
+
+				if(GetOwner().AimPitch <= 0. && GetOwner().AimPitch >= -1) {
+					Frame_Steepness_Zero_Minus_One.RelativeRotation = GetOwner().AimPitch*90;
+					Label_Steepness_Zero_Minus_One.Value = MathLib::NearestInteger(-GetOwner().AimPitch*90)^"°";
+
+					Frame_Steepness_Zero_Minus_One.Visible = True;
+					Frame_Steepness_Zero_One.Visible = False;
+				}
+				if(GetOwner().AimPitch >= 0. && GetOwner().AimPitch <= 1) {
+					Frame_Steepness_Zero_One.RelativeRotation = GetOwner().AimPitch*90;
+					Label_Steepness_Zero_One.Value = MathLib::NearestInteger(-GetOwner().AimPitch*90)^"°";
+
+					Frame_Steepness_Zero_One.Visible = True;
+					Frame_Steepness_Zero_Minus_One.Visible = False;
+				}
+
+				yield;
+			}
+		}
+	--></script>
+</manialink>

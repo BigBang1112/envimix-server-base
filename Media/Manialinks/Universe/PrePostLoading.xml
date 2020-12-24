@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<manialink version="3">
+	<frame z-index="100">
+		<frame id="FRAME_TOP" pos="0 0">
+			<quad z-index="0" size="320 12.5" halign="center" valign="bottom" pos="0 -10" style="Bgs1InRace" substyle="BgGradTop" id="QUAD_TOP_SHADOW" hidden="1"/>
+			<quad z-index="1" size="320 90" bgcolor="000" halign="center" valign="bottom"/>
+			<frame z-index="2" clip="True" clipsizen="320 90" clipposn="0 45">
+				<quad pos="0 -0.5" size="180 45" halign="center" valign="center" image="http://envimix.bigbang1112.eu/Envimix.png"/>
+			</frame>
+		</frame>
+		<frame id="FRAME_BOTTOM" pos="0 0">
+			<quad z-index="0" size="320 12.5" halign="center" valign="top" pos="0 10" style="Bgs1InRace" substyle="BgGradBottom" id="QUAD_BOTTOM_SHADOW" hidden="1"/>
+			<quad z-index="1" size="320 90" bgcolor="000" halign="center" valign="top"/>
+			<frame z-index="2" clip="True" clipsizen="320 90" clipposn="0 -45">
+				<quad pos="0 -0.5" size="180 45" halign="center" valign="center" image="http://envimix.bigbang1112.eu/Envimix.png"/>
+			</frame>
+
+			<label z-index="2" size="160 8" text="CRAFTED BY $o$i$nBIGBANG1112" halign="center" pos="0 -74" valign="center2" textfont="RajdhaniMono" textsize="4"/>
+			<label z-index="2" size="160 8" text="WITH AWESOME HELP OF THAUMICTOM, POUTREL, PEKATOUR AND ARKADY" halign="center" pos="0 -80" valign="center2" textfont="RajdhaniMono" textsize="1.5"/>
+		</frame>
+	</frame>
+	<script><!--
+		#Include "AnimLib" as AnimLib
+
+		declare Frame_Top = (Page.GetFirstChild("FRAME_TOP") as CMlFrame);
+		declare Frame_Bottom = (Page.GetFirstChild("FRAME_BOTTOM") as CMlFrame);
+		declare Quad_Top_Shadow = (Page.GetFirstChild("QUAD_TOP_SHADOW") as CMlQuad);
+		declare Quad_Bottom_Shadow = (Page.GetFirstChild("QUAD_BOTTOM_SHADOW") as CMlQuad);
+
+		declare netread Integer Net_PrepareLoading for UI;
+		declare PrevPrepareLoading = Net_PrepareLoading;
+		declare CloseAnimation = -1;
+
+		//declare netread Integer Net_UnprepareLoading for UI;
+		//declare PrevUnprepareLoading = Net_UnprepareLoading;
+		//wait(Period < 50);
+		declare OpenAnimation = GameTime;
+
+		while(True) {
+			if(Net_PrepareLoading != PrevPrepareLoading) {
+				if(Net_PrepareLoading == -1) {
+					CloseAnimation = -1;
+					OpenAnimation = GameTime;
+				}
+				else {
+					CloseAnimation = GameTime;
+					OpenAnimation = -1;
+				}
+				PrevPrepareLoading = Net_PrepareLoading;
+			}
+
+			/*if(Net_UnprepareLoading != PrevUnprepareLoading) {
+				if(Net_UnprepareLoading == -1)
+					OpenAnimation = -1;
+				else
+					OpenAnimation = Now;
+				PrevUnprepareLoading = Net_UnprepareLoading;
+			}*/
+
+			if(Frame_Top.RelativePosition_V3.Y == 0 && Frame_Bottom.RelativePosition_V3.Y == 0) {
+				Quad_Top_Shadow.Hide();
+				Quad_Bottom_Shadow.Hide();
+			}
+			else {
+				Quad_Top_Shadow.Show();
+				Quad_Bottom_Shadow.Show();
+			}
+
+			if(CloseAnimation == -1) {
+				if(OpenAnimation != -1 && GameTime - OpenAnimation > 2000) {
+					Frame_Top.RelativePosition_V3.Y = 100.;
+					Frame_Bottom.RelativePosition_V3.Y = -100.;
+				}
+				else if(OpenAnimation != -1) {
+					Frame_Top.RelativePosition_V3.Y = AnimLib::EaseInQuad(GameTime - OpenAnimation - 1000, 0., 100., 1000);
+					Frame_Bottom.RelativePosition_V3.Y = AnimLib::EaseInQuad(GameTime - OpenAnimation - 1000, 0., -100., 1000);
+				}
+			}
+			else {
+				Frame_Top.RelativePosition_V3.Y = AnimLib::EaseInQuad(GameTime - CloseAnimation, 100., -100., 1000);
+				Frame_Bottom.RelativePosition_V3.Y = AnimLib::EaseInQuad(GameTime - CloseAnimation, -100., 100., 1000);
+			}
+
+			yield;
+		}
+	--></script>
+</manialink>

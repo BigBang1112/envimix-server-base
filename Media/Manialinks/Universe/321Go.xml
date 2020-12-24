@@ -1,0 +1,92 @@
+<manialink version="3">
+	<label pos="1 10" z-index="0" size="100 25" text="3" halign="center" valign="center2" textsize="25" textfont="RajdhaniMono" textprefix="$o$i" textemboss="1" id="LABEL_COUNTDOWN"/>
+	<label pos="1 10" z-index="1" size="100 25" text="3" halign="center" valign="center2" textsize="25" textfont="RajdhaniMono" textprefix="$o$i" id="LABEL_COUNTDOWN_EFFECT"/>
+	<script><!--
+		#Include "MathLib" as MathLib
+		#Include "AnimLib" as AnimLib
+
+		CTmMlPlayer GetPlayer() {
+			if (GUIPlayer != Null) return GUIPlayer;
+			return InputPlayer;
+		} 
+
+		Boolean IsVisible() {
+			declare netread Integer Net_CutOffTimeLimit for Teams[0];
+			return GetPlayer().RaceStartTime > 0 && (GetPlayer().RaceStartTime < Net_CutOffTimeLimit || (Net_CutOffTimeLimit == -1 && GameTime - GetPlayer().RaceStartTime > -3000));
+		}
+
+		main() {
+			declare Label_Countdown = (Page.GetFirstChild("LABEL_COUNTDOWN") as CMlLabel);
+			declare Label_Countdown_Effect = (Page.GetFirstChild("LABEL_COUNTDOWN_EFFECT") as CMlLabel);
+
+			declare PreviousSecond = MathLib::FloorInteger(Now / 1000.);
+
+			wait(GetPlayer() != Null);
+
+			Label_Countdown.Visible = IsVisible();
+			Label_Countdown_Effect.Visible = IsVisible();
+			declare PreviousIsVisible = IsVisible();
+
+			while(True) {
+				if(IsVisible() != PreviousIsVisible) {
+					Label_Countdown.Visible = IsVisible();
+					Label_Countdown_Effect.Visible = IsVisible();
+					PreviousIsVisible = IsVisible();
+				}
+
+				if(IsVisible()) {
+					declare Time = GameTime - GetPlayer().RaceStartTime;
+					declare AnimTime = Time % 1000;
+					if(AnimTime < 0) AnimTime = 1000-AnimTime*-1;
+
+					if(MathLib::FloorInteger(Time / 1000.) != PreviousSecond && AnimTime < 500) {
+						PreviousSecond = MathLib::FloorInteger(Time / 1000.);
+						if(PreviousSecond < 0)
+							Audio.PlaySoundEvent(CAudioManager::ELibSound::Countdown, 1, 1.);
+						else if(PreviousSecond == 0)
+							Audio.PlaySoundEvent(CAudioManager::ELibSound::Countdown, 0, 1.);
+					}
+
+					if(AnimTime <= 100) {
+						Label_Countdown.Opacity = AnimLib::EaseLinear(AnimTime, 0., 1., 100);
+						Label_Countdown.RelativeScale = AnimLib::EaseLinear(AnimTime, .5, .5, 100);
+						Label_Countdown_Effect.Opacity = AnimLib::EaseLinear(AnimTime, 0., 1., 100);
+						Label_Countdown_Effect.RelativeScale = AnimLib::EaseLinear(AnimTime, .5, .5, 100);
+					}
+					else if(AnimTime >= 900 && Time <= 0) {
+						Label_Countdown.Opacity = AnimLib::EaseLinear(AnimTime-900, 1., -1., 100);
+						Label_Countdown.RelativeScale = AnimLib::EaseLinear(AnimTime-900, 1., -.5, 100);
+						Label_Countdown_Effect.Opacity = AnimLib::EaseLinear(AnimTime-900, 1., -1., 100);
+						Label_Countdown_Effect.RelativeScale = AnimLib::EaseLinear(AnimTime-900, 1., -.5, 100);
+					}
+					else if(Time >= 0) {
+						Label_Countdown.Opacity = AnimLib::EaseLinear(AnimTime-250, 1., -1., 500);
+						Label_Countdown_Effect.RelativeScale = AnimLib::EaseLinear(AnimTime, 1., 1., 750);
+						Label_Countdown_Effect.Opacity = AnimLib::EaseLinear(AnimTime, .5, -.5, 750);
+					}
+					else {
+						Label_Countdown.Opacity = 1.;
+						Label_Countdown.RelativeScale = 1.;
+						Label_Countdown_Effect.Opacity = AnimLib::EaseOutQuad(AnimTime, .75, -.75, 1000);
+						Label_Countdown_Effect.RelativeScale = AnimLib::EaseOutQuad(AnimTime, 1., 1., 1000);
+					}
+
+					if(Time < 0) {
+						Label_Countdown.Value = MathLib::CeilingInteger(Time/-1000.)^"";
+						Label_Countdown_Effect.Value = MathLib::CeilingInteger(Time/-1000.)^"";
+					}
+					else if(Time < 1000) {
+						Label_Countdown.Value = "Go!";
+						Label_Countdown_Effect.Value = "Go!";
+					}
+					else {
+						Label_Countdown.Value = "";
+						Label_Countdown_Effect.Value = "";
+					}
+				}
+
+				yield;
+			}
+		}
+	--></script>
+</manialink>

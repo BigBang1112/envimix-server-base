@@ -1,0 +1,1360 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<manialink version="3">
+	<frame z-index="10">
+		<quad pos="0 0" z-index="-2" size="320 180" halign="center" valign="center" style="Bgs1" substyle="BgEmpty" id="QUAD_BACKGROUND"/>
+		<frame id="FRAME_MENU">
+			<frame z-index="-1" pos="-110">
+				<quad z-index="0" size="80 160" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="80 160" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+			</frame>
+			<frame pos="-145 75" clip="True" clipposn="36 -6" clipsizen="70 21" id="FRAME_LABEL_MAPNAME">
+				<label z-index="0" size="70 15" text="$aaa[unknown]" textsize="16" textfont="Oswald" valign="top" textemboss="1"/>
+				<label z-index="0" size="70 15" text="$aaa[unknown]" textsize="16" textfont="Oswald" valign="top" textemboss="1"/>
+			</frame>
+			<frame pos="-145 58" clip="True" clipposn="36 -2.5" clipsizen="70 10" id="FRAME_LABEL_MAPTYPE">
+				<label z-index="0" size="70 7" text="$aaa[unknown]" textsize="5" textfont="Oswald" valign="top" textemboss="1"/>
+				<label z-index="0" size="70 7" text="$aaa[unknown]" textsize="5" textfont="Oswald" valign="top" textemboss="1"/>
+			</frame>
+			<frame pos="-75 50" clip="True" clipposn="-17 -2.5" clipsizen="35 10" id="FRAME_LABEL_CAR">
+				<label z-index="0" size="35 7" text="$aaa[unknown]" textsize="4" textfont="Oswald" valign="top" id="LABEL_CAR" textprefix="$o" halign="right" textemboss="1"/>
+				<label z-index="0" size="35 7" text="$aaa[unknown]" textsize="4" textfont="Oswald" valign="top" id="LABEL_CAR_2" textprefix="$o" halign="right" textemboss="1"/>
+			</frame>
+			<frame pos="-145 50">
+				<label z-index="0" size="35 6" text="VALIDATED BY:" textsize="0.5" textfont="Oswald" id="LABEL_VALIDATOR_TEXT" valign="top"/>
+				<label z-index="0" size="35 4" text="$aaa[unknown]" textsize="1.5" textfont="Oswald" valign="top" id="LABEL_VALIDATOR" pos="0 -2.5"/>
+			</frame>
+			<frame pos="-110 42" z-index="1">
+				<quad size="80 11" halign="center" style="Bgs1" substyle="BgGradV" z-index="-1"/>
+				<label pos="-36 -3" z-index="0" size="40 5" text="$aaa[unknown]" textsize="4" textfont="Oswald" id="LABEL_PB_NICKNAME"/>
+				<label pos="35 -3.2" z-index="0" size="27.5 5" text="-:--.---" textsize="4.3" textfont="RajdhaniMono" halign="right" id="LABEL_PB_TIME"/>
+				<quad pos="38 -4" z-index="1" size="5 5" style="MedalsBig" substyle="MedalNadeo" halign="center" valign="center" hidden="1"/>
+			</frame>
+			<frame pos="-110 30">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_BUTTON_CONTINUE" halign="center" data-nav="True"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Continue" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="-110 20" id="FRAME_BUTTON_SPECTATOR" data-checked="False" data-startanimate="-1">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_BUTTON_SPECTATOR" halign="center" data-nav="True"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" text="  $tSpectator" valign="center2" textfont="RajdhaniMono" id="LABEL" textcolor="EEE" translate="1"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="-110 2" z-index="0">
+				<quad z-index="0" size="12.5 12.5" halign="center" valign="center" style="BgRaceScore2" substyle="SandTimer" id="QUAD_ENVIMIX_LOADING" class="LOADING" hidden="1"/>
+				<quad size="60 15" halign="center" valign="center" image="http://envimix.bigbang1112.eu/Envimix.png" id="QUAD_ENVIMIX" manialink="envimix"/>
+				<quad size="60 15" halign="center" valign="center" image="http://envimix.bigbang1112.eu/Envimix.png" pos=".4 -.4" modulatecolor="000" opacity=".5"/>
+			</frame>
+			<frame pos="-110 -6">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_BUTTON_SKIN" halign="center" data-nav="True"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix=" $t" text="Choose skin" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="-110 -16">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_BUTTON_ADVANCED" halign="center" data-nav="True"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Advanced options" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="-110 -26">
+				<quad z-index="-1" size="80 40" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+				<label pos="0 -3" z-index="0" size="70 5" text="$aaa[unknown server name]" textsize="3" textfont="Oswald" halign="center" id="LABEL_SERVERNAME" scriptevents="1" style="TextCardRaceRank"/>
+				<quad z-index="-1" size="30 20" style="Bgs1" substyle="BgCardList" halign="center" pos="-22.5 -9" opacity=".5"/>
+				<frame pos="-22.5 -10.5" clip="True" clipsizen="30 17.5" clipposn="0 -8.5">
+					<frame id="FRAME_PLAYERS">
+						<label pos="0 0" z-index="0" size="25 3" text="$aaa[unknown player]" textsize="1" textfont="Oswald" halign="center"/>
+						<label pos="0 -3.5" z-index="0" size="25 3" text="$aaa[unknown player]" textsize="1" textfont="Oswald" halign="center"/>
+						<label pos="0 -7" z-index="0" size="25 3" text="$aaa[unknown player]" textsize="1" textfont="Oswald" halign="center"/>
+						<label pos="0 -10.5" z-index="0" size="25 3" text="$aaa[unknown player]" textsize="1" textfont="Oswald" halign="center"/>
+						<label pos="0 -14" z-index="0" size="25 3" text="$aaa[unknown player]" textsize="1" textfont="Oswald" halign="center"/>
+						<label pos="0 -17.5" z-index="0" size="25 3" text="$aaa[unknown player]" textsize="1" textfont="Oswald" halign="center"/>
+					</frame>
+				</frame>
+				<label pos="-5.5 -10" z-index="0" size="33 4" text="$aaa[unknown mode]" textsize="2" textfont="BiryaniDemiBold" id="LABEL_MODE"/>
+				<frame pos="33 -11.5">
+					<quad pos="0 0" z-index="0" size="8 7" style="Bgs1" substyle="BgCard3" halign="center" valign="center" opacity=".25"/>
+					<quad pos="0 -0.1" z-index="0" size="8 7" halign="center" valign="center2" style="Bgs1" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="8BF" opacity=".5" id="QUAD_BUTTON_MODEHELP" data-nav="True"/>
+					<label z-index="1" size="6 5" text="" halign="center" valign="center2" textfont="RajdhaniMono" textsize="2.5" pos="0 -.35" translate="1" style="TextTitle3"/>
+				</frame>
+				<frame pos="33 -25">
+					<quad pos="0 0" z-index="0" size="8 7" style="Bgs1" substyle="BgCard3" halign="center" valign="center" opacity=".25"/>
+					<quad pos="0 -0.1" z-index="0" size="8 7" halign="center" valign="center2" style="Bgs1" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="8BF" opacity=".5" id="QUAD_BUTTON_SERVERSETTINGS" data-nav="True"/>
+					<label z-index="1" size="6 5" text="" halign="center" valign="center2" textfont="RajdhaniMono" textsize="2.5" pos="0 -.35" translate="1" style="TextTitle3"/>
+				</frame>
+				<label pos="-5.5 -23" z-index="0" size="18 5" textprefix="📷 " text="0/10$ff0🔒" textfont="RajdhaniMono" valign="bottom" textsize="2" id="LABEL_SPECTATORCOUNT" scriptevents="1" style="TextCardRaceRank"/>
+				<label pos="-5.5 -28" z-index="0" size="18 5" textprefix="👥 " text="0/10$ff0🔒" textfont="RajdhaniMono" valign="bottom" textsize="2" id="LABEL_PLAYERCOUNT" scriptevents="1" style="TextCardRaceRank"/>
+				<label pos="36 -28" z-index="0" size="40 4" text="0:00" textsize="3" textfont="BiryaniDemiBold" id="LABEL_TIMELIMIT_OLD" halign="right" valign="bottom" hidden="1"/>
+				<frame z-index="0" pos="0 -30">
+					<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_BUTTON_MANAGESERVER" halign="center" data-nav="True"/>
+					<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Manage server" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1"/>
+					<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+				</frame>
+			</frame>
+			<frame pos="-110 -68">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_BUTTON_EXIT" halign="center" data-nav="True"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Exit" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="55 -65" hidden="1">
+				<quad z-index="-1" size="30 30" halign="center" valign="center" image="file://Media/Images/CircleBlack.png" opacity=".5"/>
+				<quad z-index="0" size="30 30" image="file://Media/Images/MoonBlack.png" halign="center" valign="center" opacity=".5"/>
+				<quad z-index="0" size="60 60" halign="center" valign="center" style="Bgs1" substyle="Glow" hidden="1"/>
+			</frame>
+			<frame z-index="2" id="FRAME_TOOLTIP" hidden="1">
+				<quad pos="0 0" z-index="-1" size="43.5 6" style="Bgs1" substyle="BgCardOnline" colorize="000" id="QUAD_TOOLTIP"/>
+				<label pos="2 -3.1" z-index="0" size="43.5 6" text="https://discord.gg/v6TW88m" valign="center2" textsize="1.5" textfont="BiryaniDemiBold" id="LABEL_TEXT"/>
+			</frame>
+		</frame>
+		<frame id="FRAME_SKINS" pos="-110" hidden="1">
+			<frame z-index="-1" pos="-110">
+				<quad z-index="0" size="80 160" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="80 160" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+			</frame>
+			<label pos="-110 75" z-index="0" size="70 15" text="Choose skin" textsize="12" textfont="Oswald" valign="top" textemboss="1" translate="1" halign="center"/>
+			<label z-index="0" pos="-110 61" size="70 7" textprefix="$o" text="$aaa[unknown]" textsize="7" textfont="Oswald" valign="top" textemboss="1" halign="center" id="LABEL_SKIN_CAR"/>
+			<frame pos="-110 50">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_BUTTON_SKIN_PLAY" halign="center"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Play" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<framemodel id="FRAMEMODEL_SKIN">
+				<quad z-index="0" size="77 15" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_SKIN" halign="center" pos="-1.5"/>
+				<quad z-index="1" size="12.5 12.5" halign="center" valign="center" pos="-30 -7.5" id="QUAD_ICON"/>
+				<label pos="-20 -8" z-index="1" size="55 10" text="Default" valign="center2" textfont="RajdhaniMono" textcolor="EEE" textsize="4" textprefix="$t" id="LABEL_NAME"/>
+				<quad z-index="0" size="78 14.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="-2 -0.25"/>
+			</framemodel>
+			<frame pos="-110 39" z-index="1">
+				<quad size="80 105" halign="center" style="Bgs1" substyle="BgGradV" z-index="-1"/>
+				<frame pos="38" z-index="1">
+					<quad z-index="0" size="2 105" style="Bgs1" substyle="BgCardList" id="QUAD_SKIN_SCROLLABLE" scriptevents="1" halign="center"/>
+					<quad z-index="1" size="2 30" style="Bgs1" substyle="BgWindow4" opacity=".75" id="QUAD_SKIN_SCROLLBAR" scriptevents="1" halign="center" hidden="0"/>
+				</frame>
+				<frame clip="True" clipposn="0 -52.5" clipsizen="80 105" scroll="True" scrollgrid="15 15" scrollmax="0 100">
+					<frame id="FRAME_SKIN_LIST">
+						<frameinstance modelid="FRAMEMODEL_SKIN" data-index="0"/>
+						<frameinstance modelid="FRAMEMODEL_SKIN" data-index="1" pos="0 -15"/>
+						<frameinstance modelid="FRAMEMODEL_SKIN" data-index="2" pos="0 -30"/>
+						<frameinstance modelid="FRAMEMODEL_SKIN" data-index="3" pos="0 -45"/>
+						<frameinstance modelid="FRAMEMODEL_SKIN" data-index="4" pos="0 -60"/>
+						<frameinstance modelid="FRAMEMODEL_SKIN" data-index="5" pos="0 -75"/>
+						<frameinstance modelid="FRAMEMODEL_SKIN" data-index="6" pos="0 -90"/>
+					</frame>
+				</frame>
+			</frame>
+			<frame pos="-110 -68">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_BUTTON_SKIN_BACK" halign="center"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Back" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="55 -65" hidden="1">
+				<quad z-index="-1" size="30 30" halign="center" valign="center" image="file://Media/Images/CircleBlack.png" opacity=".5"/>
+				<quad z-index="0" size="30 30" image="file://Media/Images/MoonBlack.png" halign="center" valign="center" opacity=".5"/>
+				<quad z-index="0" size="60 60" halign="center" valign="center" style="Bgs1" substyle="Glow" hidden="1"/>
+			</frame>
+			<frame z-index="2" id="FRAME_TOOLTIP" hidden="1">
+				<quad pos="0 0" z-index="-1" size="43.5 6" style="Bgs1" substyle="BgCardOnline" colorize="000" id="QUAD_TOOLTIP"/>
+				<label pos="2 -3.1" z-index="0" size="43.5 6" text="https://discord.gg/v6TW88m" valign="center2" textsize="1.5" textfont="BiryaniDemiBold" id="LABEL_TEXT"/>
+			</frame>
+		</frame>
+		<frame id="FRAME_ADVANCEDSETTINGS" pos="-110" hidden="1">
+			<frame z-index="-1" pos="-110">
+				<quad z-index="0" size="80 160" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="80 160" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+			</frame>
+			<label pos="-110 70" z-index="0" size="70 10" text="Advanced options" textsize="8" textfont="Oswald" valign="center2" textemboss="1" translate="1" halign="center"/>
+			<frame pos="-110 62">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" halign="center" data-nav="True"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Enable animations" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1" textsize="3"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="-110 52">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" halign="center" data-nav="True"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Animate scoreboard" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1" textsize="3"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="-110 42">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" halign="center" data-nav="True"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Blur scoreboard" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1" textsize="3"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="-110 32">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" halign="center" data-nav="True"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Swap panels" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1" textsize="3"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="-110 22">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" halign="center" data-nav="True"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Colorblind mode" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1" textsize="3"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="-110 12">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" halign="center" data-nav="True"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Use old UI" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1" textsize="3"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="-110 -48">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_BUTTON_PARAMETERS" halign="center" data-nav="True"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Script Parameters" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="-110 -58">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_BUTTON_ADVANCEDSETTINGS" halign="center" data-nav="True"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Advanced settings" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="-110 -68">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_BUTTON_SETTINGS_BACK" halign="center" data-nav="True"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Back" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="55 -65" hidden="1">
+				<quad z-index="-1" size="30 30" halign="center" valign="center" image="file://Media/Images/CircleBlack.png" opacity=".5"/>
+				<quad z-index="0" size="30 30" image="file://Media/Images/MoonBlack.png" halign="center" valign="center" opacity=".5"/>
+				<quad z-index="0" size="60 60" halign="center" valign="center" style="Bgs1" substyle="Glow" hidden="1"/>
+			</frame>
+			<frame z-index="2" id="FRAME_TOOLTIP" hidden="1">
+				<quad pos="0 0" z-index="-1" size="43.5 6" style="Bgs1" substyle="BgCardOnline" colorize="000" id="QUAD_TOOLTIP"/>
+				<label pos="2 -3.1" z-index="0" size="43.5 6" text="https://discord.gg/v6TW88m" valign="center2" textsize="1.5" textfont="BiryaniDemiBold" id="LABEL_TEXT"/>
+			</frame>
+		</frame>
+		<frame pos="0 5" id="FRAME_TEAMINFO">
+			<frame pos="0 -63.5" clip="True" clipsizen="55 9">
+				<frame id="FRAME_TEAMMESSAGE" clip="True" clipsizen="55 8">
+					<quad z-index="0" size="55 7" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+					<quad z-index="1" size="55 7" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+					<frame z-index="3" id="FRAME_LABEL_TEAMMESSAGE" clip="True" clipsizen="40 9">
+						<label size="47.5 5" text="Choose your team" halign="center" valign="center2" textfont="RajdhaniMono" pos="0 -.1" textsize="2" textprefix="$t" translate="1" id="LABEL_TEAMMESSAGE"/>
+					</frame>
+				</frame>
+			</frame>
+			<frame pos="0 -72.5" id="FRAME_JOINTEAM">
+				<quad z-index="0" size="60 10" valign="center" halign="center" style="Bgs1InRace" substyle="BgCardList"/>
+				<quad z-index="1" size="60 10" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+				<frame pos="-14.75" z-index="2">
+					<frame pos="-21.5" clip="True" clipsizen="12 9">
+						<frame id="FRAME_RED_PLAYERCOUNT">
+							<quad z-index="0" size="11 8" valign="center" halign="center" style="Bgs1InRace" substyle="BgCardList"/>
+							<quad z-index="1" size="11 8" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+							<label pos="0 -0.35" z-index="2" size="10 10" text="10" valign="center2" textfont="RajdhaniMono" halign="center" textemboss="1" id="LABEL_RED_PLAYERCOUNT"/>
+						</frame>
+					</frame>
+					<frame clip="True" clipsizen="28.75 9">
+						<frame id="FRAME_JOINRED">
+							<quad z-index="0" size="29 9" valign="center" halign="center" style="Bgs1" substyle="BgWindow4" modulatecolor="F00" opacity=".5"/>
+							<quad z-index="1" size="29 9" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="F00" opacity=".5" halign="center" data-nav="True" valign="center" id="QUAD_JOINRED"/>
+							<label z-index="2" size="22.5 5" text="RED" halign="center" valign="center2" textfont="RajdhaniMono" pos="0 -.35" textsize="3"/>
+							<quad z-index="3" size="7 7" pos="-10" halign="center" valign="center" style="Icons64x64_1" substyle="StatePrivate" id="QUAD_JOINRED_LOCK"/>
+						</frame>
+					</frame>
+				</frame>
+				<frame pos="14.75" z-index="2">
+					<frame pos="21.5" clip="True" clipsizen="12 9">
+						<frame id="FRAME_BLUE_PLAYERCOUNT">
+							<quad z-index="0" size="11 8" valign="center" halign="center" style="Bgs1InRace" substyle="BgCardList"/>
+							<quad z-index="1" size="11 8" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+							<label pos="0 -0.35" z-index="2" size="10 10" text="10" valign="center2" textfont="RajdhaniMono" halign="center" textemboss="1" id="LABEL_BLUE_PLAYERCOUNT"/>
+						</frame>
+					</frame>
+					<frame clip="True" clipsizen="28.75 9">
+						<frame id="FRAME_JOINBLUE">
+							<quad z-index="0" size="29 9" valign="center" halign="center" style="Bgs1" substyle="BgWindow4" modulatecolor="00F" opacity=".5"/>
+							<quad z-index="1" size="29 9" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="00F" opacity=".5" halign="center" data-nav="True" valign="center" id="QUAD_JOINBLUE"/>
+							<label z-index="2" size="22.5 5" text="BLUE" halign="center" valign="center2" textfont="RajdhaniMono" pos="0 -.35" textsize="3"/>
+							<quad z-index="3" size="7 7" pos="-10" halign="center" valign="center" style="Icons64x64_1" substyle="StatePrivate" id="QUAD_JOINBLUE_LOCK"/>
+						</frame>
+					</frame>
+				</frame>
+			</frame>
+			<frame pos="0 -81.5" id="FRAME_TIMELIMIT">
+				<quad z-index="0" size="50 7" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="50 7" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+				<frame z-index="3" id="FRAME_LABEL_TIMELIMIT" clip="True" clipsizen="40 9">
+					<label size="32.5 5" text="0:00" halign="center" valign="center2" textfont="RajdhaniMono" pos="0 -.35" textsize="3" id="LABEL_TIMELIMIT"/>
+				</frame>
+			</frame>
+		</frame>
+		<frame id="FRAME_QUICKTIP" hidden="1">
+			<quad z-index="0" size="80 8" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+			<quad z-index="1" size="80 8" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+			<label pos="0 0.3" z-index="2" size="75 4" halign="center" valign="center" text="YOU CAN USE SCROLLWHEEL TO SELECT A CAR" textfont="RajdhaniMono" textsize="1.5"/>
+		</frame>
+		<frame id="FRAME_VEHICLE_LIST">
+			<frame clip="True" clipposn="62 0" clipsizen="50 160">
+				<frame id="FRAME_GHOST_ARROW">
+					<label pos="62 -0.3" z-index="0" size="20 20" text="" halign="center" valign="center" textsize="10" textemboss="1" textcolor="048" opacity=".25"/>
+				</frame>
+				<frame id="FRAME_ARROW" z-index="1">
+					<label pos="62 -0.3" z-index="0" size="20 20" text="" halign="center" valign="center" textsize="10" textemboss="1" id="LABEL_ARROW"/>
+					<label pos="62 -0.3" z-index="1" size="20 20" text="🔒" halign="center" valign="center2" textsize="8" textemboss="1" textcolor="222" id="LABEL_LOCK" hidden="1"/>
+				</frame>
+			</frame>
+			<frame pos="110" clip="True" clipsizen="320 160" id="FRAME_VEHICLES">
+				<frame id="FRAME_INNER_VEHICLES"/>
+			</frame>
+		</frame>
+	</frame>
+	<script><!--
+		#Include "TextLib" as TextLib
+		#Include "MathLib" as MathLib
+		#Include "AnimLib" as AnimLib
+
+		#Struct SSkin {
+			Text File;
+			Text Icon;
+		}
+
+		CTmMlPlayer GetPlayer() {
+			if (GUIPlayer != Null) return GUIPlayer;
+			return InputPlayer;
+		}
+
+		Text TimeToTextWithMilli(Integer _Time) {
+			return TextLib::TimeToText(_Time, True) ^ MathLib::Abs(_Time % 10);
+		}
+
+		***UpdateVehicles***
+		***
+		declare Frame_Inner_Vehicles = (Page.GetFirstChild("FRAME_INNER_VEHICLES") as CMlFrame);
+		for(I, 0, Frame_Inner_Vehicles.Controls.count - 1) {
+			declare Frame = (Frame_Inner_Vehicles.Controls[I] as CMlFrame);
+			declare Quad_Vehicle = (Frame.GetFirstChild("QUAD_VEHICLE") as CMlQuad);
+			declare Label_Default = (Frame.GetFirstChild("LABEL_DEFAULT") as CMlLabel);
+			declare Label_Vehicle = (Frame.GetFirstChild("LABEL_VEHICLE") as CMlLabel);
+			if(DisplayedCars.exists(Net_Car) && I == VehicleIndex) {
+				Quad_Vehicle.StyleSelected = True;
+			}
+			else {
+				Quad_Vehicle.StyleSelected = False;
+			}
+
+			if(DisplayedCars.existskey(I)) {
+				if(ItemCars[DisplayedCars[I]] == Net_MapPlayerModelName) {
+					if(Net_S_EnableDefaultCar) {
+						Label_Vehicle.Opacity = 1.;
+						Label_Default.Opacity = 1.;
+					}
+					else {
+						Label_Vehicle.Opacity = .5;
+						Label_Default.Opacity = .5;
+					}
+					Label_Default.Show();
+				}
+				else {
+					Label_Vehicle.Opacity = 1.;
+					Label_Default.Hide();
+				}
+			}
+		}
+		***
+
+		***UpdateSkins***
+		***
+		declare CarName = DisplayedCars[VehicleIndex];
+
+		declare Text[] SortedNames;
+		if(Skins.existskey(CarName)) {
+			foreach(Name => Skin in Skins[CarName])
+				SortedNames.add(Name);
+			SortedNames = SortedNames.sort();
+		}
+
+		declare Offset = MathLib::NearestInteger(Frame_Skin_List.Parent.ScrollOffset.Y/15.);
+
+		foreach(I => Control in Frame_Skin_List.Controls) {
+			declare Frame = (Control as CMlFrame);
+			declare Quad_Skin = (Frame.GetFirstChild("QUAD_SKIN") as CMlQuad);
+			declare Quad_Icon = (Frame.GetFirstChild("QUAD_ICON") as CMlQuad);
+			declare Label_Name = (Frame.GetFirstChild("LABEL_NAME") as CMlLabel);
+
+			if(I + Offset == 0) {
+				Label_Name.Value = TextLib::GetTranslatedText("Default");
+				Quad_Icon.ChangeImageUrl("");
+
+				if(Net_UserSkins.existskey(CarName)) {
+					if(Net_UserSkins[CarName] == "")
+						Quad_Skin.StyleSelected = True;
+					else
+						Quad_Skin.StyleSelected = False;
+				}
+				else {
+					Quad_Skin.StyleSelected = True;
+				}
+
+				Frame.Show();
+			}
+			else {
+				if(Skins.existskey(CarName)) {
+					if(Skins[CarName].count > I + Offset - 1) {
+						declare Name = SortedNames[I + Offset - 1];
+						declare Skin = Skins[CarName][Name];
+
+						Label_Name.Value = Name;
+						Quad_Icon.ChangeImageUrl("file://Media/" ^ Skin.Icon);
+
+						if(Net_UserSkins.existskey(CarName)) {
+							if(Net_UserSkins[CarName] == Name)
+								Quad_Skin.StyleSelected = True;
+							else
+								Quad_Skin.StyleSelected = False;
+						}
+						else {
+							Quad_Skin.StyleSelected = True;
+						}
+
+						Frame.Show();
+					}
+					else {
+						Frame.Hide();
+					}
+				}
+				else {
+					Frame.Hide();
+				}
+			}
+		}
+		***
+
+		Void SetSlidingText(CMlFrame _Frame, Text _Value) {
+			declare L1 = (_Frame.Controls[0] as CMlLabel);
+			L1.Value = _Value;
+			L1.Size.X = L1.ComputeWidth(_Value);
+
+			declare L2 = (_Frame.Controls[1] as CMlLabel);
+			L2.Value = _Value;
+			L2.Size.X = L2.ComputeWidth(_Value);
+		}
+
+		Void MoveSlidingText(CMlFrame _Frame, Integer _Distance, Real _Speed) {
+			declare L1 = (_Frame.Controls[0] as CMlLabel);
+			declare L2 = (_Frame.Controls[1] as CMlLabel);
+
+			if(_Frame.ClipWindowSize.X < L1.Size.X) {		
+				L1.RelativePosition_V3.X -= Period*_Speed;
+				L2.RelativePosition_V3.X -= Period*_Speed;
+				L2.Show();
+
+				if(_Speed > 0) {
+					if(L1.RelativePosition_V3.X + L1.Size.X < 0 || L1.RelativePosition_V3.X + L1.Size.X > L2.RelativePosition_V3.X)
+						L1.RelativePosition_V3.X = L2.RelativePosition_V3.X+L2.Size.X+_Distance;
+					if(L2.RelativePosition_V3.X + L2.Size.X < 0 || L1.RelativePosition_V3.X + L1.Size.X < L2.RelativePosition_V3.X)
+						L2.RelativePosition_V3.X = L1.RelativePosition_V3.X+L1.Size.X+_Distance;
+				}
+				else if(_Speed < 0) {
+					if(L1.RelativePosition_V3.X - L1.Size.X > 0 || L1.RelativePosition_V3.X - L1.Size.X < L2.RelativePosition_V3.X)
+						L1.RelativePosition_V3.X = L2.RelativePosition_V3.X-L2.Size.X-_Distance;
+					if(L2.RelativePosition_V3.X - L2.Size.X > 0 || L1.RelativePosition_V3.X - L1.Size.X > L2.RelativePosition_V3.X)
+						L2.RelativePosition_V3.X = L1.RelativePosition_V3.X-L1.Size.X-_Distance;
+				}
+			}
+			else {
+				L2.Hide();
+				L1.RelativePosition_V3.X = 0.;
+			}
+		}
+
+		***QUAD_BUTTON_CONTINUE***
+		***
+		CloseInGameMenu(::EInGameMenuResult::Resume);
+		Audio.PlaySoundEvent(CAudioManager::ELibSound::Valid, 0, 1.0);
+		***
+
+		***QUAD_BUTTON_SPECTATOR***
+		***
+		if(Page.GetFirstChild("QUAD_BUTTON_SPECTATOR").Parent.DataAttributeGet("checked") == "True") {
+			RequestSpectatorClient(False);
+			Page.GetFirstChild("QUAD_BUTTON_SPECTATOR").Parent.DataAttributeSet("startanimate", "-1");
+			(Page.GetFirstChild("QUAD_BUTTON_SPECTATOR").Parent.GetFirstChild("LABEL") as CMlLabel).Value = "  $t" ^ TextLib::GetTranslatedText("Spectator");
+			Page.GetFirstChild("QUAD_BUTTON_SPECTATOR").Parent.DataAttributeSet("checked", "False");
+		}
+		else {
+			RequestSpectatorClient(True);
+			Page.GetFirstChild("QUAD_BUTTON_SPECTATOR").Parent.DataAttributeSet("startanimate", ""^Now);
+			(Page.GetFirstChild("QUAD_BUTTON_SPECTATOR").Parent.GetFirstChild("LABEL") as CMlLabel).Value = "  $t" ^ TextLib::GetTranslatedText("Spectator");
+			Page.GetFirstChild("QUAD_BUTTON_SPECTATOR").Parent.DataAttributeSet("checked", "True");
+		}
+		Audio.PlaySoundEvent(CAudioManager::ELibSound::Valid, 0, 1.0);
+		***
+
+		***QUAD_BUTTON_MANAGESERVER***
+		***
+		CloseInGameMenu(::EInGameMenuResult::ServerSettings);
+		Audio.PlaySoundEvent(CAudioManager::ELibSound::Valid, 0, 1.0);
+		***
+
+		***QUAD_BUTTON_EXIT***
+		***
+		CloseInGameMenu(::EInGameMenuResult::Quit);
+		Audio.PlaySoundEvent(CAudioManager::ELibSound::Valid, 0, 1.0);
+		***
+
+		***QUAD_BUTTON_ADVANCED***
+		***
+		AnimMgr.Add(Page.GetFirstChild("FRAME_MENU"), "<frame pos=\"-110 0\" hidden=\"1\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+		AnimMgr.Add(Page.GetFirstChild("FRAME_ADVANCEDSETTINGS"), "<frame pos=\"0 0\" hidden=\"0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+		MenuKind = "Settings";
+		Audio.PlaySoundEvent(CAudioManager::ELibSound::Valid, 0, 1.0);
+		***
+
+		***QUAD_BUTTON_ADVANCEDSETTINGS***
+		***
+		CloseInGameMenu(::EInGameMenuResult::AdvancedMenu);
+		Audio.PlaySoundEvent(CAudioManager::ELibSound::Valid, 0, 1.0);
+		***
+
+		***QUAD_BUTTON_SKIN***
+		***
+		+++UpdateSkins+++
+		AnimMgr.Add(Page.GetFirstChild("FRAME_MENU"), "<frame pos=\"-110 0\" hidden=\"1\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+		AnimMgr.Add(Page.GetFirstChild("FRAME_SKINS"), "<frame pos=\"0 0\" hidden=\"0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+		MenuKind = "Skin";
+		Audio.PlaySoundEvent(CAudioManager::ELibSound::Valid, 0, 1.0);
+		***
+
+		***QUAD_BUTTON_SKIN_PLAY***
+		***
+		AnimMgr.Add(Page.GetFirstChild("FRAME_MENU"), "<frame pos=\"-110 0\" hidden=\"0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+		AnimMgr.Add(Page.GetFirstChild("FRAME_SKINS"), "<frame pos=\"-110 0\" hidden=\"1\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+		MenuKind = "";
+
+		SendCustomEvent("Car", [DisplayedCars[VehicleIndex], "True"]);
+		CloseInGameMenu(::EInGameMenuResult::Resume);
+		Audio.PlaySoundEvent(CAudioManager::ELibSound::Valid, 0, 1.0);
+		***
+
+		***QUAD_BUTTON_SKIN_BACK***
+		***
+		AnimMgr.Add(Page.GetFirstChild("FRAME_MENU"), "<frame pos=\"0 0\" hidden=\"0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+		AnimMgr.Add(Page.GetFirstChild("FRAME_SKINS"), "<frame pos=\"-110 0\" hidden=\"1\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+		MenuKind = "";
+		Audio.PlaySoundEvent(CAudioManager::ELibSound::Valid, 0, 1.0);
+		***
+
+		***QUAD_BUTTON_SETTINGS_BACK***
+		***
+		AnimMgr.Add(Page.GetFirstChild("FRAME_MENU"), "<frame pos=\"0 0\" hidden=\"0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+		AnimMgr.Add(Page.GetFirstChild("FRAME_ADVANCEDSETTINGS"), "<frame pos=\"-110 0\" hidden=\"1\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+		MenuKind = "";
+		Audio.PlaySoundEvent(CAudioManager::ELibSound::Valid, 0, 1.0);
+		***
+
+		Boolean IsCarLocked() {
+			declare netread Integer Net_CutOffTimeLimit for Teams[0];
+			return (GetPlayer().RaceStartTime > 0 && GameTime - GetPlayer().RaceStartTime >= 0)
+			|| UI.UISequence == CUIConfig::EUISequence::Intro || IsSpectator;
+			//return (InputPlayer.RaceStartTime > 0 && GameTime - InputPlayer.RaceStartTime >= 0)
+			//	|| (Net_CutOffTimeLimit == -1 && InputPlayer.RaceStartTime == 0);  - issues with disabled default car and no time limit
+		}
+
+		main() {
+			declare PreviousMapUid = "";
+			declare PreviousCar = "";
+
+			declare IsMenuOpen = False;
+			declare ShowMenuLittleLater = -1;
+
+			declare Quad_Background = (Page.GetFirstChild("QUAD_BACKGROUND") as CMlQuad);
+			declare Frame_Button_Spectator = (Page.GetFirstChild("FRAME_BUTTON_SPECTATOR") as CMlFrame);
+			declare Frame_Players = (Page.GetFirstChild("FRAME_PLAYERS") as CMlFrame);
+
+			declare Quad_Envimix = (Page.GetFirstChild("QUAD_ENVIMIX") as CMlQuad);
+			declare Quad_Envimix_Loading = (Page.GetFirstChild("QUAD_ENVIMIX_LOADING") as CMlQuad);
+
+			declare Label_ServerName = (Page.GetFirstChild("LABEL_SERVERNAME") as CMlLabel);
+			declare Label_Mode = (Page.GetFirstChild("LABEL_MODE") as CMlLabel);
+			declare Label_PlayerCount = (Page.GetFirstChild("LABEL_PLAYERCOUNT") as CMlLabel);
+			declare Label_SpectatorCount = (Page.GetFirstChild("LABEL_SPECTATORCOUNT") as CMlLabel);
+			declare Label_PB_Nickname = (Page.GetFirstChild("LABEL_PB_NICKNAME") as CMlLabel);
+			declare Label_PB_Time = (Page.GetFirstChild("LABEL_PB_TIME") as CMlLabel);
+			declare Label_TimeLimit = (Page.GetFirstChild("LABEL_TIMELIMIT") as CMlLabel);
+
+			declare Frame_Skins = (Page.GetFirstChild("FRAME_SKINS") as CMlFrame);
+
+			declare Frame_Label_MapName = (Page.GetFirstChild("FRAME_LABEL_MAPNAME") as CMlFrame);
+
+			declare Label_Skin_Car = (Page.GetFirstChild("LABEL_SKIN_CAR") as CMlLabel);
+			declare Frame_Skin_List = (Page.GetFirstChild("FRAME_SKIN_LIST") as CMlFrame);
+			declare Quad_Skin_Scrollable = (Page.GetFirstChild("QUAD_SKIN_SCROLLABLE") as CMlQuad);
+			declare Quad_Skin_Scrollbar = (Page.GetFirstChild("QUAD_SKIN_SCROLLBAR") as CMlQuad);
+
+			declare Label_Red_PlayerCount = (Page.GetFirstChild("LABEL_RED_PLAYERCOUNT") as CMlLabel);
+			declare Label_Blue_PlayerCount = (Page.GetFirstChild("LABEL_BLUE_PLAYERCOUNT") as CMlLabel);
+
+			declare Frame_TeamInfo = (Page.GetFirstChild("FRAME_TEAMINFO") as CMlFrame);
+			declare Frame_TeamMessage = (Page.GetFirstChild("FRAME_TEAMMESSAGE") as CMlFrame);
+			declare Frame_Label_TeamMessage = (Page.GetFirstChild("FRAME_LABEL_TEAMMESSAGE") as CMlFrame);
+			declare Frame_Label_TimeLimit = (Page.GetFirstChild("FRAME_LABEL_TIMELIMIT") as CMlFrame);
+			declare Frame_JoinTeam = (Page.GetFirstChild("FRAME_JOINTEAM") as CMlFrame);
+			declare Frame_JoinRed = (Page.GetFirstChild("FRAME_JOINRED") as CMlFrame);
+			declare Frame_JoinBlue = (Page.GetFirstChild("FRAME_JOINBLUE") as CMlFrame);
+			declare Quad_JoinBlue = (Page.GetFirstChild("QUAD_JOINBLUE") as CMlQuad);
+			declare Quad_JoinRed = (Page.GetFirstChild("QUAD_JOINRED") as CMlQuad);
+			declare Quad_JoinBlue_Lock = (Page.GetFirstChild("QUAD_JOINBLUE_LOCK") as CMlQuad);
+			declare Quad_JoinRed_Lock = (Page.GetFirstChild("QUAD_JOINRED_LOCK") as CMlQuad);
+			declare Frame_Red_PlayerCount = (Page.GetFirstChild("FRAME_RED_PLAYERCOUNT") as CMlFrame);
+			declare Frame_Blue_PlayerCount = (Page.GetFirstChild("FRAME_BLUE_PLAYERCOUNT") as CMlFrame);
+			declare Frame_TimeLimit = (Page.GetFirstChild("FRAME_TIMELIMIT") as CMlFrame);
+
+			Page.GetClassChildren("LOADING", Page.MainFrame, True);
+
+			(Frame_Button_Spectator.GetFirstChild("LABEL") as CMlLabel).Value = "  $t" ^ TextLib::GetTranslatedText("Spectator");
+
+			EnableMenuNavigationInputs = True;
+			declare Nav_OnVehicle = False;
+			declare Nav_FirstControl = (Page.GetFirstChild("QUAD_BUTTON_CONTINUE") as CMlQuad);
+			declare Nav_FocusedControl = Nav_FirstControl;
+			
+			while(!IsInGameMenuDisplayed) {
+				yield;
+				ShowInGameMenu();
+			}
+
+			declare netread Boolean Net_S_EnableDefaultCar for Teams[0];
+			declare PreviousEnableDefaultCar = Net_S_EnableDefaultCar;
+			declare netread Text Net_MapPlayerModelName for Teams[0];
+			declare netread Integer Net_CutOffTimeLimit for Teams[0];
+
+			declare netwrite Text Net_Client_Car for UI;
+
+			Frame_Button_Spectator.DataAttributeSet("checked", IsSpectatorClient^"");
+			if(IsSpectatorClient) {
+				Frame_Button_Spectator.DataAttributeSet("startanimate", ""^Now);
+				(Frame_Button_Spectator.GetFirstChild("LABEL") as CMlLabel).Value = "  $t" ^ TextLib::GetTranslatedText("Spectator");
+			}
+			else {
+				Frame_Button_Spectator.DataAttributeSet("startanimate", "-1");
+				(Frame_Button_Spectator.GetFirstChild("LABEL") as CMlLabel).Value = "  $t" ^ TextLib::GetTranslatedText("Spectator");
+			}
+
+			declare UserShift = 0;
+			declare MenuKind = "";
+			
+			wait(GetPlayer() != Null);
+			wait(Net_MapPlayerModelName != "");
+
+			// Vehicle stuff
+			declare netread Text[] DisplayedCars for Teams[0];
+			declare netread Text[Text] ItemCars for Teams[0];
+			declare Frame_Vehicle_List = (Page.GetFirstChild("FRAME_VEHICLE_LIST") as CMlFrame);
+			declare Frame_Vehicles = (Page.GetFirstChild("FRAME_VEHICLES") as CMlFrame);
+			declare Label_Arrow = (Page.GetFirstChild("LABEL_ARROW") as CMlLabel);
+			declare Label_Lock = (Page.GetFirstChild("LABEL_LOCK") as CMlLabel);
+			declare Frame_Quicktip = (Page.GetFirstChild("FRAME_QUICKTIP") as CMlFrame);
+			declare Frame_Arrow = (Page.GetFirstChild("FRAME_ARROW") as CMlFrame);
+			declare Frame_Ghost_Arrow = (Page.GetFirstChild("FRAME_GHOST_ARROW") as CMlFrame);
+			declare VehicleIndex = 0;
+			declare PreviousVehicleIndex = VehicleIndex;
+			declare MapVehicleIndex = 0;
+			if(DisplayedCars.count > 0) {
+				Frame_Vehicles.ScrollActive = True;
+				Frame_Vehicles.ScrollMax = <0., (DisplayedCars.count - MapVehicleIndex - 1) * 20.>;
+				Frame_Vehicles.ScrollMin = <0., -MapVehicleIndex * 20.>;
+				Frame_Vehicles.ScrollGridSnap = True;
+				Frame_Vehicles.ScrollGrid = <0., 20.>;
+			}
+
+			declare netread SSkin[Text][Text] Skins for Teams[0];
+			declare netwrite Text[Text] Net_UserSkins for UI;
+			foreach(Car in DisplayedCars) {
+				Net_UserSkins[Car] = "";
+			}
+
+			Page.GetFirstChild("FRAME_MENU").RelativePosition_V3.X = -110.;
+			Frame_Vehicle_List.RelativePosition_V3.X = 110.;
+
+			if(ItemCars.exists(Net_MapPlayerModelName))
+				Net_Client_Car = ItemCars.keyof(Net_MapPlayerModelName);
+			else
+				Net_Client_Car = "";
+			if(DisplayedCars.exists(Net_Client_Car))
+				VehicleIndex = DisplayedCars.keyof(Net_Client_Car);
+			else
+				VehicleIndex = 0;
+
+			while(VehicleIndex > 0 && Frame_Vehicles.ScrollOffset.Y != VehicleIndex * 20.) {
+				yield;
+				Frame_Vehicles.ScrollOffset.Y = VehicleIndex * 20.;
+			}
+			
+			declare PreviousScrollOffset = Frame_Vehicles.ScrollOffset.Y;
+			declare PreviousSkinScrollOffset = Frame_Skin_List.Parent.ScrollOffset;
+
+			declare PreviousUISequence = UI.UISequence;
+
+			declare MenuOpenTime = -1;
+
+			declare netread Text Net_Car for GetPlayer();
+			+++UpdateVehicles+++
+
+			declare PrevUseForcedClans = UseForcedClans;
+
+			while(True) {
+				if(ShowMenuLittleLater != -1 && Now - ShowMenuLittleLater > 100 && Now - ShowMenuLittleLater < 300) {
+					ShowInGameMenu();
+				}
+
+				foreach(Event in PendingEvents) {
+					switch(Event.Type) {
+						case CMlScriptEvent::Type::MouseOver: {
+							if(Event.Control.DataAttributeGet("nav") == "True") {
+								Nav_FocusedControl.StyleSelected = False;
+								if(Event.Control is CMlQuad)
+									Nav_FocusedControl = (Event.Control as CMlQuad);
+							}
+
+							switch(Event.ControlId) {
+								case "QUAD_BUTTON_CONTINUE": {
+									Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+								}
+								case "QUAD_BUTTON_SPECTATOR": {
+									Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+								}
+								case "QUAD_BUTTON_SKIN": {
+									Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+								}
+								case "QUAD_BUTTON_ADVANCED": {
+									Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+								}
+								case "QUAD_BUTTON_MODEHELP": {
+									Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 3, 1.0);
+								}
+								case "QUAD_BUTTON_SERVERSETTINGS": {
+									Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 3, 1.0);
+								}
+								case "QUAD_BUTTON_MANAGESERVER": {
+									Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+								}
+								case "QUAD_BUTTON_EXIT": {
+									Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+								}
+							}
+						}
+						case CMlScriptEvent::Type::MouseOut: {
+							
+						}
+						case CMlScriptEvent::Type::MouseClick: {
+							declare Parent <=> Event.Control.Parent;
+							switch(Event.ControlId) {
+								case "QUAD_BUTTON_CONTINUE": {
+									+++QUAD_BUTTON_CONTINUE+++
+								}
+								case "QUAD_BUTTON_SPECTATOR": {
+									+++QUAD_BUTTON_SPECTATOR+++
+								}
+								case "QUAD_BUTTON_MANAGESERVER": {
+									+++QUAD_BUTTON_MANAGESERVER+++
+								}
+								case "QUAD_BUTTON_EXIT": {
+									+++QUAD_BUTTON_EXIT+++
+								}
+								case "QUAD_BUTTON_ADVANCED": {
+									+++QUAD_BUTTON_ADVANCED+++
+								}
+								case "QUAD_BUTTON_ADVANCEDSETTINGS": {
+									+++QUAD_BUTTON_ADVANCEDSETTINGS+++
+								}
+								case "QUAD_VEHICLE": {
+									PreviousVehicleIndex = VehicleIndex;
+									declare Index = TextLib::ToInteger(Event.Control.Parent.DataAttributeGet("id"));
+									Frame_Vehicles.Scroll(<0., (Index - PreviousVehicleIndex) * 1.>);
+									if(PreviousVehicleIndex - Index == 0) {
+										if(DisplayedCars.existskey(Index)) {
+											if(IsSpectator) {
+												// suggest the player to play that car or something lol
+											}
+											else {
+												if(InputPlayer.RaceStartTime - GameTime < 0)
+													SendCustomEvent("Car", [DisplayedCars[Index], "True"]);
+												else
+													SendCustomEvent("Car", [DisplayedCars[Index], "False"]);
+											}
+											if(MenuKind == "Skin") {
+												AnimMgr.Flush(Page.GetFirstChild("FRAME_MENU"));
+												AnimMgr.Add(Page.GetFirstChild("FRAME_MENU"), "<frame pos=\"0 0\" hidden=\"0\"/>",500, CAnimManager::EAnimManagerEasing::QuadOut);
+												AnimMgr.Add(Page.GetFirstChild("FRAME_SKINS"), "<frame pos=\"-110 0\" hidden=\"1\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+												MenuKind = "";
+											}
+											else if(MenuKind == "Settings") {
+												AnimMgr.Flush(Page.GetFirstChild("FRAME_MENU"));
+												AnimMgr.Add(Page.GetFirstChild("FRAME_MENU"), "<frame pos=\"0 0\" hidden=\"0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+												AnimMgr.Add(Page.GetFirstChild("FRAME_ADVANCEDSETTINGS"), "<frame pos=\"-110 0\" hidden=\"1\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+												MenuKind = "";
+											}
+											CloseInGameMenu(CMlScriptIngame::EInGameMenuResult::Resume);
+										}
+									}
+									else {
+										if(!Frame_Quicktip.Visible) {
+											foreach(Control in Frame_Quicktip.Controls) {
+												if(Control is CMlQuad) (Control as CMlQuad).Opacity = 0.;
+												if(Control is CMlLabel) (Control as CMlLabel).Opacity = 0.;
+												AnimMgr.Flush(Control);
+												AnimMgr.Add(Control, "<control opacity=\"1\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+											}
+										}
+										AnimMgr.Flush(Frame_Quicktip);
+										Frame_Quicktip.Show();
+										AnimMgr.Add(Frame_Quicktip, "<frame hidden=\"1\"/>", Now+2000, 300, CAnimManager::EAnimManagerEasing::QuadOut);
+									}
+									+++UpdateVehicles+++
+									+++UpdateSkins+++
+								}
+								case "QUAD_BUTTON_SKIN": {
+									+++QUAD_BUTTON_SKIN+++
+								}
+								case "QUAD_BUTTON_SKIN_PLAY": {
+									+++QUAD_BUTTON_SKIN_PLAY+++
+								}
+								case "QUAD_BUTTON_SKIN_BACK": {
+									+++QUAD_BUTTON_SKIN_BACK+++
+								}
+								case "QUAD_BUTTON_SETTINGS_BACK": {
+									+++QUAD_BUTTON_SETTINGS_BACK+++
+								}
+								case "QUAD_SKIN": {
+									declare SOffset = MathLib::NearestInteger(Frame_Skin_List.Parent.ScrollOffset.Y/15.);
+									declare Index = TextLib::ToInteger(Event.Control.Parent.DataAttributeGet("index"))+SOffset-1;
+									declare CName = DisplayedCars[VehicleIndex];
+
+									if(Index == -1) {
+										Net_UserSkins[CName] = "";
+									}
+									else {
+										declare Text[] SNames;
+										if(Skins.existskey(CName)) {
+											foreach(Name => Skin in Skins[CName])
+												SNames.add(Name);
+											SNames = SNames.sort();
+										}
+
+										if(SNames.existskey(Index)) {
+											Net_UserSkins[CName] = SNames[Index];
+										}
+									}
+									+++UpdateSkins+++
+									SendCustomEvent("Skin", [CName, Net_UserSkins[CName]]);
+								}
+								case "QUAD_JOINRED": {
+									JoinTeam1();
+									SendCustomEvent("JoinTeam", ["1"]);
+									Event.Control.Parent.Parent.RelativeScale = 1.05;
+									AnimMgr.Add(Event.Control.Parent.Parent, "<frame scale=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+								}
+								case "QUAD_JOINBLUE": {
+									JoinTeam2();
+									SendCustomEvent("JoinTeam", ["2"]);
+									Event.Control.Parent.Parent.RelativeScale = 1.05;
+									AnimMgr.Add(Event.Control.Parent.Parent, "<frame scale=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+								}
+							}
+						}
+						case CMlScriptEvent::Type::PluginCustomEvent: {
+							switch(Event.CustomEventType) {
+								default: {}
+							}
+						}
+						case CMlScriptEvent::Type::MenuNavigation: {
+							switch(Event.MenuNavAction) {
+								case CMlScriptEvent::EMenuNavAction::Cancel: {
+									if(UI.UISequence == CUIConfig::EUISequence::Intro) {
+										if(ShowMenuLittleLater == -1)
+											CloseInGameMenu(::EInGameMenuResult::Resume);
+										ShowMenuLittleLater = Now;
+									}
+									else if(MenuKind == "Skin") {
+										AnimMgr.Flush(Page.GetFirstChild("FRAME_MENU"));
+										AnimMgr.Add(Page.GetFirstChild("FRAME_MENU"), "<frame pos=\"0 0\" hidden=\"0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+										AnimMgr.Add(Page.GetFirstChild("FRAME_SKINS"), "<frame pos=\"-110 0\" hidden=\"1\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+										MenuKind = "";
+									}
+									else if(MenuKind == "Settings") {
+										AnimMgr.Flush(Page.GetFirstChild("FRAME_MENU"));
+										AnimMgr.Add(Page.GetFirstChild("FRAME_MENU"), "<frame pos=\"0 0\" hidden=\"0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+										AnimMgr.Add(Page.GetFirstChild("FRAME_ADVANCEDSETTINGS"), "<frame pos=\"-110 0\" hidden=\"1\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+										MenuKind = "";
+									}
+									else
+										CloseInGameMenu(::EInGameMenuResult::Resume);
+								}
+								case CMlScriptEvent::EMenuNavAction::Select: {
+									if(Nav_OnVehicle) {
+										if(DisplayedCars.existskey(VehicleIndex)) {
+											if(IsSpectator) {
+												// suggest the player to play that car or something lol
+											}
+											else {
+												if(InputPlayer.RaceStartTime - GameTime < 0)
+													SendCustomEvent("Car", [DisplayedCars[VehicleIndex], "True"]);
+												else
+													SendCustomEvent("Car", [DisplayedCars[VehicleIndex], "False"]);
+											}
+
+											if(MenuKind == "Skin") {
+												AnimMgr.Flush(Page.GetFirstChild("FRAME_MENU"));
+												AnimMgr.Add(Page.GetFirstChild("FRAME_MENU"), "<frame pos=\"0 0\" hidden=\"0\"/>",500, CAnimManager::EAnimManagerEasing::QuadOut);
+												AnimMgr.Add(Page.GetFirstChild("FRAME_SKINS"), "<frame pos=\"-110 0\" hidden=\"1\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+												MenuKind = "";
+											}
+											else if(MenuKind == "Settings") {
+												AnimMgr.Flush(Page.GetFirstChild("FRAME_MENU"));
+												AnimMgr.Add(Page.GetFirstChild("FRAME_MENU"), "<frame pos=\"0 0\" hidden=\"0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+												AnimMgr.Add(Page.GetFirstChild("FRAME_ADVANCEDSETTINGS"), "<frame pos=\"-110 0\" hidden=\"1\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+												MenuKind = "";
+											}
+
+											CloseInGameMenu(CMlScriptIngame::EInGameMenuResult::Resume);
+										}
+									}
+									else {
+										switch(Nav_FocusedControl.ControlId) {
+											case "QUAD_BUTTON_CONTINUE": {
+												+++QUAD_BUTTON_CONTINUE+++
+											}
+											case "QUAD_BUTTON_EXIT": {
+												+++QUAD_BUTTON_EXIT+++
+											}
+											case "QUAD_BUTTON_MANAGESERVER": {
+												+++QUAD_BUTTON_MANAGESERVER+++
+											}
+											case "QUAD_BUTTON_MODEHELP": {
+												+++QUAD_BUTTON_MODEHELP+++
+											}
+											case "QUAD_BUTTON_SERVERSETTINGS": {
+												+++QUAD_BUTTON_SERVERSETTINGS+++
+											}
+											case "QUAD_BUTTON_ADVANCED": {
+												+++QUAD_BUTTON_ADVANCED+++
+											}
+											case "QUAD_BUTTON_SKIN": {
+												+++QUAD_BUTTON_SKIN+++
+											}
+											case "QUAD_BUTTON_SPECTATOR": {
+												+++QUAD_BUTTON_SPECTATOR+++
+											}
+										}
+									}
+								}
+								case CMlScriptEvent::EMenuNavAction::Up: {
+									if(Nav_OnVehicle) {
+										Frame_Vehicles.Scroll(<0., -1.>);
+									}
+									else {
+										if(Nav_FocusedControl.StyleSelected) {
+											Nav_FocusedControl.StyleSelected = False;
+											switch(Nav_FocusedControl.ControlId) {
+												case "QUAD_BUTTON_CONTINUE": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_EXIT") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+												}
+												case "QUAD_BUTTON_EXIT": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_MANAGESERVER") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+												}
+												case "QUAD_BUTTON_MANAGESERVER": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_SERVERSETTINGS") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 3, 1.0);
+												}
+												case "QUAD_BUTTON_SERVERSETTINGS": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_MODEHELP") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 3, 1.0);
+												}
+												case "QUAD_BUTTON_MODEHELP": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_ADVANCED") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+												}
+												case "QUAD_BUTTON_ADVANCED": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_SKIN") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+												}
+												case "QUAD_BUTTON_SKIN": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_SPECTATOR") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+												}
+												case "QUAD_BUTTON_SPECTATOR": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_CONTINUE") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+												}
+											}
+										}
+										Nav_FocusedControl.StyleSelected = True;
+									}
+								}
+								case CMlScriptEvent::EMenuNavAction::Down: {
+									if(Nav_OnVehicle) {
+										Frame_Vehicles.Scroll(<0., 1.>);
+									}
+									else {
+										if(Nav_FocusedControl.StyleSelected) {
+											Nav_FocusedControl.StyleSelected = False;
+											switch(Nav_FocusedControl.ControlId) {
+												case "QUAD_BUTTON_CONTINUE": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_SPECTATOR") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+												}
+												case "QUAD_BUTTON_SPECTATOR": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_SKIN") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+												}
+												case "QUAD_BUTTON_SKIN": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_ADVANCED") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+												}
+												case "QUAD_BUTTON_ADVANCED": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_MODEHELP") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 3, 1.0);
+												}
+												case "QUAD_BUTTON_MODEHELP": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_SERVERSETTINGS") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 3, 1.0);
+												}
+												case "QUAD_BUTTON_SERVERSETTINGS": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_MANAGESERVER") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+												}
+												case "QUAD_BUTTON_MANAGESERVER": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_EXIT") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+												}
+												case "QUAD_BUTTON_EXIT": {
+													Nav_FocusedControl = (Page.GetFirstChild("QUAD_BUTTON_CONTINUE") as CMlQuad);
+													Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+												}
+											}
+										}
+										Nav_FocusedControl.StyleSelected = True;
+									}
+								}
+								case CMlScriptEvent::EMenuNavAction::Left: {
+									Nav_FocusedControl.StyleSelected = False;
+									Nav_OnVehicle = !Nav_OnVehicle;
+									if(!Nav_OnVehicle) {
+										Nav_FirstControl.StyleSelected = True;
+										Nav_FocusedControl = Nav_FirstControl;
+										Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+									}
+								}
+								case CMlScriptEvent::EMenuNavAction::Right: {
+									Nav_FocusedControl.StyleSelected = False;
+									Nav_OnVehicle = !Nav_OnVehicle;
+									if(!Nav_OnVehicle) {
+										Nav_FirstControl.StyleSelected = True;
+										Nav_FocusedControl = Nav_FirstControl;
+										Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+									}
+								}
+							}
+						}
+					}
+				}
+
+				declare netread Text Net_Car for GetPlayer();
+				Net_Client_Car = DisplayedCars[VehicleIndex];
+
+				if(IsMenuOpen != IsMenuNavigationForeground) {
+					IsMenuOpen = IsMenuNavigationForeground;
+					if(IsMenuOpen) {
+						if(Nav_OnVehicle) {
+
+						}
+						else {
+							Nav_FirstControl.StyleSelected = True;
+							Nav_FocusedControl = Nav_FirstControl;
+						}
+						//ShowMenuLittleLater = -1;
+						if(MenuKind == "") {
+							Page.GetFirstChild("FRAME_MENU").RelativePosition_V3.X = -110.;
+							AnimMgr.Add(Page.GetFirstChild("FRAME_MENU"), "<frame pos=\"0 0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+							Page.GetFirstChild("FRAME_ADVANCEDSETTINGS").RelativePosition_V3.X = -110.;
+						}
+						else if(MenuKind == "Settings") {
+							Page.GetFirstChild("FRAME_ADVANCEDSETTINGS").RelativePosition_V3.X = -110.;
+							AnimMgr.Add(Page.GetFirstChild("FRAME_ADVANCEDSETTINGS"), "<frame pos=\"0 0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+							Page.GetFirstChild("FRAME_MENU").RelativePosition_V3.X = -110.;
+						}
+						Frame_Vehicle_List.RelativePosition_V3.X = 110.;
+						AnimMgr.Add(Frame_Vehicle_List, "<frame pos=\"0 0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+
+						Frame_TimeLimit.Controls[0].Size.X = 0.;
+						Frame_TimeLimit.Controls[1].Size.X = 0.;
+						AnimMgr.Add(Frame_TimeLimit.Controls[0], "<quad size=\"50 7\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+						AnimMgr.Add(Frame_TimeLimit.Controls[1], "<quad size=\"50 7\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+
+						Frame_TeamMessage.Controls[0].Size.X = 0.;
+						Frame_TeamMessage.Controls[1].Size.X = 0.;
+						AnimMgr.Add(Frame_TeamMessage.Controls[0], "<quad size=\"55 7\"/>", 600, CAnimManager::EAnimManagerEasing::QuadOut);
+						AnimMgr.Add(Frame_TeamMessage.Controls[1], "<quad size=\"55 7\"/>", 600, CAnimManager::EAnimManagerEasing::QuadOut);
+
+						Frame_Red_PlayerCount.RelativePosition_V3.X = 12.5;
+						Frame_Red_PlayerCount.Parent.RelativePosition_V3.X = 10.;
+						AnimMgr.Add(Frame_Red_PlayerCount.Parent, "<frame pos=\"-21.5 0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+						AnimMgr.Add(Frame_Red_PlayerCount, "<frame pos=\"0 0\"/>", 700, CAnimManager::EAnimManagerEasing::QuadOut);
+						Frame_Blue_PlayerCount.RelativePosition_V3.X = -12.5;
+						Frame_Blue_PlayerCount.Parent.RelativePosition_V3.X = -10.;
+						AnimMgr.Add(Frame_Blue_PlayerCount.Parent, "<frame pos=\"21.5 0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+						AnimMgr.Add(Frame_Blue_PlayerCount, "<frame pos=\"0 0\"/>", 700, CAnimManager::EAnimManagerEasing::QuadOut);
+
+						Frame_JoinTeam.Controls[0].Size.X = 0.;
+						Frame_JoinTeam.Controls[1].Size.X = 0.;
+						AnimMgr.Add(Frame_JoinTeam.Controls[0], "<quad size=\"60 10\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+						AnimMgr.Add(Frame_JoinTeam.Controls[1], "<quad size=\"60 10\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+
+						Frame_JoinRed.RelativePosition_V3.X = 29.5;
+						AnimMgr.Add(Frame_JoinRed, "<frame pos=\"0 0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+						Frame_JoinBlue.RelativePosition_V3.X = -29.5;
+						AnimMgr.Add(Frame_JoinBlue, "<frame pos=\"0 0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+
+						MenuOpenTime = Now;
+					}
+					else {
+						Nav_FocusedControl.StyleSelected = False;
+
+						if(Net_CutOffTimeLimit != -1 && InputPlayer.RaceStartTime > Net_CutOffTimeLimit && !IsSpectator) {
+							SendCustomEvent("Car", [DisplayedCars[VehicleIndex], "True"]);
+						}
+					}
+				}
+
+				if(Nav_OnVehicle) {
+					Label_Arrow.TextColor = <.0,.2,.4>;
+				}
+				else {
+					Label_Arrow.TextColor = <1.,1.,1.>;
+				}
+
+				if(Net_S_EnableDefaultCar != PreviousEnableDefaultCar) {
+					+++UpdateVehicles+++
+					PreviousEnableDefaultCar = Net_S_EnableDefaultCar;
+				}
+
+				/*if(UI.UISequence != PreviousUISequence) {
+					if(PreviousUISequence == CUIConfig::EUISequence::Intro
+					&& UI.UISequence == CUIConfig::EUISequence::Playing) {
+						SendCustomEvent("Car", [DisplayedCars[VehicleIndex], "True"]);
+					}
+					PreviousUISequence = UI.UISequence;
+				}*/
+
+				/*if(ShowMenuLittleLater != -1 && Now - ShowMenuLittleLater > 150) {
+					ShowInGameMenu();
+					ShowMenuLittleLater = -1;
+				}*/
+
+				if(Map.MapInfo.MapUid != PreviousMapUid) {
+					SetSlidingText(Frame_Label_MapName, Map.MapInfo.Name);
+					if(Map.MapType == "Envimix" || Map.MapType == "TrackMania\\Envimix") {
+						SetSlidingText((Page.GetFirstChild("FRAME_LABEL_MAPTYPE") as CMlFrame), "$ff0ENVIMIX MAP");
+					}
+					else SetSlidingText((Page.GetFirstChild("FRAME_LABEL_MAPTYPE") as CMlFrame), "$aaaNON-ENVIMIX MAP");
+					PreviousMapUid = Map.MapInfo.Name;
+				}
+
+				MoveSlidingText(Frame_Label_MapName, 10, -.01);
+
+				if(Net_Car != PreviousCar) {
+					declare netread Text Net_Car for GetPlayer();
+					SetSlidingText((Page.GetFirstChild("FRAME_LABEL_CAR") as CMlFrame), Net_Car);
+					Label_Skin_Car.Value = Net_Car;
+					PreviousCar = Net_Car;
+				}
+
+				if(Frame_Button_Spectator.DataAttributeGet("checked") == "True") {
+					declare StartTime = TextLib::ToInteger(Frame_Button_Spectator.DataAttributeGet("startanimate"));
+					Frame_Button_Spectator.GetFirstChild("LABEL").RelativeScale = (MathLib::Sin((Now-StartTime)/1000.*MathLib::PI()*2-MathLib::PI()/2)+1)/2*.1+1;
+				}
+				else {
+					Frame_Button_Spectator.GetFirstChild("LABEL").RelativeScale = 1.;
+				}
+
+				Label_PB_Nickname.Value = GetPlayer().User.Name;
+				if(GetPlayer().Score == Null || GetPlayer().Score.BestRace.Time < 0)
+					Label_PB_Time.Value = "-.--.---";
+				else
+					Label_PB_Time.Value = TimeToTextWithMilli(GetPlayer().Score.BestRace.Time);
+
+				Label_ServerName.Value = Playground.ServerInfo.ServerName;
+				Label_Mode.Value = Playground.ServerInfo.ModeName;
+				if(Playground.ServerInfo.IsPrivate)
+					Label_PlayerCount.Value = Playground.ServerInfo.PlayerCount ^ "/" ^ Playground.ServerInfo.MaxPlayerCount ^ "$ff0🔒";
+				else
+					Label_PlayerCount.Value = Playground.ServerInfo.PlayerCount ^ "/" ^ Playground.ServerInfo.MaxPlayerCount;
+				if(Playground.ServerInfo.IsPrivateForSpectator)
+					Label_SpectatorCount.Value = Playground.ServerInfo.SpectatorCount ^ "/" ^ Playground.ServerInfo.MaxSpectatorCount ^ "$ff0🔒";
+				else
+					Label_SpectatorCount.Value = Playground.ServerInfo.SpectatorCount ^ "/" ^ Playground.ServerInfo.MaxSpectatorCount;
+				
+				if(Net_CutOffTimeLimit == -1)
+					Label_TimeLimit.Value = "-:--";
+				else if(Net_CutOffTimeLimit - GameTime < 0)
+					Label_TimeLimit.Value = "0:00";
+				else
+					Label_TimeLimit.Value = TextLib::TimeToText(Net_CutOffTimeLimit - GameTime);
+
+				if(Players.count > 5) {
+					Frame_Players.RelativePosition_V3.Y += 0.01;
+					if(Frame_Players.RelativePosition_V3.Y > 3.5) {
+						Frame_Players.RelativePosition_V3.Y = 0.;
+						UserShift += 1;
+						//UserShift = UserShift % Players.count;
+					}
+				}
+				else {
+					UserShift = 0;
+					Frame_Players.RelativePosition_V3.Y = 0.;
+				}
+
+				for(I, 0, Frame_Players.Controls.count - 1) {
+					declare Label = (Frame_Players.Controls[I] as CMlLabel);
+					if(Players.existskey(I+UserShift)) {
+						declare Player <=> Players[I+UserShift];
+						Label.Value = Player.User.Name;
+						Label.Show();
+					}
+					else {
+						if(Players.count > 5) {
+							declare Player <=> Players[(I + UserShift) % 5];
+							Label.Value = Player.User.Name;
+							Label.Show();
+						}
+						else
+							Label.Hide();
+					}
+				}
+
+				if(Frame_Vehicles.ScrollOffset.Y != PreviousScrollOffset) {
+					declare Difference = Frame_Vehicles.ScrollOffset.Y - PreviousScrollOffset;
+					declare IndexChange = MathLib::NearestInteger(Difference / 20);
+					VehicleIndex += IndexChange;
+					PreviousScrollOffset = Frame_Vehicles.ScrollOffset.Y;
+				}
+
+				if(Skins.existskey(DisplayedCars[VehicleIndex])) {
+					if(Skins[DisplayedCars[VehicleIndex]].count > 7) {
+						Frame_Skin_List.Parent.ScrollMax.Y = (Skins[DisplayedCars[VehicleIndex]].count+1)*15.-(7*15.);
+						Quad_Skin_Scrollbar.Size.Y = 7./Skins[DisplayedCars[VehicleIndex]].count * Quad_Skin_Scrollable.Size.Y;
+						Quad_Skin_Scrollbar.RelativePosition_V3.Y = -Frame_Skin_List.Parent.ScrollOffset.Y / Frame_Skin_List.Parent.ScrollMax.Y * (Quad_Skin_Scrollable.Size.Y - Quad_Skin_Scrollbar.Size.Y);
+						Quad_Skin_Scrollbar.Visible = True;
+					}
+					else {
+						Frame_Skin_List.Parent.ScrollMax.Y = 0.;
+						Quad_Skin_Scrollbar.Visible = False;
+					}
+				}
+				else
+					Frame_Skin_List.Parent.ScrollMax.Y = 0.;
+
+				if(Frame_Skin_List.Parent.ScrollOffset != PreviousSkinScrollOffset) {
+					+++UpdateSkins+++
+					Frame_Skin_List.RelativePosition_V3.Y = -Frame_Skin_List.Parent.ScrollOffset.Y;
+					PreviousSkinScrollOffset = Frame_Skin_List.Parent.ScrollOffset;
+				}
+
+				if(VehicleIndex != PreviousVehicleIndex) {
+					Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 1, 1.0);
+					+++UpdateVehicles+++
+					+++UpdateSkins+++
+					PreviousVehicleIndex = VehicleIndex;
+					if((InputPlayer.RaceStartTime == 0 || GameTime - InputPlayer.RaceStartTime < 0) && DisplayedCars.existskey(VehicleIndex) && !IsSpectator) {
+						SendCustomEvent("Car", [DisplayedCars[VehicleIndex], "True", "True"]);
+					}
+				}
+
+				Quad_Background.Visible = IsCarLocked();
+				Label_Lock.Visible = IsCarLocked();
+
+				if(IsCarLocked() && DisplayedCars.exists(Net_Car)) {
+					Frame_Arrow.RelativePosition_V3.Y = Frame_Vehicles.ScrollAnimOffset.Y + DisplayedCars.keyof(Net_Car)*-20.;
+				}
+				else {
+					Frame_Arrow.RelativePosition_V3.Y = Frame_Vehicles.ScrollAnimOffset.Y - Frame_Vehicles.ScrollOffset.Y;
+				}
+				Frame_Ghost_Arrow.RelativePosition_V3.Y = Frame_Vehicles.ScrollAnimOffset.Y - Frame_Vehicles.ScrollOffset.Y;
+
+				if(Quad_Envimix.DownloadInProgress) {
+					Quad_Envimix_Loading.Show();
+				}
+				else {
+					Quad_Envimix_Loading.Hide();
+				}
+
+				foreach(Control in Page.GetClassChildren_Result) {
+					if(Control.Visible) Control.RelativeRotation += Period*.2;
+				}
+				
+				declare Integer[Integer] PlayerCounts = [1 => 0, 2 => 0];
+				foreach(Score in Scores) {
+					if(!PlayerCounts.existskey(Score.TeamNum))
+						PlayerCounts[Score.TeamNum] = 0;
+					PlayerCounts[Score.TeamNum] += 1;
+				}
+
+				if(PlayerCounts.existskey(1))
+					Label_Red_PlayerCount.Value = PlayerCounts[1]^"";
+				else Label_Red_PlayerCount.Value = "0";
+				if(PlayerCounts.existskey(2))
+					Label_Blue_PlayerCount.Value = PlayerCounts[2]^"";
+				else Label_Blue_PlayerCount.Value = "0";
+
+				if(UseClans) {
+					if(MenuKind == "Skin")
+						Frame_TeamInfo.Hide();
+					else
+						Frame_TeamInfo.Show();
+					
+					if(UseForcedClans) {
+						Quad_JoinBlue_Lock.Show();
+						Quad_JoinRed_Lock.Show();
+						Quad_JoinBlue.Hide();
+						Quad_JoinRed.Hide();
+					}
+					else {
+						if(PlayerCounts.existskey(1) && PlayerCounts.existskey(2)) {
+							if(PlayerCounts[1] > PlayerCounts[2]) {
+								Quad_JoinBlue_Lock.Hide();
+								Quad_JoinRed_Lock.Show();
+								Quad_JoinBlue.Show();
+								Quad_JoinRed.Hide();
+							}
+							else if(PlayerCounts[2] > PlayerCounts[1]) {
+								Quad_JoinBlue_Lock.Show();
+								Quad_JoinRed_Lock.Hide();
+								Quad_JoinBlue.Hide();
+								Quad_JoinRed.Show();
+							}
+							else if(PlayerCounts[1] == PlayerCounts[2]) {
+								Quad_JoinBlue_Lock.Show();
+								Quad_JoinRed_Lock.Show();
+								Quad_JoinBlue.Hide();
+								Quad_JoinRed.Hide();
+							}
+							else {
+								Quad_JoinBlue_Lock.Hide();
+								Quad_JoinRed_Lock.Hide();
+								Quad_JoinBlue.Show();
+								Quad_JoinRed.Show();
+							}
+						}
+					}
+				}
+				else {
+					Frame_TeamInfo.Hide();
+				}
+
+				if(MenuOpenTime != -1) {
+					Frame_Label_TeamMessage.ClipWindowSize.X = AnimLib::EaseOutQuad(Now - MenuOpenTime, 0., 55., 600);
+					Frame_Label_TimeLimit.ClipWindowSize.X = AnimLib::EaseOutQuad(Now - MenuOpenTime, 0., 50., 500);
+				}
+
+				if(UseForcedClans != PrevUseForcedClans) {
+					if(UseForcedClans) {
+						Frame_TeamMessage.RelativePosition_V3.Y = -0.;
+						AnimMgr.Add(Frame_TeamMessage, "<frame pos=\"0 -8\"/>", 600, CAnimManager::EAnimManagerEasing::QuadOut);
+					}
+					else {
+						Frame_TeamMessage.RelativePosition_V3.Y = -8.;
+						AnimMgr.Add(Frame_TeamMessage, "<frame pos=\"0 0\"/>", 600, CAnimManager::EAnimManagerEasing::QuadOut);
+					}
+					PrevUseForcedClans = UseForcedClans;
+				}
+
+				yield;
+			}
+		}
+	--></script>
+</manialink>

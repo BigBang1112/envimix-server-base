@@ -1,0 +1,6 @@
+<manialink version="3">
+	<script><!--
+		wait(!IsInGameMenuDisplayed);
+		ShowInGameMenu();
+	--></script>
+</manialink>

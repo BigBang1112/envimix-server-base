@@ -1,0 +1,22 @@
+<manialink version="3">
+	
+	<script><!--
+		declare IsMenuOpen = False;
+
+		EnableMenuNavigation(True, True, Page.GetFirstChild("QUAD_BUTTON_CONTINUE"), 50);
+
+		while(True) {
+			if(IsMenuOpen != IsMenuNavigationForeground) {
+				IsMenuOpen = IsMenuNavigationForeground;
+				if(IsMenuOpen) {
+					Page.GetFirstChild("FRAME_VEHICLES").RelativePosition_V3.X = 110.;
+					AnimMgr.Add(Page.GetFirstChild("FRAME_VEHICLES"), "<frame pos=\"0 0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+				}
+				else {
+					
+				}
+			}
+			yield;
+		}
+	--></script>
+</manialink>

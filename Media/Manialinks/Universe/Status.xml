@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<manialink version="3">
+	<frame pos="0 2.5" id="FRAME_ALL_TIMELIMIT">
+		<frame pos="0 81.5" id="FRAME_TEAM">
+			<quad z-index="0" size="40 7" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+			<quad z-index="1" size="40 7" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+			<quad z-index="2" size="39 6" valign="center" halign="center" style="Bgs1InRace" substyle="BgWindow4" colorize="F00" opacity=".5" id="QUAD_TEAM" hidden="1"/>
+			<frame z-index="3" id="FRAME_TEAM_LABEL" clip="True" clipsizen="40 9">
+				<label size="32.5 5" text="TEAM RED" halign="center" valign="center2" textfont="RajdhaniMono" pos="0 -.35" textsize="2" id="LABEL_TEAM"/>
+			</frame>
+		</frame>
+		<frame pos="0 72.5" id="FRAME_POINTSTATUS">
+			<quad z-index="0" size="50 10" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+			<quad z-index="1" size="50 10" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+			<frame z-index="2">
+				<label pos="-15 -0.25" z-index="3" size="17 8" text="50" halign="center" valign="center2" textfont="RajdhaniMono" id="LABEL_RED_POINTS"/>
+				<quad z-index="2" size="17 8.5" pos="-23.5 0" valign="center" style="Bgs1InRace" substyle="BgWindow4" colorize="F00" opacity=".5" id="QUAD_RED_POINTS"/>
+				<label pos="8.5 -0.25" z-index="3" size="30 8" text="200" halign="center" valign="center2" textfont="RajdhaniMono" id="LABEL_BLUE_POINTS"/>
+				<quad z-index="2" size="30 8.5" pos="23.5 0" valign="center" style="Bgs1InRace" substyle="BgWindow4" colorize="00F" opacity=".5" id="QUAD_BLUE_POINTS" halign="right"/>
+			</frame>
+		</frame>
+	</frame>
+	<script><!--
+
+	#Include "TextLib" as TextLib
+	#Include "MathLib" as MathLib
+	#Include "AnimLib" as AnimLib
+	#Include "ColorLib" as ColorLib
+
+	CTmMlPlayer GetPlayer() {
+		if (GUIPlayer != Null) return GUIPlayer;
+		return InputPlayer;
+	}
+
+	Boolean IsVisible() {
+		return True;//!IsInGameMenuDisplayed;
+	}
+
+	Text ToNicerNumber(Integer _Num) {
+		declare NewText = "";
+		for(I, 0, TextLib::Length(_Num^"")-1) {
+			NewText ^= TextLib::SubText(_Num^"", I, 1);
+			if((TextLib::Length(_Num^"")-I-1) % 3 == 0) NewText ^= " ";
+		}
+		return TextLib::SubText(NewText, 0, TextLib::Length(NewText)-1);
+	}
+
+	main() {
+		declare Frame_All_TimeLimit = (Page.GetFirstChild("FRAME_ALL_TIMELIMIT") as CMlFrame);
+		declare Frame_Team = (Page.GetFirstChild("FRAME_TEAM") as CMlFrame);
+		declare Quad_Team = (Page.GetFirstChild("QUAD_TEAM") as CMlQuad);
+		declare Frame_Team_Label = (Page.GetFirstChild("FRAME_TEAM_LABEL") as CMlFrame);
+		declare Label_Team = (Page.GetFirstChild("LABEL_TEAM") as CMlLabel);
+
+		declare Frame_PointStatus = (Page.GetFirstChild("FRAME_POINTSTATUS") as CMlFrame);
+		declare Label_Red_Points = (Page.GetFirstChild("LABEL_RED_POINTS") as CMlLabel);
+		declare Label_Blue_Points = (Page.GetFirstChild("LABEL_BLUE_POINTS") as CMlLabel);
+		declare Quad_Red_Points = (Page.GetFirstChild("QUAD_RED_POINTS") as CMlQuad);
+		declare Quad_Blue_Points = (Page.GetFirstChild("QUAD_BLUE_POINTS") as CMlQuad);
+
+		declare Start = Now;
+		
+		Frame_Team.Visible = IsVisible();
+		declare PreviousIsVisible = IsVisible();
+
+		declare PreviousIsInMenu = IsInGameMenuDisplayed;
+
+		declare netread Boolean Net_CarSelectionMode for Teams[0];
+		declare netread Integer Net_CurrentWarmUpNb for Teams[0];
+
+		declare PrevClanScores = [ClanScores[0], ClanScores[1], ClanScores[2]];
+		declare PreviousClanScores = [ClanScores[0], ClanScores[1], ClanScores[2]];
+		declare PreviousClanScoresTime = [0, 0, 0];
+
+		wait(GetPlayer() != Null);
+
+		while(True) {
+			foreach(Event in PendingEvents) {
+				switch(Event.Type) {
+					case CMlScriptEvent::Type::MouseClick: {
+						switch(Event.ControlId) {
+							case "QUAD_TEAM": {
+								declare ManialinkUrl = Teams[GetPlayer().CurrentClan].PresentationManialinkUrl;
+								if(ManialinkUrl != "")
+									OpenLink(ManialinkUrl, ::LinkType::ManialinkBrowser);
+							}
+						}
+					}
+				}
+			}
+
+			if(IsVisible() != PreviousIsVisible) {
+				if(IsVisible()) {
+					foreach(Control in Frame_Team.Controls) {
+						if(Control is CMlQuad) {
+							declare Quad = (Control as CMlQuad);
+							Quad.Size.X = 0.;
+							if(Quad.ControlId == "QUAD_TEAM")
+								AnimMgr.Add(Quad, """<quad size="39 6.25"/>""", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+							else
+								AnimMgr.Add(Quad, """<quad size="40 7"/>""", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+						}
+					}
+				}
+				Start = Now;
+				Frame_Team.Visible = IsVisible();
+				PreviousIsVisible = IsVisible();
+			}
+
+			if(IsInGameMenuDisplayed != PreviousIsInMenu) {
+				if(IsInGameMenuDisplayed) {
+					AnimMgr.Add(Frame_All_TimeLimit, """<frame pos="0 -5"/>""", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+					foreach(Control in Frame_Team.Controls) {
+						if(Control is CMlQuad) {
+							declare Quad = (Control as CMlQuad);
+							if(Quad.ControlId == "QUAD_TEAM")
+								AnimMgr.Add(Quad, """<quad size="39 6.25"/>""", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+							else
+								AnimMgr.Add(Quad, """<quad size="40 7"/>""", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+						}
+					}
+					AnimMgr.Add(Frame_PointStatus.Controls[0], """<quad size="50 10"/>""", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.Add(Frame_PointStatus.Controls[1], """<quad size="50 10"/>""", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.Add(Quad_Red_Points, """<quad pos="-23.5 0"/>""", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.Add(Quad_Blue_Points, """<quad pos="23.5 0"/>""", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+				}
+				else {
+					AnimMgr.Add(Frame_All_TimeLimit, """<frame pos="0 2.5"/>""", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+					foreach(Control in Frame_Team.Controls) {
+						if(Control is CMlQuad) {
+							declare Quad = (Control as CMlQuad);
+							if(Quad.ControlId == "QUAD_TEAM")
+								AnimMgr.Add(Quad, """<quad size="49 6.25"/>""", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+							else
+								AnimMgr.Add(Quad, """<quad size="50 7"/>""", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+						}
+					}
+					AnimMgr.Add(Frame_PointStatus.Controls[0], """<quad size="70 10"/>""", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.Add(Frame_PointStatus.Controls[1], """<quad size="70 10"/>""", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.Add(Quad_Red_Points, """<quad pos="-33.5 0"/>""", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.Add(Quad_Blue_Points, """<quad pos="33.5 0"/>""", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+				}
+				PreviousIsInMenu = IsInGameMenuDisplayed;
+			}
+
+			Frame_Team_Label.ClipWindowSize.X = AnimLib::EaseOutQuad(Now-Start, 0.0, 40.0, 300);
+
+			if(UseClans) {
+				if(GetPlayer().Score == Null) {
+					Quad_Team.Hide();
+				}
+				else {
+					declare Team <=> Teams[GetPlayer().Score.TeamNum-1];
+					Label_Team.Value = "$t"^Team.Name;
+					Quad_Team.Colorize = Team.ColorPrimary;
+				}
+				Quad_Team.Show();
+				Frame_PointStatus.Show();
+			}
+			else {
+				Label_Team.Value = GetPlayer().User.Name;
+				Quad_Team.Hide();
+				Frame_PointStatus.Hide();
+			}
+
+			for(I, 0, ClanScores.count-1) {
+				if(ClanScores[I] != PrevClanScores[I]) {
+					PreviousClanScores[I] = PrevClanScores[I];
+					PreviousClanScoresTime[I] = Now;
+					PrevClanScores[I] = ClanScores[I];
+					log("Change");
+				}
+			}
+
+			declare AnimatedClanScore1 = AnimLib::EaseOutQuad(Now - PreviousClanScoresTime[1], PreviousClanScores[1]*1., (ClanScores[1]-PreviousClanScores[1])*1., 1000);
+			declare AnimatedClanScore2 = AnimLib::EaseOutQuad(Now - PreviousClanScoresTime[2], PreviousClanScores[2]*1., (ClanScores[2]-PreviousClanScores[2])*1., 1000);
+
+			Label_Red_Points.Value = ToNicerNumber(MathLib::NearestInteger(AnimatedClanScore1));
+			Label_Blue_Points.Value = ToNicerNumber(MathLib::NearestInteger(AnimatedClanScore2));
+			
+			declare RedRatio = .5;
+			declare BlueRatio = .5;
+			if(AnimatedClanScore1 + AnimatedClanScore2 > 0) {
+				RedRatio = 1. * AnimatedClanScore1 / (AnimatedClanScore1 + AnimatedClanScore2);
+				BlueRatio = 1. * AnimatedClanScore2 / (AnimatedClanScore1 + AnimatedClanScore2);
+			}
+
+			RedRatio = MathLib::Clamp(RedRatio, .1, .9);
+			BlueRatio = MathLib::Clamp(BlueRatio, .1, .9);
+
+			Quad_Red_Points.Size.X = 47.*RedRatio-(Quad_Red_Points.RelativePosition_V3.X+23.5);
+			Quad_Blue_Points.Size.X = 47.*BlueRatio-(-Quad_Blue_Points.RelativePosition_V3.X+23.5);
+
+			//if(BlueRatio >= .15) Label_Red_Points.Show();
+			//else Label_Red_Points.Hide();
+			Label_Red_Points.RelativePosition_V3.X = Quad_Red_Points.RelativePosition_V3.X+Quad_Red_Points.Size.X / 2;
+
+			//if(RedRatio >= .15) Label_Blue_Points.Show();
+			//else Label_Blue_Points.Hide();
+			Label_Blue_Points.RelativePosition_V3.X = -Quad_Red_Points.RelativePosition_V3.X-Quad_Blue_Points.Size.X / 2;
+
+			yield;
+		}
+	}
+
+	--></script>
+</manialink>

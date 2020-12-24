@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<manialink version="3">
+	<frame pos="-157.5 12.5" id="FRAME_LIVERANKINGS_CAR">
+		<frame pos="26.25 -3">
+			<frame id="FRAME_LIVERANKINGS_CAR_BG">
+				<quad z-index="0" size="52.5 6" halign="center" valign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="52.5 6" halign="center" valign="center" style="Bgs1InRace" substyle="BgGradV"/>
+			</frame>
+			<frame z-index="1" clip="True" clipsizen="52.5 5" id="FRAME_LABEL_CAR">
+				<label pos="0 0.2" z-index="0" size="47 5" text="$aaa[unknown]" valign="center" textfont="RajdhaniMono" textsize="1.5" translate="1" halign="center" id="LABEL_CAR"/>
+			</frame>
+		</frame>
+		<frame pos="0 -6" id="FRAME_LIVERANKINGS_RECORDS">
+			<quad z-index="0" pos="26.25 0" size="52.5 52.5" style="Bgs1" substyle="BgCardList" halign="center"/>
+			<quad z-index="1" pos="26.25 0" size="52.5 52.5" style="Bgs1InRace" substyle="BgGradV" halign="center"/>
+			<framemodel id="FRAMEMODEL_RECORD">
+				<label pos="0 0.3" z-index="0" size="5 5" text="1st" valign="center" textfont="RajdhaniMono" textsize="2" translate="1" id="LABEL_RANK"/>
+				<frame pos="5 0.3" z-index="0">
+					<label size="25 5" text="$aaa[unknown]" valign="center" textfont="Oswald" textsize="2" id="LABEL_NICKNAME"/>
+				</frame>
+				<label pos="46 0.3" z-index="0" size="15 5" text="-:--.---" halign="right" valign="center" textfont="OswaldMono" textsize="1.75" id="LABEL_TIME"/>
+			</framemodel>
+			<frame pos="3 -3.5" z-index="3" id="FRAME_RECORDS" clip="True" clipposn="23.25 -23.25" clipsizen="45 52.5">
+				<frameinstance modelid="FRAMEMODEL_RECORD"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -5"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -10"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -15"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -20"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -25"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -30"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -35"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -40"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -45"/>
+			</frame>
+		</frame>
+	</frame>
+	<script><!--
+		#Include "TextLib" as TextLib
+		#Include "MathLib" as MathLib
+		#Include "AnimLib" as AnimLib
+
+		#Struct SCheckpoint {
+			Integer Time;
+			Integer Score;
+			Integer NbRespawns;
+			Real Distance;
+			Real Speed;
+		}
+
+		#Struct SRecord {
+			Text Login;
+			Integer Time;
+			Integer Score;
+			Integer NbRespawns;
+			Real Distance;
+			Real Speed;
+			SCheckpoint[] Checkpoints;
+		}
+
+		CTmMlPlayer GetPlayer() {
+			if (GUIPlayer != Null) return GUIPlayer;
+			return InputPlayer;
+		}
+
+		Text TimeToTextWithMilli(Integer _Time) {
+			return TextLib::TimeToText(_Time, True) ^ MathLib::Abs(_Time % 10);
+		}
+
+		Boolean IsVisible() {
+			declare Boolean ScoreTable_IsVisible for ClientUI;
+			return !IsInGameMenuDisplayed && !ScoreTable_IsVisible;
+		}
+
+		Void SetSlidingText(CMlFrame _Frame, Text _Value) {
+			declare L1 = (_Frame.Controls[0] as CMlLabel);
+			L1.Value = _Value;
+			L1.Size.X = L1.ComputeWidth(_Value);
+
+			declare L2 = (_Frame.Controls[1] as CMlLabel);
+			L2.Value = _Value;
+			L2.Size.X = L2.ComputeWidth(_Value);
+		}
+
+		Void MoveSlidingText(CMlFrame _Frame, Integer _Distance, Real _Speed) {
+			declare L1 = (_Frame.Controls[0] as CMlLabel);
+			declare L2 = (_Frame.Controls[1] as CMlLabel);
+
+			if(_Frame.ClipWindowSize.X < L1.Size.X) {		
+				L1.RelativePosition_V3.X -= Period*_Speed;
+				L2.RelativePosition_V3.X -= Period*_Speed;
+				L2.Show();
+
+				if(_Speed > 0) {
+					if(L1.RelativePosition_V3.X + L1.Size.X < 0 || L1.RelativePosition_V3.X + L1.Size.X > L2.RelativePosition_V3.X)
+						L1.RelativePosition_V3.X = L2.RelativePosition_V3.X+L2.Size.X+_Distance;
+					if(L2.RelativePosition_V3.X + L2.Size.X < 0 || L1.RelativePosition_V3.X + L1.Size.X < L2.RelativePosition_V3.X)
+						L2.RelativePosition_V3.X = L1.RelativePosition_V3.X+L1.Size.X+_Distance;
+				}
+				else if(_Speed < 0) {
+					if(L1.RelativePosition_V3.X - L1.Size.X > 0 || L1.RelativePosition_V3.X - L1.Size.X < L2.RelativePosition_V3.X)
+						L1.RelativePosition_V3.X = L2.RelativePosition_V3.X-L2.Size.X-_Distance;
+					if(L2.RelativePosition_V3.X - L2.Size.X > 0 || L1.RelativePosition_V3.X - L1.Size.X > L2.RelativePosition_V3.X)
+						L2.RelativePosition_V3.X = L1.RelativePosition_V3.X-L1.Size.X-_Distance;
+				}
+			}
+			else {
+				L2.Hide();
+				L1.RelativePosition_V3.X = 0.;
+			}
+		}
+
+		main() {
+			declare Frame_LiveRankings_Car = (Page.GetFirstChild("FRAME_LIVERANKINGS_CAR") as CMlFrame);
+			declare Frame_LiveRankings_Car_Bg = (Page.GetFirstChild("FRAME_LIVERANKINGS_CAR_BG") as CMlFrame);
+			declare Frame_LiveRankings_Records = (Page.GetFirstChild("FRAME_LIVERANKINGS_RECORDS") as CMlFrame);
+			declare Frame_Label_Car = (Page.GetFirstChild("FRAME_LABEL_CAR") as CMlFrame);
+			
+			declare Label_Car = (Page.GetFirstChild("LABEL_CAR") as CMlLabel);
+			declare Frame_Records = (Page.GetFirstChild("FRAME_RECORDS") as CMlFrame);
+
+			Frame_LiveRankings_Car.Visible = IsVisible();
+			declare PreviousVisible = Frame_LiveRankings_Car.Visible;
+
+			declare VisibleTime = -1;
+
+			wait(GetPlayer() != Null);
+
+			while(True) {
+				declare netread Text Net_Car for GetPlayer();
+
+				Frame_LiveRankings_Car.Visible = IsVisible();
+
+				if(Frame_LiveRankings_Car.Visible != PreviousVisible) {
+					if(Frame_LiveRankings_Car.Visible) {
+						foreach(Control in Frame_LiveRankings_Car_Bg.Controls) {
+							Control.Size.X = 0.;
+							AnimMgr.Add(Control, "<quad size=\"52.5 6\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+						}
+						Frame_LiveRankings_Records.Controls[0].Size.X = 0.;
+						Frame_LiveRankings_Records.Controls[1].Size.X = 0.;
+						AnimMgr.Add(Frame_LiveRankings_Records.Controls[0], "<quad size=\"52.5 52.5\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+						AnimMgr.Add(Frame_LiveRankings_Records.Controls[1], "<quad size=\"52.5 52.5\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+
+						VisibleTime = Now;
+					}
+					PreviousVisible = Frame_LiveRankings_Car.Visible;
+				}
+
+				if(VisibleTime == -1) {
+					Frame_Records.ClipWindowSize.X = 52.5;
+					Frame_Label_Car.ClipWindowSize.X = 52.5;
+				}
+				else {
+					Frame_Records.ClipWindowSize.X = AnimLib::EaseOutQuad(Now - VisibleTime, 0., 52.5, 300);
+					Frame_Label_Car.ClipWindowSize.X = AnimLib::EaseOutQuad(Now - VisibleTime, 0., 52.5, 300);
+				}
+
+				Label_Car.Value = Net_Car;
+
+				declare Integer[] CarScores;
+
+				declare Integer[Text] LoginSort;
+				foreach(I => Score in Scores) {
+					declare netread Integer[Text] Envimix_Points for Score;
+					if(Envimix_Points.existskey(Net_Car))
+						LoginSort[Score.User.Login] = Envimix_Points[Net_Car];
+					else
+						LoginSort[Score.User.Login] = 0;
+				}
+
+				LoginSort = LoginSort.sortreverse();
+
+				foreach(Login => S in LoginSort) {
+					foreach(I => Score in Scores) {
+						if(Login == Score.User.Login) {
+							CarScores.add(I);
+						}
+					}
+				}
+
+				declare Offset = 0;
+				declare PreviousScore = 0;
+				foreach(I => Control in Frame_Records.Controls) {
+					declare Frame = (Control as CMlFrame);
+					if(CarScores.count > I) {
+						declare Label_Rank = (Frame.GetFirstChild("LABEL_RANK") as CMlLabel);
+						declare Label_Nickname = (Frame.GetFirstChild("LABEL_NICKNAME") as CMlLabel);
+						declare Label_Time = (Frame.GetFirstChild("LABEL_TIME") as CMlLabel);
+
+						declare Score <=> Scores[CarScores[I]];
+
+						declare netread Integer[Text] Envimix_Points for Score;
+						declare netread SRecord[Text] Envimix_BestRace for Score;
+
+						if(Envimix_Points.existskey(Net_Car)) {
+							if(Envimix_Points[Net_Car] > 0) {
+								if(Envimix_Points[Net_Car] == PreviousScore)
+									Offset += 1;
+								else Offset = 0;
+								PreviousScore = Envimix_Points[Net_Car];
+
+								if(I - Offset == 0) Label_Rank.Value = "1st";
+								else if(I - Offset == 1) Label_Rank.Value = "2nd";
+								else if(I - Offset == 2) Label_Rank.Value = "3rd";
+								else Label_Rank.Value = TextLib::Compose("%1th", (I - Offset + 1) ^ "");
+								Label_Rank.Size.X = Label_Rank.ComputeWidth(Label_Rank.Value);
+								Label_Rank.Visible = True;
+
+								Label_Nickname.Parent.RelativePosition_V3.X = Label_Rank.Size.X + 1;
+							}
+							else {
+								Label_Rank.Visible = False;
+								Label_Nickname.Parent.RelativePosition_V3.X = 0.;
+							}
+
+							if(Envimix_BestRace.existskey(Net_Car))
+								Label_Time.Value = TimeToTextWithMilli(Envimix_BestRace[Net_Car].Time);
+							else
+								Label_Time.Value = "-:--.---";
+						}
+						else {
+							Label_Rank.Visible = False;
+							Label_Nickname.Parent.RelativePosition_V3.X = 0.;
+							Label_Time.Value = "-:--.---";
+						}
+
+						Label_Nickname.Value = Score.User.Name;
+
+						Frame.Show();
+					}
+					else {
+						Frame.Hide();
+					}
+				}
+
+				yield;
+			}
+		}
+	--></script>
+</manialink>

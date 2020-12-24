@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<manialink version="3">
+	<frame id="FRAME_MAP">
+		<frame pos="117.5 80" id="FRAME_MAPNAME">
+			<frame pos="40 0" id="FRAME_MAPNAME_BG" data-size="80">
+				<quad z-index="0" size="80 15" valign="center" halign="right" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="80 15" valign="center" halign="right" style="Bgs1InRace" substyle="BgGradV"/>
+				<quad z-index="2" size="80 15" valign="center" halign="right" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" colorize="036" opacity=".75"/>
+			</frame>
+			<frame pos="37.5 7" clip="True" clipposn="-38 -7.5" clipsizen="74.5 13" id="FRAME_LABEL_MAPNAME" z-index="3">
+				<label z-index="0" size="90 12" textsize="12" textfont="Oswald" id="LABEL_MAPNAME" halign="right" pos="0 -1.25" textemboss="1"/>
+				<label z-index="0" size="90 12" textsize="12" textfont="Oswald" id="LABEL_MAPNAME_2" halign="right" pos="0 -1.25" textemboss="1"/>
+			</frame>
+		</frame>
+		<frame pos="130 67.5" id="FRAME_CAR">
+			<frame pos="27.5 0" id="FRAME_CAR_BG">
+				<quad z-index="0" size="55 8" valign="center" halign="right" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="55 8" valign="center" halign="right" style="Bgs1InRace" substyle="BgGradV"/>
+				<quad z-index="2" size="55 8" valign="center" halign="right" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" colorize="036" opacity=".75"/>
+			</frame>
+			<frame pos="25 4.5" clip="True" clipposn="-25 -5" clipsizen="50 10" id="FRAME_LABEL_CAR" z-index="3">
+				<label z-index="0" size="90 7" textsize="4" textfont="Oswald" id="LABEL_CAR" halign="right" pos="0 -1.9" textprefix="$o" textemboss="1"/>
+				<label z-index="0" size="90 7" textsize="4" textfont="Oswald" id="LABEL_CAR_2" halign="right" pos="0 -1.9" textprefix="$o" textemboss="1"/>
+			</frame>
+		</frame>
+		<frame pos="130 59.5" id="FRAME_LAPS" hidden="1">
+			<frame pos="27.5 0" id="FRAME_LAPS_BG">
+				<quad z-index="0" size="20 6" valign="center" halign="right" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="20 6" valign="center" halign="right" style="Bgs1InRace" substyle="BgGradV"/>
+			</frame>
+			<label z-index="3" size="20 5" textsize="2" textfont="RajdhaniMono" id="LABEL_CAR" textprefix=" 1/1" valign="center" halign="center" pos="17.5 0.4" textemboss="1"/>
+		</frame>
+		<quad pos="0 0" z-index="-1" size="320 180" halign="center" valign="center" style="Bgs1" substyle="BgEmpty" scriptevents="1" id="QUAD_BLUR" hidden="1"/>
+		<frame z-index="10" id="FRAME_SPECIALS">
+			<frame id="FRAME_SPECIALS_MAP" hidden="1">
+				<quad pos="0 0" halign="center" z-index="-1" size="100 30" style="Bgs1" substyle="BgCardList" valign="center"/>
+				<quad pos="0 0" halign="center" z-index="-1" size="100 30" style="Bgs1" substyle="BgGradV" valign="center"/>
+				<label z-index="0" size="90 7" textsize="6" textfont="Oswald" id="LABEL_MAP_NAME" pos="0 5" textemboss="1" halign="center" valign="center2"/>
+				<frame pos="42 -7.5">
+					<quad z-index="0" size="10 10" halign="center" style="Bgs1InRace" substyle="BgCard" scriptevents="1" modulatecolor="600" id="QUAD_BUTTON_EXIT" valign="center"/>
+					<label z-index="1" size="10 10" text="" valign="center2" textfont="RajdhaniMono" halign="center" pos="0 -0.8" textsize="3"/>
+				</frame>
+			</frame>
+			<frame id="FRAME_SPECIALS_CHALLENGE" hidden="1">
+				<quad pos="0 0" halign="center" z-index="-1" size="100 30" style="Bgs1" substyle="BgCardList" valign="center"/>
+				<quad pos="0 0" halign="center" z-index="-1" size="100 30" style="Bgs1" substyle="BgGradV" valign="center"/>
+				<label z-index="0" size="90 7" textsize="6" textfont="Oswald" id="LABEL_CHALLENGE_NAME" pos="0 5" textemboss="1" halign="center" valign="center2"/>
+				<frame pos="42 -7.5">
+					<quad z-index="0" size="10 10" halign="center" style="Bgs1InRace" substyle="BgCard" scriptevents="1" modulatecolor="600" id="QUAD_BUTTON_EXIT" valign="center"/>
+					<label z-index="1" size="10 10" text="" valign="center2" textfont="RajdhaniMono" halign="center" pos="0 -0.8" textsize="3"/>
+				</frame>
+			</frame>
+			<frame id="FRAME_SPECIALS_CAR" hidden="1">
+				<quad pos="0 0" halign="center" z-index="-1" size="100 30" style="Bgs1" substyle="BgCardList" valign="center"/>
+				<quad pos="0 0" halign="center" z-index="-1" size="100 30" style="Bgs1" substyle="BgGradV" valign="center"/>
+				<label z-index="0" size="90 7" textsize="6" textfont="Oswald" id="LABEL_CAR_NAME" pos="0 5" textemboss="1" halign="center" valign="center2"/>
+				<frame pos="42 -7.5">
+					<quad z-index="0" size="10 10" halign="center" style="Bgs1InRace" substyle="BgCard" scriptevents="1" modulatecolor="600" id="QUAD_BUTTON_EXIT" valign="center"/>
+					<label z-index="1" size="10 10" text="" valign="center2" textfont="RajdhaniMono" halign="center" pos="0 -0.8" textsize="3"/>
+				</frame>
+			</frame>
+		</frame>
+	</frame>
+	<script><!--
+		CTmMlPlayer GetPlayer() {
+			if (GUIPlayer != Null) return GUIPlayer;
+			return InputPlayer;
+		}
+
+		Boolean IsVisible() {
+			return !IsInGameMenuDisplayed;
+		}
+
+		Void SetSlidingText(CMlFrame _Frame, Text _Value) {
+			declare L1 = (_Frame.Controls[0] as CMlLabel);
+			L1.Value = _Value;
+			L1.Size.X = L1.ComputeWidth(_Value);
+
+			declare L2 = (_Frame.Controls[1] as CMlLabel);
+			L2.Value = _Value;
+			L2.Size.X = L2.ComputeWidth(_Value);
+		}
+
+		Void MoveSlidingText(CMlFrame _Frame, Integer _Distance, Real _Speed) {
+			declare L1 = (_Frame.Controls[0] as CMlLabel);
+			declare L2 = (_Frame.Controls[1] as CMlLabel);
+
+			if(_Frame.ClipWindowSize.X < L1.Size.X) {		
+				L1.RelativePosition_V3.X -= Period*_Speed;
+				L2.RelativePosition_V3.X -= Period*_Speed;
+				L2.Show();
+
+				if(_Speed > 0) {
+					if(L1.RelativePosition_V3.X + L1.Size.X < 0 || L1.RelativePosition_V3.X + L1.Size.X > L2.RelativePosition_V3.X)
+						L1.RelativePosition_V3.X = L2.RelativePosition_V3.X+L2.Size.X+_Distance;
+					if(L2.RelativePosition_V3.X + L2.Size.X < 0 || L1.RelativePosition_V3.X + L1.Size.X < L2.RelativePosition_V3.X)
+						L2.RelativePosition_V3.X = L1.RelativePosition_V3.X+L1.Size.X+_Distance;
+				}
+				else if(_Speed < 0) {
+					if(L1.RelativePosition_V3.X - L1.Size.X > 0 || L1.RelativePosition_V3.X - L1.Size.X < L2.RelativePosition_V3.X)
+						L1.RelativePosition_V3.X = L2.RelativePosition_V3.X-L2.Size.X-_Distance;
+					if(L2.RelativePosition_V3.X - L2.Size.X > 0 || L1.RelativePosition_V3.X - L1.Size.X > L2.RelativePosition_V3.X)
+						L2.RelativePosition_V3.X = L1.RelativePosition_V3.X-L1.Size.X-_Distance;
+				}
+			}
+			else {
+				L2.Hide();
+				L1.RelativePosition_V3.X = 0.;
+			}
+		}
+
+		main() {
+			declare Frame_Map = (Page.GetFirstChild("FRAME_MAP") as CMlFrame);
+
+			declare Frame_MapName = (Page.GetFirstChild("FRAME_MAPNAME") as CMlFrame);
+			declare Frame_MapName_Bg = (Page.GetFirstChild("FRAME_MAPNAME_BG") as CMlFrame);
+			declare Frame_Label_MapName = (Page.GetFirstChild("FRAME_LABEL_MAPNAME") as CMlFrame);
+			declare Label_MapName = (Page.GetFirstChild("LABEL_MAPNAME") as CMlLabel);
+			declare Label_MapName2 = (Page.GetFirstChild("LABEL_MAPNAME_2") as CMlLabel);
+
+			declare Frame_Car = (Page.GetFirstChild("FRAME_CAR") as CMlFrame);
+			declare Frame_Car_Bg = (Page.GetFirstChild("FRAME_CAR_BG") as CMlFrame);
+			declare Frame_Label_Car = (Page.GetFirstChild("FRAME_LABEL_CAR") as CMlFrame);
+			declare Label_Car = (Page.GetFirstChild("LABEL_CAR") as CMlLabel);
+			declare Label_Car2 = (Page.GetFirstChild("LABEL_CAR_2") as CMlLabel);
+
+			Frame_MapName.Hide();
+			Frame_Car.Hide();
+
+			wait(GetPlayer() != Null);
+
+			declare PreviousMapName = "";
+			declare PreviousCar = "";
+
+			declare PreviousIsVisible = IsVisible();
+
+			while(True) {
+				Frame_Map.Visible = IsVisible();
+
+				if(Map == Null) {
+					SetSlidingText(Frame_Label_MapName, "");
+					Frame_MapName.Visible = False;
+					Frame_Car.Visible = False;
+				}
+				else {
+					if(Map.MapInfo.Name != PreviousMapName) {
+						foreach(Control in Frame_MapName_Bg.Controls) {
+							declare Quad = (Control as CMlQuad);
+							Quad.Size.X = Label_MapName.ComputeWidth(Map.MapInfo.Name) + 6;
+							if(Quad.Size.X > 80) {
+								Quad.Size.X = 80.;
+							}
+							Frame_MapName_Bg.DataAttributeSet("size", ""^Quad.Size.X);
+						}
+
+						SetSlidingText(Frame_Label_MapName, Map.MapInfo.Name);
+						PreviousMapName = Map.MapInfo.Name;
+
+						if(PreviousMapName == "")
+							Frame_MapName.Visible = False;
+						else
+							Frame_MapName.Visible = True;
+					}
+
+					declare netread Text Net_Car for GetPlayer();
+					Label_Car.Value = Net_Car;
+
+					if(Net_Car != PreviousCar) {
+						foreach(Control in Frame_Car_Bg.Controls) {
+							declare Quad = (Control as CMlQuad);
+							Quad.Size.X = Label_Car.ComputeWidth(Label_Car.Value) + 6;
+						}
+
+						Frame_Car_Bg.DataAttributeSet("size", ""^(Label_Car.ComputeWidth(Label_Car.Value) + 6));
+
+						PreviousCar = Net_Car;
+
+						if(PreviousCar == "")
+							Frame_Car.Visible = False;
+						else
+							Frame_Car.Visible = True;
+						
+						foreach(Control in Frame_Car_Bg.Controls) {
+							Control.Size.X = 0.;
+							AnimMgr.Add(Control, "<quad size=\""^Frame_Car_Bg.DataAttributeGet("size")^" 8\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+						}
+						foreach(Control in Frame_Label_Car.Controls) {
+							(Control as CMlLabel).Opacity = 0.;
+							AnimMgr.Add(Control, "<label opacity=\"0\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+							AnimMgr.AddChain(Control, "<label opacity=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+						}
+					}
+				}
+
+				if(Frame_Map.Visible != PreviousIsVisible) {
+					if(Frame_Map.Visible) {
+						foreach(Control in Frame_MapName_Bg.Controls) {
+							Control.Size.X = 0.;
+							AnimMgr.Add(Control, "<quad size=\""^Frame_MapName_Bg.DataAttributeGet("size")^" 15\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+						}
+						foreach(Control in Frame_Label_MapName.Controls) {
+							(Control as CMlLabel).Opacity = 0.;
+							AnimMgr.Add(Control, "<label opacity=\"0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+							AnimMgr.AddChain(Control, "<label opacity=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+						}
+						foreach(Control in Frame_Car_Bg.Controls) {
+							Control.Size.X = 0.;
+							AnimMgr.Add(Control, "<quad size=\""^Frame_Car_Bg.DataAttributeGet("size")^" 8\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+						}
+						foreach(Control in Frame_Label_Car.Controls) {
+							(Control as CMlLabel).Opacity = 0.;
+							AnimMgr.Add(Control, "<label opacity=\"0\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+							AnimMgr.AddChain(Control, "<label opacity=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+						}
+					}
+					PreviousIsVisible = Frame_Map.Visible;
+				}
+
+				MoveSlidingText(Frame_Label_MapName, 10, .01);
+				
+				yield;
+			}
+		}
+	--></script>
+</manialink>

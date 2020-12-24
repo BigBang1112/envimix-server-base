@@ -1,0 +1,1253 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<manialink version="3">
+<frame z-index="90" id="FRAME_SCORETABLE">
+	<quad pos="0 0" size="320 180" halign="center" valign="center" style="Bgs1" substyle="BgEmpty" scriptevents="1" z-index="-1"/>
+	<frame pos="-81" id="FRAME_CAR_TABLE" clip="True" clipsizen="111 131" clipposn="-15 0">
+		<frame>
+			<frame pos="0 55" clip="True" clipsizen="80 19" clipposn="0 0.5">
+				<frame id="FRAME_CAR_BG">
+					<quad z-index="0" size="80 19" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+					<quad z-index="1" size="80 19" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+					<label z-index="2" size="70 10" text="ValleyCar" halign="center" valign="center2" textfont="RajdhaniMono" textsize="8" pos="0 -1" id="LABEL_SCORETABLE_CAR"/>
+				</frame>
+			</frame>
+			<frame pos="0 40.25" clip="True" clipsizen="80 10" clipposn="0 0.5">
+				<frame id="FRAME_CAR_TIMEA">
+					<quad z-index="0" size="80 9.5" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+					<quad z-index="1" size="80 9.5" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+					<label z-index="2" size="70 10" text="120 TOTAL POINTS GRINDED" halign="center" valign="center2" textfont="RajdhaniMono" textsize="3" pos="0 -0.4" id="LABEL_CAR_TIMEA_POINTS"/>
+				</frame>
+				<frame id="FRAME_CAR_TEAMA" hidden="1">
+					<frame pos="-20.125">
+						<quad size="39.75 9.5" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+						<quad z-index="1" size="39.75 9.5" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+						<quad z-index="2" size="39 9" valign="center" halign="center" style="Bgs1" substyle="BgWindow4" colorize="F00" opacity=".5"/>
+						<quad z-index="3" size="39 9" valign="center" halign="center" style="Bgs1" substyle="BgCardInventoryItem" scriptevents="1" colorize="F00" id="QUAD_CAR_TEAMA_POINTS_RED" opacity=".5"/>
+						<label z-index="4" pos="0 -0.4" size="40 10" text="0" halign="center" valign="center2" textfont="RajdhaniMono" textsize="4" id="LABEL_CAR_TEAMA_POINTS_RED"/>
+					</frame>
+					<frame pos="20.125">
+						<quad size="39.75 9.5" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+						<quad z-index="1" size="39.75 9.5" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+						<quad z-index="2" size="39 9" valign="center" halign="center" style="Bgs1" substyle="BgWindow4" colorize="00F" opacity=".5"/>
+						<quad z-index="3" size="39 9" valign="center" halign="center" style="Bgs1" substyle="BgCardInventoryItem" scriptevents="1" colorize="00F" id="QUAD_CAR_TEAMA_POINTS_BLUE" opacity=".5"/>
+						<label z-index="4" pos="0 -0.4" size="40 10" text="0" halign="center" valign="center2" textfont="RajdhaniMono" textsize="4" id="LABEL_CAR_TEAMA_POINTS_BLUE"/>
+					</frame>
+				</frame>
+			</frame>
+			<frame pos="0 -15" clip="True" clipsizen="80 100">
+				<frame id="FRAME_CAR_LB_BG">
+					<quad z-index="0" size="80 100" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+					<quad z-index="1" size="80 100" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+				</frame>
+			</frame>
+			<framemodel id="FRAMEMODEL_RECORD_CAR">
+				<frame pos="-9 0" clip="True" clipsizen="8 6">
+					<frame id="FRAME_ZONE">
+						<quad z-index="0" size="8 6" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+						<quad z-index="1" size="8 6" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+						<quad z-index="2" size="7 5" valign="center" halign="center" bgcolor="F00" opacity=".5" id="QUAD_TEAM"/>
+						<quad z-index="3" size="4 4" halign="center" valign="center" image="file://ZoneFlags/Path/World|Europe|Czech Republic" opacity=".9" id="QUAD_ZONE"/>
+					</frame>
+				</frame>
+				<frame pos="-17 0" clip="True" clipsizen="8 6">
+					<frame id="FRAME_ECHELON">
+						<quad z-index="0" size="8 6" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+						<quad z-index="1" size="8 6" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+						<quad z-index="2" size="4 4" halign="center" valign="center" image="" opacity=".9" id="QUAD_ECHELON"/>
+						<label z-index="3" size="8 5" text="" valign="center" halign="center" textfont="Oswald" textsize="1" id="LABEL_ECHELON" opacity=".8"/>
+					</frame>
+				</frame>
+				<quad pos="-2.5 0" z-index="0" size="75 6.5" valign="center" style="Bgs1" substyle="BgCardInventoryItem" scriptevents="1" colorize="888" id="QUAD_SELECT" opacity=".25"/>
+				<label pos="0 -0.3" z-index="1" size="7.5 5" text="1st" valign="center2" textfont="RajdhaniMono" translate="1" textsize="3" textemboss="1" id="LABEL_RANK"/>
+				<frame pos="7.5 -0.3" clip="True" clipposn="20 0" clipsizen="40 5" z-index="1" id="FRAME_LABEL_NICKNAME">
+					<label size="100 5" text="$o$i$nBIGBANG1112" valign="center2" textfont="RajdhaniMono" textsize="3" id="LABEL_NICKNAME"/>
+				</frame>
+				<quad pos="42 0" z-index="1" size="5 5" halign="center" valign="center" id="QUAD_SOMETHING" image="file://Media/Manialinks/Common/Echelons/echelon3.dds" hidden="1"/>
+				<quad pos="42 0" z-index="1" size="5 5" style="Icons64x64_2" substyle="Disconnected" valign="center" halign="center" id="QUAD_STATUS" hidden="1"/>
+				<frame pos="70 -0.3" clip="True" clipposn="-12.5 0" clipsizen="25 5" z-index="1">
+					<label size="25 5" text="1:00:00.000" valign="center2" halign="right" textfont="RajdhaniMono" textsize="3" id="LABEL_TIME"/>
+				</frame>
+			</framemodel>
+			<frame z-index="1" pos="-35 30" id="FRAME_CAR_RECORDS">
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="0"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="1" pos="0 -6"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="2" pos="0 -12"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="3" pos="0 -18"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="4" pos="0 -24"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="5" pos="0 -30"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="6" pos="0 -36"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="7" pos="0 -42"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="8" pos="0 -48"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="9" pos="0 -54"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="10" pos="0 -60"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="11" pos="0 -66"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="12" pos="0 -72"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="13" pos="0 -78"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD_CAR" data-index="14" pos="0 -84"/>
+			</frame>
+			<frame pos="-19 -61" z-index="1" hidden="1">
+				<quad size="37 5" halign="center" valign="center" style="BgsPlayerCard" substyle="BgCard" scriptevents="1"/>
+				<label z-index="1" size="10 5" text="" halign="center" valign="center2"/>
+			</frame>
+			<frame pos="19 -61" z-index="1" hidden="1">
+				<quad size="37 5" halign="center" valign="center" style="BgsPlayerCard" substyle="BgCard" scriptevents="1"/>
+				<label z-index="1" size="10 5" text="" halign="center" valign="center2"/>
+			</frame>
+		</frame>
+	</frame>
+	<frame id="FRAME_MIDDLE_TABLE">
+		<frame pos="0 55" clip="True" clipsizen="80 19" clipposn="0 0.5">
+			<frame id="FRAME_MIDDLE_BG">
+				<quad z-index="0" size="80 19" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="80 19" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+				<label z-index="2" size="70 10" text="$o$n$iBIGBANG1112" halign="center" valign="center2" textfont="RajdhaniMono" textsize="7" pos="0 -1" id="LABEL_MIDDLE_NICKNAME"/>
+			</frame>
+		</frame>
+		<frame pos="0 0" clip="True" clipsizen="80 90">
+			<frame id="FRAME_MIDDLE_LB_BG">
+				<quad z-index="0" size="80 90" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="80 90" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+				<frame pos="0 35" z-index="2">
+					<quad size="74 15" halign="center" valign="center" style="Bgs1" substyle="BgWindow1" opacity=".75"/>
+					<label z-index="1" size="70 10" text="0.0" halign="center" valign="center2" textsize="9" textfont="RajdhaniMono" pos="0 -0.9" opacity=".9" textcolor="CB6" id="LABEL_LADDERPOINTS"/>
+					<quad pos="-32 -5" z-index="1" size="6 6" halign="center" valign="center" style="BgRaceScore2" substyle="LadderPoints"/>
+				</frame>
+				<frame pos="0 23.5" z-index="2">
+					<quad z-index="1" pos="0 -1" size="74 8" halign="center" valign="center" style="Bgs1" substyle="BgWindow1" opacity=".5"/>
+					<quad z-index="3" size="4 4" halign="center" valign="center" opacity=".9" pos="-33.75 0" id="QUAD_ECHELON_CURRENT" image="file://Media/Manialinks/Common/Echelons/echelon3.dds"/>
+					<label z-index="4" pos="-33.75 0" size="8 5" text="" valign="center" halign="center" textfont="Oswald" textsize="1" id="LABEL_ECHELON_CURRENT" opacity=".8"/>
+					<quad z-index="3" size="4 4" halign="center" valign="center" opacity=".9" pos="33.75 0" id="QUAD_ECHELON_NEXT" image="file://Media/Manialinks/Common/Echelons/echelon4.dds"/>
+					<label z-index="4" pos="33.75 0" size="8 5" text="" valign="center" halign="center" textfont="Oswald" textsize="1" id="LABEL_ECHELON_NEXT" opacity=".8"/>
+					<label z-index="3" size="70 5" text="Not ranked" halign="center" valign="center2" textsize="1.5" textfont="RajdhaniMono" pos="0 -0.2" id="LABEL_LADDERZONE" translate="1"/>
+
+					<quad z-index="2" size="72 1.5" halign="center" valign="center" style="Bgs1" pos="0 -3.5" substyle="BgWindow4" opacity=".1"/>
+					<quad size="40 1.5" valign="center" style="Bgs1" substyle="BgWindow4" opacity=".75" pos="-36 -3.5" id="QUAD_ECHELON_PERCENT" colorize="CB6"/>
+				</frame>
+				<frame z-index="2" pos="0 10">
+					<quad pos="-30 0" z-index="0" size="10 10" halign="center" valign="center" image="file://ZoneFlags/Path/World|Europe|Czech Republic" bgcolor="000A" id="QUAD_USER_ZONE"/>
+					<label pos="-22.5 -0.1" z-index="0" size="25 10" text="Czech Republic" valign="center2" textsize="2" autonewline="1" textfont="RajdhaniMono" id="LABEL_USER_ZONE" translate="1"/>
+					<frame pos="10" id="FRAME_FAME">
+						<quad z-index="4" size="10 10" halign="center" valign="center" style="BgRaceScore2" substyle="Fame"/>
+						<quad pos="5 0" z-index="3" size="10 10" halign="center" valign="center" style="BgRaceScore2" substyle="Fame"/>
+						<quad pos="10 0" z-index="2" size="10 10" halign="center" valign="center" style="BgRaceScore2" substyle="Fame" colorize="111"/>
+						<quad pos="15 0" z-index="1" size="10 10" halign="center" valign="center" style="BgRaceScore2" substyle="Fame" colorize="111"/>
+						<quad pos="20 0" z-index="0" size="10 10" halign="center" valign="center" style="BgRaceScore2" substyle="Fame" colorize="111"/>
+					</frame>
+				</frame>
+				<frame z-index="2" pos="-25 -32" id="FRAME_CURRENT_CAR">
+					<quad z-index="0" size="20 20" halign="center" valign="center" image="file://Media/Images/Cars/RallyCar.png" id="QUAD_CURRENT_CAR"/>
+					<label pos="13.5 2" z-index="0" size="47.5 6" text="RallyCar" valign="center2" textfont="RajdhaniMono" textsize="5" id="LABEL_CURRENT_CAR"/>
+					<label pos="13.5 -4" z-index="0" size="47.5 6" text="Default" valign="center2" textfont="RajdhaniMono" textsize="2" translate="1" textcolor="888" id="LABEL_CURRENT_SKIN"/>
+				</frame>
+			</frame>
+		</frame>
+		<frame pos="0 -55.25" clip="True" clipsizen="80 20" clipposn="0 -0.5">
+			<frame id="FRAME_MIDDLE_ENVIMIX_BG">
+				<quad z-index="0" size="80 19.5" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="80 19.5" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+				<quad z-index="2" size="12.5 12.5" halign="center" valign="center" style="BgRaceScore2" substyle="SandTimer" id="QUAD_ENVIMIX_LOADING" class="LOADING" hidden="1"/>
+				<quad z-index="3" size="60 15" halign="center" valign="center" image="http://envimix.bigbang1112.eu/Envimix.png" id="QUAD_ENVIMIX" manialink="envimix"/>
+				<quad z-index="2" size="60 15" halign="center" valign="center" image="http://envimix.bigbang1112.eu/Envimix.png" pos=".4 -.4" modulatecolor="000" opacity=".5"/>
+			</frame>
+		</frame>
+	</frame>
+	<frame pos="81" id="FRAME_GLOBAL_TABLE">
+		<frame pos="0 55" clip="True" clipsizen="80 19" clipposn="0 0.5">
+			<frame id="FRAME_GLOBAL_BG">
+				<quad z-index="0" size="80 19" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="80 19" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+				<label z-index="2" size="70 10" text="Global" halign="center" valign="center2" textfont="RajdhaniMono" textsize="8" pos="0 -1" translate="1"/>
+			</frame>
+		</frame>
+		<frame pos="0 40.25" clip="True" clipsizen="80 10" clipposn="0 0.5">
+			<frame id="FRAME_GLOBAL_TIMEA">
+				<quad z-index="0" size="80 9.5" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="80 9.5" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+				<label z-index="2" size="70 10" text="120 TOTAL POINTS GRINDED" halign="center" valign="center2" textfont="RajdhaniMono" textsize="3" pos="0 -0.4" id="LABEL_GLOBAL_TIMEA_POINTS"/>
+			</frame>
+			<frame id="FRAME_GLOBAL_TEAMA" hidden="1">
+				<frame pos="-20.125">
+					<quad size="39.75 9.5" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+					<quad z-index="1" size="39.75 9.5" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+					<quad z-index="2" size="39 9" valign="center" halign="center" style="Bgs1" substyle="BgWindow4" colorize="F00" opacity=".5"/>
+					<quad z-index="3" size="39 9" valign="center" halign="center" style="Bgs1" substyle="BgCardInventoryItem" scriptevents="1" colorize="F00" id="QUAD_GLOBAL_TEAMA_POINTS_RED" opacity=".5"/>
+					<label z-index="4" pos="0 -0.4" size="40 10" text="0" halign="center" valign="center2" textfont="RajdhaniMono" textsize="4" id="LABEL_GLOBAL_TEAMA_POINTS_RED"/>
+				</frame>
+				<frame pos="20.125">
+					<quad size="39.75 9.5" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+					<quad z-index="1" size="39.75 9.5" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+					<quad z-index="2" size="39 9" valign="center" halign="center" style="Bgs1" substyle="BgWindow4" colorize="00F" opacity=".5"/>
+					<quad z-index="3" size="39 9" valign="center" halign="center" style="Bgs1" substyle="BgCardInventoryItem" scriptevents="1" colorize="00F" id="QUAD_GLOBAL_TEAMA_POINTS_BLUE" opacity=".5"/>
+					<label z-index="4" pos="0 -0.4" size="40 10" text="0" halign="center" valign="center2" textfont="RajdhaniMono" textsize="4" id="LABEL_GLOBAL_TEAMA_POINTS_BLUE"/>
+				</frame>
+			</frame>
+		</frame>
+		<frame pos="0 -15" clip="True" clipsizen="80 100">
+			<frame id="FRAME_GLOBAL_LB_BG">
+				<quad z-index="0" size="80 100" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="80 100" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+			</frame>
+		</frame>
+		<framemodel id="FRAMEMODEL_RECORD_GLOBAL">
+			<frame pos="79 0" clip="True" clipsizen="8 6" clipposn="-.5 0">
+				<frame id="FRAME_ZONE">
+					<quad z-index="0" size="8 6" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+					<quad z-index="1" size="8 6" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+					<quad z-index="2" size="7 5" valign="center" halign="center" bgcolor="F00" opacity=".5" id="QUAD_TEAM"/>
+					<quad z-index="3" size="4 4" halign="center" valign="center" image="file://ZoneFlags/Path/World|Europe|Czech Republic" opacity=".9" id="QUAD_ZONE"/>
+				</frame>
+			</frame>
+			<frame pos="87 0" clip="True" clipsizen="8 6" clipposn="-.5 0">
+				<frame id="FRAME_ECHELON">
+					<quad z-index="0" size="8 6" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+					<quad z-index="1" size="8 6" valign="center" halign="center" style="Bgs1InRace" substyle="BgGradV"/>
+					<quad z-index="2" size="4 4" halign="center" valign="center" image="" opacity=".9" id="QUAD_ECHELON"/>
+					<label z-index="3" size="8 5" text="" valign="center" halign="center" textfont="Oswald" textsize="1" id="LABEL_ECHELON" opacity=".8"/>
+				</frame>
+			</frame>
+			<quad pos="-2.5 0" z-index="0" size="75 6.5" valign="center" style="Bgs1" substyle="BgCardInventoryItem" scriptevents="1" colorize="888" id="QUAD_SELECT" opacity=".25"/>
+			<label pos="0 -0.3" z-index="1" size="7.5 5" text="1st" valign="center2" textfont="RajdhaniMono" translate="1" textsize="3" textemboss="1" id="LABEL_RANK"/>
+			<frame pos="7.5 -0.3" clip="True" clipposn="20 0" clipsizen="40 5" z-index="1" id="FRAME_LABEL_NICKNAME">
+				<label size="100 5" text="$o$i$nBIGBANG1112" valign="center2" textfont="RajdhaniMono" textsize="3" id="LABEL_NICKNAME"/>
+			</frame>
+			<quad pos="42 0" z-index="1" size="5 5" halign="center" valign="center" id="QUAD_SOMETHING" image="file://Media/Manialinks/Common/Echelons/echelon3.dds" hidden="1"/>
+			<quad pos="51 0" z-index="1" size="5 5" style="Icons64x64_2" substyle="Disconnected" valign="center" halign="center" id="QUAD_STATUS"/>
+			<frame pos="70 -0.3" clip="True" clipposn="-12.5 0" clipsizen="25 5" z-index="1">
+				<label size="20 5" text="10 000" valign="center2" halign="right" textfont="RajdhaniMono" textsize="3" id="LABEL_POINTS"/>
+			</frame>
+		</framemodel>
+		<frame z-index="1" pos="-35 30" id="FRAME_GLOBAL_RECORDS">
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="0"/>
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="1" pos="0 -6"/>
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="2" pos="0 -12"/>
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="3" pos="0 -18"/>
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="4" pos="0 -24"/>
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="5" pos="0 -30"/>
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="6" pos="0 -36"/>
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="7" pos="0 -42"/>
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="8" pos="0 -48"/>
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="9" pos="0 -54"/>
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="10" pos="0 -60"/>
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="11" pos="0 -66"/>
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="12" pos="0 -72"/>
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="13" pos="0 -78"/>
+			<frameinstance modelid="FRAMEMODEL_RECORD_GLOBAL" data-index="14" pos="0 -84"/>
+		</frame>
+		<frame pos="-19 -61" z-index="1" hidden="1">
+			<quad size="37 5" halign="center" valign="center" style="BgsPlayerCard" substyle="BgCard" scriptevents="1"/>
+			<label z-index="1" size="10 5" text="" halign="center" valign="center2"/>
+		</frame>
+		<frame pos="19 -61" z-index="1" hidden="1">
+			<quad size="37 5" halign="center" valign="center" style="BgsPlayerCard" substyle="BgCard" scriptevents="1"/>
+			<label z-index="1" size="10 5" text="" halign="center" valign="center2"/>
+		</frame>
+	</frame>
+</frame>
+<script><!--
+
+	#Include "TextLib" as TextLib
+	#Include "MathLib" as MathLib
+	#Include "AnimLib" as AnimLib
+	#Include "ColorLib" as ColorLib
+
+	#Struct SCheckpoint {
+		Integer Time;
+		Integer Score;
+		Integer NbRespawns;
+		Real Distance;
+		Real Speed;
+	}
+
+	#Struct SRecord {
+		Text Login;
+		Integer Time;
+		Integer Score;
+		Integer NbRespawns;
+		Real Distance;
+		Real Speed;
+		SCheckpoint[] Checkpoints;
+	}
+
+	Void SetSlidingText(CMlFrame _Frame, Text _Value) {
+		declare L1 = (_Frame.Controls[0] as CMlLabel);
+		L1.Value = _Value;
+		L1.Size.X = L1.ComputeWidth(_Value);
+
+		declare L2 = (_Frame.Controls[1] as CMlLabel);
+		L2.Value = _Value;
+		L2.Size.X = L2.ComputeWidth(_Value);
+	}
+
+	Void MoveSlidingText(CMlFrame _Frame, Integer _Distance, Real _Speed) {
+		declare L1 = (_Frame.Controls[0] as CMlLabel);
+		declare L2 = (_Frame.Controls[1] as CMlLabel);
+
+		if(_Frame.ClipWindowSize.X < L1.Size.X) {		
+			L1.RelativePosition_V3.X -= Period*_Speed;
+			L2.RelativePosition_V3.X -= Period*_Speed;
+			L2.Show();
+
+			if(_Speed > 0) {
+				if(L1.RelativePosition_V3.X + L1.Size.X < 0 || L1.RelativePosition_V3.X + L1.Size.X > L2.RelativePosition_V3.X)
+					L1.RelativePosition_V3.X = L2.RelativePosition_V3.X+L2.Size.X+_Distance;
+				if(L2.RelativePosition_V3.X + L2.Size.X < 0 || L1.RelativePosition_V3.X + L1.Size.X < L2.RelativePosition_V3.X)
+					L2.RelativePosition_V3.X = L1.RelativePosition_V3.X+L1.Size.X+_Distance;
+			}
+			else if(_Speed < 0) {
+				if(L1.RelativePosition_V3.X - L1.Size.X > 0 || L1.RelativePosition_V3.X - L1.Size.X < L2.RelativePosition_V3.X)
+					L1.RelativePosition_V3.X = L2.RelativePosition_V3.X-L2.Size.X-_Distance;
+				if(L2.RelativePosition_V3.X - L2.Size.X > 0 || L1.RelativePosition_V3.X - L1.Size.X > L2.RelativePosition_V3.X)
+					L2.RelativePosition_V3.X = L1.RelativePosition_V3.X-L1.Size.X-_Distance;
+			}
+		}
+		else {
+			L2.Hide();
+			L1.RelativePosition_V3.X = 0.;
+		}
+	}
+
+	CTmMlPlayer GetPlayer() {
+		if (GUIPlayer != Null) return GUIPlayer;
+		return InputPlayer;
+	}
+
+	CTmMlPlayer GetPlayer(Text _Login) {
+		foreach(Player in Players)
+			if(Player.User.Login == _Login)
+				return Player;
+		return Null;
+	}
+
+	CTmScore GetScore(Text _Login) {
+		foreach(Score in Scores)
+			if(Score.User.Login == _Login)
+				return Score;
+		return Null;
+	}
+
+	Text TimeToTextWithMilli(Integer _Time) {
+		return TextLib::TimeToText(_Time, True) ^ MathLib::Abs(_Time % 10);
+	}
+
+	Text ToNicerNumber(Integer _Num) {
+		declare NewText = "";
+		for(I, 0, TextLib::Length(_Num^"")-1) {
+			NewText ^= TextLib::SubText(_Num^"", I, 1);
+			if((TextLib::Length(_Num^"")-I-1) % 3 == 0) NewText ^= " ";
+		}
+		return TextLib::SubText(NewText, 0, TextLib::Length(NewText)-1);
+	}
+
+	Integer EchelonToInteger(CUser::EEchelon _Echelon) {
+		switch (_Echelon) {
+			case CUser::EEchelon::Bronze1	: return 1;
+			case CUser::EEchelon::Bronze2	: return 2;
+			case CUser::EEchelon::Bronze3	: return 3;
+			case CUser::EEchelon::Silver1	: return 4;
+			case CUser::EEchelon::Silver2	: return 5;
+			case CUser::EEchelon::Silver3	: return 6;
+			case CUser::EEchelon::Gold1		: return 7;
+			case CUser::EEchelon::Gold2		: return 8;
+			case CUser::EEchelon::Gold3		: return 9;
+		}
+		
+		return 0;
+	}
+
+	main() {
+		declare Frame_ScoreTable = (Page.GetFirstChild("FRAME_SCORETABLE") as CMlFrame);
+
+		declare Label_ScoreTable_Car = (Page.GetFirstChild("LABEL_SCORETABLE_CAR") as CMlLabel);
+		
+		declare Frame_Car_Table = (Page.GetFirstChild("FRAME_CAR_TABLE") as CMlFrame);
+		declare Frame_Middle_Table = (Page.GetFirstChild("FRAME_MIDDLE_TABLE") as CMlFrame);
+		declare Frame_Global_Table = (Page.GetFirstChild("FRAME_GLOBAL_TABLE") as CMlFrame);
+
+		declare Frame_Car_Records = (Page.GetFirstChild("FRAME_CAR_RECORDS") as CMlFrame);
+		declare Frame_Car_TimeA = (Page.GetFirstChild("FRAME_CAR_TIMEA") as CMlFrame);
+		declare Frame_Car_TeamA = (Page.GetFirstChild("FRAME_CAR_TEAMA") as CMlFrame);
+		
+		declare Label_Middle_Nickname = (Page.GetFirstChild("LABEL_MIDDLE_NICKNAME") as CMlLabel);
+		declare Label_LadderPoints = (Page.GetFirstChild("LABEL_LADDERPOINTS") as CMlLabel);
+		declare Label_LadderZone = (Page.GetFirstChild("LABEL_LADDERZONE") as CMlLabel);
+		declare Quad_Current_Car = (Page.GetFirstChild("QUAD_CURRENT_CAR") as CMlQuad);
+		declare Label_Current_Car = (Page.GetFirstChild("LABEL_CURRENT_CAR") as CMlLabel);
+		declare Label_Current_Skin = (Page.GetFirstChild("LABEL_CURRENT_Skin") as CMlLabel);
+
+		declare Frame_Global_Records = (Page.GetFirstChild("FRAME_GLOBAL_RECORDS") as CMlFrame);
+		declare Frame_Global_TimeA = (Page.GetFirstChild("FRAME_GLOBAL_TIMEA") as CMlFrame);
+		declare Frame_Global_TeamA = (Page.GetFirstChild("FRAME_GLOBAL_TEAMA") as CMlFrame);
+
+		declare Label_Car_TimeA_Points = (Page.GetFirstChild("LABEL_CAR_TIMEA_POINTS") as CMlLabel);
+		declare Label_Global_TimeA_Points = (Page.GetFirstChild("LABEL_GLOBAL_TIMEA_POINTS") as CMlLabel);
+
+		declare Label_Car_TeamA_Points_Red = (Page.GetFirstChild("LABEL_CAR_TEAMA_POINTS_RED") as CMlLabel);
+		declare Label_Car_TeamA_Points_Blue = (Page.GetFirstChild("LABEL_CAR_TEAMA_POINTS_BLUE") as CMlLabel);
+		declare Label_Global_TeamA_Points_Red = (Page.GetFirstChild("LABEL_GLOBAL_TEAMA_POINTS_RED") as CMlLabel);
+		declare Label_Global_TeamA_Points_Blue = (Page.GetFirstChild("LABEL_GLOBAL_TEAMA_POINTS_BLUE") as CMlLabel);
+
+		declare Frame_Car_Bg = (Page.GetFirstChild("FRAME_CAR_BG") as CMlFrame);
+		declare Frame_Middle_Bg = (Page.GetFirstChild("FRAME_MIDDLE_BG") as CMlFrame);
+		declare Frame_Global_Bg = (Page.GetFirstChild("FRAME_GLOBAL_BG") as CMlFrame);
+
+		declare Frame_Car_LB_Bg = (Page.GetFirstChild("FRAME_CAR_LB_BG") as CMlFrame);
+		declare Frame_Middle_LB_Bg = (Page.GetFirstChild("FRAME_MIDDLE_LB_BG") as CMlFrame);
+		declare Frame_Global_LB_Bg = (Page.GetFirstChild("FRAME_GLOBAL_LB_BG") as CMlFrame);
+
+		declare Frame_Middle_Envimix_Bg = (Page.GetFirstChild("FRAME_MIDDLE_ENVIMIX_BG") as CMlFrame);
+		declare Quad_Echelon_Percent = (Page.GetFirstChild("QUAD_ECHELON_PERCENT") as CMlQuad);
+		declare Quad_Echelon_Current = (Page.GetFirstChild("QUAD_ECHELON_CURRENT") as CMlQuad);
+		declare Quad_Echelon_Next = (Page.GetFirstChild("QUAD_ECHELON_NEXT") as CMlQuad);
+		declare Label_Echelon_Current = (Page.GetFirstChild("LABEL_ECHELON_CURRENT") as CMlLabel);
+		declare Label_Echelon_Next = (Page.GetFirstChild("LABEL_ECHELON_NEXT") as CMlLabel);
+		declare Quad_User_Zone = (Page.GetFirstChild("QUAD_USER_ZONE") as CMlQuad);
+		declare Label_User_Zone = (Page.GetFirstChild("LABEL_USER_ZONE") as CMlLabel);
+		declare Frame_Fame = (Page.GetFirstChild("FRAME_FAME") as CMlFrame);
+		declare Frame_Current_Car = (Page.GetFirstChild("FRAME_CURRENT_CAR") as CMlFrame);
+
+		declare Quad_Envimix = (Page.GetFirstChild("QUAD_ENVIMIX") as CMlQuad);
+		declare Quad_Envimix_Loading = (Page.GetFirstChild("QUAD_ENVIMIX_LOADING") as CMlQuad);
+
+		declare Boolean ScoreTable_IsVisible for ClientUI;
+		declare PreviousVisibility = True;
+		declare PreviousMenuOpen = IsInGameMenuDisplayed;
+
+		declare Animate = True;
+
+		wait(GetPlayer() != Null);
+		wait(GetPlayer().Score != Null);
+
+		declare netread Integer Net_CutOffTimeLimit for Teams[0];
+		declare PreviousCutOffTimeLimit = Net_CutOffTimeLimit;
+
+		declare netread Text[] DisplayedCars for Teams[0];
+		declare netread Text[Text] ItemCars for Teams[0];
+		declare netread Boolean Net_S_EnableDefaultCar for Teams[0];
+		declare netread Text Net_MapPlayerModelName for Teams[0];
+
+		declare FocusLogin = GetPlayer().User.Login;
+		declare PreviousFocusLogin = GetPlayer().User.Login;
+
+		declare OpenTime = -1;
+		declare FinishTime = -1;
+
+		declare CarTeamFilter = 0;
+		declare GlobalTeamFilter = 0;
+
+		declare TeamCarPoints = [0, 0, 0, 0];
+		declare TotalCarPoints = 0;
+		declare TotalPoints = 0;
+
+		declare PrevTeamCarPoints = [0, 0, 0, 0];
+		declare PreviousTeamCarPoints = [0, 0, 0, 0];
+		declare PreviousTeamCarPointsTime = [0, 0, 0, 0];
+
+		declare PrevClanScores = [ClanScores[0], ClanScores[1], ClanScores[2]];
+		declare PreviousClanScores = [ClanScores[0], ClanScores[1], ClanScores[2]];
+		declare PreviousClanScoresTime = [0, 0, 0];
+
+		declare Text[] ConnectedLogins;
+
+		declare PrevSequence = UI.UISequence;
+		declare PodiumSequenceTime = -1;
+		declare PodiumCarIndex = 0;
+		declare TableCarName = "";
+
+		declare PreviousNetCar = "";
+
+		declare PreviousLadderPoints = GetPlayer().User.LadderPoints;
+		declare PreviousLadderRank = GetPlayer().User.LadderRank;
+
+		while(True) {
+			foreach(Event in RaceEvents) {
+				if(Event.Player == InputPlayer) {
+					switch(Event.Type) {
+						case CTmRaceClientEvent::EType::WayPoint: {
+							if(Event.IsEndRace) {
+								ClientUI.ScoreTableVisibility = CUIConfig::EVisibility::ForcedVisible;
+							}
+						}
+						case CTmRaceClientEvent::EType::Respawn: {
+							ClientUI.ScoreTableVisibility = CUIConfig::EVisibility::Normal;
+						}
+					}
+				}
+			}
+
+			if(UI.UISequence != PrevSequence) {
+				if(UI.UISequence == CUIConfig::EUISequence::Podium) {
+					ClientUI.ScoreTableVisibility = CUIConfig::EVisibility::ForcedVisible;
+					PodiumSequenceTime = Now;
+					FocusLogin = GetPlayer().User.Login;
+				}
+				else {
+					ClientUI.ScoreTableVisibility = CUIConfig::EVisibility::Normal;
+					PodiumSequenceTime = -1;
+				}
+				PrevSequence = UI.UISequence;
+			}
+			
+			Frame_ScoreTable.Visible = !IsInGameMenuDisplayed;
+			if(IsInGameMenuDisplayed != PreviousMenuOpen) {
+				if(!IsInGameMenuDisplayed) OpenTime = Now;
+				PreviousMenuOpen = IsInGameMenuDisplayed;
+			}
+
+			ScoreTable_IsVisible = PageIsVisible;
+
+			if(PageIsVisible != PreviousVisibility) {
+				if(PageIsVisible) {
+					OpenTime = Now;
+				}
+				else {
+					OpenTime = -1;
+					FocusLogin = GetPlayer().User.Login;
+					CarTeamFilter = 0;
+					GlobalTeamFilter = 0;
+				}
+				PreviousVisibility = PageIsVisible;
+			}
+
+			if(PodiumSequenceTime == -1) {
+				wait(GetScore(FocusLogin) != Null);
+				declare User <=> GetScore(FocusLogin).User;
+
+				Label_LadderPoints.Value = TextLib::FormatReal(User.LadderPoints, 1, False, False);
+
+				if(User.LadderRank == -1)
+					Label_LadderZone.Value = "Not ranked";
+				else
+					Label_LadderZone.Value = TextLib::GetTranslatedText(User.LadderZoneName)^": $ff0" ^ User.LadderRank ^ "$aaa / " ^ User.LadderTotal;
+
+				PreviousLadderPoints = User.LadderPoints;
+				PreviousLadderRank = User.LadderRank;
+			}
+
+			declare Integer[] GlobalScores;
+			declare Integer[] CarScores;
+
+			TeamCarPoints = [0, 0, 0, 0];
+			TotalCarPoints = 0;
+			TotalPoints = 0;
+
+			declare netread Text Net_Car for GetPlayer();
+
+			declare Integer[Text] LoginSort;
+			foreach(I => Score in Scores) {
+				declare netread Integer[Text] Envimix_Points for Score;
+				if(Envimix_Points.existskey(Net_Car)) {
+					LoginSort[Score.User.Login] = Envimix_Points[Net_Car];
+					TotalCarPoints += Envimix_Points[Net_Car];
+					TeamCarPoints[Score.TeamNum] += Envimix_Points[Net_Car];
+				}
+				else
+					LoginSort[Score.User.Login] = 0;
+				TotalPoints += Score.Points;
+
+				if(GlobalTeamFilter == 0 || GlobalTeamFilter == Score.TeamNum)
+					GlobalScores.add(I);
+			}
+
+			LoginSort = LoginSort.sortreverse();
+
+			foreach(Login => S in LoginSort) {
+				foreach(I => Score in Scores) {
+					if(Login == Score.User.Login && (CarTeamFilter == 0 || CarTeamFilter == Score.TeamNum)) {
+						CarScores.add(I);
+					}
+				}
+			}
+
+			if(Net_Car != PreviousNetCar) {
+				wait(GetPlayer(FocusLogin) != Null);
+
+				declare Integer PreviousCurrentCarTimeStamp for GetPlayer(FocusLogin).Score;
+				PreviousCurrentCarTimeStamp = 0;
+
+				for(I, 0, PrevTeamCarPoints.count-1) {
+					PrevTeamCarPoints[I] = TeamCarPoints[I];
+					PreviousTeamCarPoints[I] = TeamCarPoints[I];
+				}
+
+				PreviousNetCar = Net_Car;
+			}
+
+			for(I, 0, TeamCarPoints.count-1) {
+				if(TeamCarPoints[I] != PrevTeamCarPoints[I]) {
+					PreviousTeamCarPoints[I] = PrevTeamCarPoints[I];
+					PreviousTeamCarPointsTime[I] = Now;
+					PrevTeamCarPoints[I] = TeamCarPoints[I];
+				}
+			}
+
+			for(I, 0, ClanScores.count-1) {
+				if(ClanScores[I] != PrevClanScores[I]) {
+					PreviousClanScores[I] = PrevClanScores[I];
+					PreviousClanScoresTime[I] = Now;
+					PrevClanScores[I] = ClanScores[I];
+				}
+			}
+
+			foreach(I => Control in Frame_Global_Records.Controls) {
+				if(I < GlobalScores.count) {
+					declare Score <=> Scores[GlobalScores[I]];
+					declare Integer PrevPoints for Score; // Will change instantly once difference detected
+					declare Integer PreviousPoints for Score; // Will always stay one amount back
+					declare Integer PreviousPointsTime for Score;
+					if(Score.Points != PrevPoints) {
+						PreviousPoints = PrevPoints;
+						PreviousPointsTime = Now;
+						PrevPoints = Score.Points;
+					}
+				}
+			}
+
+			if(PodiumSequenceTime != -1) {
+				/*declare Time = (Now - PodiumSequenceTime) % 2000;
+				Frame_Car_Table.Controls[0].RelativePosition_V3.X = AnimLib::EaseOutQuad(Time - 1000, 0., 81., 500) + AnimLib::EaseOutQuad(Time - 1500, 0., -81., 500);
+
+				PodiumCarIndex = MathLib::FloorInteger((Now - PodiumSequenceTime+500) / 2000.);
+				if(DisplayedCars.existskey(PodiumCarIndex % DisplayedCars.count))
+					TableCarName = DisplayedCars[PodiumCarIndex % DisplayedCars.count];
+				else
+					TableCarName = Net_Car;*/
+				
+				Frame_Current_Car.Hide();
+			}
+			else {
+				TableCarName = Net_Car;
+				Frame_Current_Car.Show();
+			}
+
+			if(PageIsVisible) {
+				foreach(Event in PendingEvents) {
+					switch(Event.Type) {
+						case CMlScriptEvent::Type::MouseClick: {
+							switch(Event.ControlId) {
+								case "QUAD_TEAM": {
+									declare ManialinkUrl = Teams[GetPlayer().Score.TeamNum].PresentationManialinkUrl;
+									if(ManialinkUrl != "")
+										OpenLink(ManialinkUrl, ::LinkType::ManialinkBrowser);
+								}
+								case "QUAD_SELECT": {
+									if(PodiumSequenceTime == -1) {
+										declare Index = TextLib::ToInteger(Event.Control.Parent.DataAttributeGet("index"));
+										if(Event.Control.Parent.Parent.Parent.Parent.ControlId == "FRAME_CAR_TABLE") {
+											if(CarScores.existskey(Index)) {
+												FocusLogin = Scores[CarScores[Index]].User.Login;
+												SetSpectateTarget(FocusLogin);
+											}
+										}
+										else if(Event.Control.Parent.Parent.Parent.ControlId == "FRAME_GLOBAL_TABLE") {
+											if(GlobalScores.existskey(Index)) {
+												FocusLogin = Scores[GlobalScores[Index]].User.Login;
+												SetSpectateTarget(FocusLogin);
+											}
+										}
+									}
+								}
+							}
+						}
+						case CMlScriptEvent::Type::MouseOver: {
+							switch (Event.ControlId) {
+								case "QUAD_CAR_TEAMA_POINTS_RED": {
+									CarTeamFilter = 1;
+								}
+								case "QUAD_CAR_TEAMA_POINTS_BLUE": {
+									CarTeamFilter = 2;
+								}
+								case "QUAD_GLOBAL_TEAMA_POINTS_RED": {
+									GlobalTeamFilter = 1;
+								}
+								case "QUAD_GLOBAL_TEAMA_POINTS_BLUE": {
+									GlobalTeamFilter = 2;
+								}
+							}
+						}
+						case CMlScriptEvent::Type::MouseOut: {
+							switch (Event.ControlId) {
+								case "QUAD_CAR_TEAMA_POINTS_RED": {
+									CarTeamFilter = 0;
+								}
+								case "QUAD_CAR_TEAMA_POINTS_BLUE": {
+									CarTeamFilter = 0;
+								}
+								case "QUAD_GLOBAL_TEAMA_POINTS_RED": {
+									GlobalTeamFilter = 0;
+								}
+								case "QUAD_GLOBAL_TEAMA_POINTS_BLUE": {
+									GlobalTeamFilter = 0;
+								}
+							}
+						}
+					}
+				}
+
+				ConnectedLogins.clear();
+				foreach(Player in Players) {
+					ConnectedLogins.add(Player.User.Login);
+				}
+				
+				if(UseClans) {
+					declare Team <=> Teams[GetPlayer().Score.TeamNum-1];
+					Frame_Car_TimeA.Visible = False;
+					Frame_Car_TeamA.Visible = True;
+					Frame_Global_TimeA.Visible = False;
+					Frame_Global_TeamA.Visible = True;
+				}
+				else {
+					Frame_Car_TimeA.Visible = True;
+					Frame_Car_TeamA.Visible = False;
+					Frame_Global_TimeA.Visible = True;
+					Frame_Global_TeamA.Visible = False;
+				}
+
+				if(GetScore(FocusLogin) == Null) {
+					Label_Middle_Nickname.Value = "[no player]";
+					Label_LadderPoints.Value = "0.0";
+					Label_LadderZone.Value = "Not ranked";
+					Quad_Current_Car.ChangeImageUrl("");
+					Quad_User_Zone.ChangeImageUrl("");
+					Label_User_Zone.Value = "Unknown";
+
+					foreach(I => Control in Frame_Fame.Controls) {
+						declare Quad = (Control as CMlQuad);
+						Quad.Colorize = <.1,.1,.1>;
+					}
+				}
+				else {
+					declare Score <=> GetScore(FocusLogin);
+					declare User <=> Score.User;
+
+					Label_Middle_Nickname.TextSizeReal = 7.;
+					Label_Middle_Nickname.Value = User.Name;
+					while(Label_Middle_Nickname.ComputeWidth(Label_Middle_Nickname.Value) > Label_Middle_Nickname.Size.X)
+						Label_Middle_Nickname.TextSizeReal -= 0.1;
+					
+					declare Zones = TextLib::Split("|", User.ZonePath);
+					if(Zones.count >= 3) {
+						Quad_User_Zone.ChangeImageUrl("file://ZoneFlags/Path/"^Zones[0]^"|"^Zones[1]^"|"^Zones[2]);
+						Label_User_Zone.Value = Zones[2];
+					}
+					else if(Zones.count == 0) {
+						Quad_User_Zone.ChangeImageUrl("");
+						Label_User_Zone.Value = "Unknown";
+					}
+					else if(Zones.count == 2) {
+						Quad_User_Zone.ChangeImageUrl("file://ZoneFlags/Path/"^Zones[0]^"|"^Zones[1]);
+						Label_User_Zone.Value = Zones[1];
+					}
+					else if(Zones.count == 1) {
+						Quad_User_Zone.ChangeImageUrl("file://ZoneFlags/Path/"^Zones[0]);
+						Label_User_Zone.Value = Zones[0	];
+					}
+
+					foreach(I => Control in Frame_Fame.Controls) {
+						declare Quad = (Control as CMlQuad);
+						if(I < User.FameStars) {
+							Quad.Colorize = <1.,1.,1.>;
+						}
+						else {
+							Quad.Colorize = <.1,.1,.1>;
+						}
+					}
+					
+					if(PodiumSequenceTime != -1 && Now - PodiumSequenceTime > 10000) {
+						declare NewLadderPoints = PreviousLadderPoints;
+						if(Score.LadderScore != -1.) NewLadderPoints += Score.LadderScore;
+						Label_LadderPoints.Value = TextLib::FormatReal(AnimLib::EaseOutQuad(Now - PodiumSequenceTime - 10000, PreviousLadderPoints, (NewLadderPoints-PreviousLadderPoints), 1000), 1, False, False);
+
+						if(User.LadderRank == -1)
+							Label_LadderZone.Value = "Not ranked";
+						else if(PreviousLadderRank == -1)
+							Label_LadderZone.Value = TextLib::GetTranslatedText(User.LadderZoneName)^": $ff0" ^ MathLib::NearestInteger(AnimLib::EaseOutQuad(Now - PodiumSequenceTime - 10000, User.LadderTotal*1., (User.LadderRank-User.LadderTotal)*1., 1000)) ^ "$aaa / " ^ User.LadderTotal;
+						else
+							Label_LadderZone.Value = TextLib::GetTranslatedText(User.LadderZoneName)^": $ff0" ^ MathLib::NearestInteger(AnimLib::EaseOutQuad(Now - PodiumSequenceTime - 10000, PreviousLadderRank*1., (User.LadderRank-PreviousLadderRank)*1., 1000)) ^ "$aaa / " ^ User.LadderTotal;
+					}
+					else if(PodiumSequenceTime == -1) {
+						Label_LadderPoints.Value = TextLib::FormatReal(User.LadderPoints, 1, False, False);
+
+						if(User.LadderRank == -1)
+							Label_LadderZone.Value = "Not ranked";
+						else
+							Label_LadderZone.Value = TextLib::GetTranslatedText(User.LadderZoneName)^": $ff0" ^ User.LadderRank ^ "$aaa / " ^ User.LadderTotal;
+
+						PreviousLadderPoints = User.LadderPoints;
+						PreviousLadderRank = User.LadderRank;
+					}
+
+					Quad_Echelon_Percent.Size.X = User.NextEchelonPercent/100.*72;
+					Quad_Echelon_Current.ChangeImageUrl("file://Media/Manialinks/Common/Echelons/echelon"^EchelonToInteger(User.Echelon)^".dds");
+					Label_Echelon_Current.Value = EchelonToInteger(User.Echelon)^"";
+					if(EchelonToInteger(User.Echelon) + 1 < 10) {
+						Quad_Echelon_Next.ChangeImageUrl("file://Media/Manialinks/Common/Echelons/echelon"^(EchelonToInteger(User.Echelon) + 1)^".dds");
+						Label_Echelon_Next.Value = (EchelonToInteger(User.Echelon) + 1)^"";
+					}
+					else {
+						Quad_Echelon_Next.ChangeImageUrl("");
+						Label_Echelon_Next.Value = "";
+					}
+					
+					Quad_Current_Car.ChangeImageUrl("file://Media/Images/Cars/"^Net_Car^".png");
+					Label_Current_Car.Value = Net_Car;
+				}
+
+				Label_ScoreTable_Car.Value = TableCarName;
+
+				if(UseClans) {
+					Label_Car_TeamA_Points_Red.Value = ToNicerNumber(MathLib::NearestInteger(AnimLib::EaseOutQuad(Now - PreviousTeamCarPointsTime[1], PreviousTeamCarPoints[1]*1., (TeamCarPoints[1]-PreviousTeamCarPoints[1])*1., 1000)));
+					Label_Car_TeamA_Points_Blue.Value = ToNicerNumber(MathLib::NearestInteger(AnimLib::EaseOutQuad(Now - PreviousTeamCarPointsTime[2], PreviousTeamCarPoints[2]*1., (TeamCarPoints[2]-PreviousTeamCarPoints[2])*1., 1000)));
+					Label_Global_TeamA_Points_Red.Value = ToNicerNumber(MathLib::NearestInteger(AnimLib::EaseOutQuad(Now - PreviousClanScoresTime[1], PreviousClanScores[1]*1., (ClanScores[1]-PreviousClanScores[1])*1., 1000)));
+					Label_Global_TeamA_Points_Blue.Value = ToNicerNumber(MathLib::NearestInteger(AnimLib::EaseOutQuad(Now - PreviousClanScoresTime[2], PreviousClanScores[2]*1., (ClanScores[2]-PreviousClanScores[2])*1., 1000)));
+				}
+				else {
+					Label_Car_TimeA_Points.Value = "$t" ^ ToNicerNumber(TotalCarPoints) ^ " total points";
+					Label_Global_TimeA_Points.Value = "$t" ^ ToNicerNumber(TotalPoints) ^ " total points";
+				}
+
+				if(GetPlayer().User.Login != PreviousFocusLogin) {
+					FocusLogin = GetPlayer().User.Login;
+					PreviousFocusLogin = GetPlayer().User.Login;
+
+					declare Integer PreviousCurrentCarTimeStamp for GetPlayer(FocusLogin).Score;
+					PreviousCurrentCarTimeStamp = 0;
+				}
+
+				if(Animate) {
+					if(OpenTime != -1) {
+						Frame_Car_Table.RelativePosition_V3.Y = AnimLib::EaseOutQuad(Now - OpenTime, -10., 10., 600);
+						Frame_Middle_Table.RelativePosition_V3.Y = AnimLib::EaseOutQuad(Now - OpenTime, -20., 20., 600);
+						Frame_Global_Table.RelativePosition_V3.Y = AnimLib::EaseOutQuad(Now - OpenTime, -10., 10., 600);
+
+						Frame_Car_Bg.RelativePosition_V3.Y = AnimLib::EaseOutQuad(Now - OpenTime - 300, -20., 20., 500);
+						Frame_Middle_Bg.RelativePosition_V3.Y = AnimLib::EaseOutQuad(Now - OpenTime, -20., 20., 500);
+						Frame_Global_Bg.RelativePosition_V3.Y = AnimLib::EaseOutQuad(Now - OpenTime - 300, -20., 20., 500);
+
+						Frame_Car_TimeA.RelativePosition_V3.Y = AnimLib::EaseOutQuad(Now - OpenTime, -10., 10., 300);
+						Frame_Car_TeamA.RelativePosition_V3.Y = AnimLib::EaseOutQuad(Now - OpenTime, -10., 10., 300);
+						Frame_Global_TimeA.RelativePosition_V3.Y = AnimLib::EaseOutQuad(Now - OpenTime, -10., 10., 300);
+						Frame_Global_TeamA.RelativePosition_V3.Y = AnimLib::EaseOutQuad(Now - OpenTime, -10., 10., 300);
+
+						Frame_Car_LB_Bg.RelativePosition_V3.Y = AnimLib::EaseOutQuad(Now - OpenTime, 105., -105., 500);
+						Frame_Middle_LB_Bg.RelativePosition_V3.Y = AnimLib::EaseOutQuad(Now - OpenTime, 115., -115., 600);
+						Frame_Global_LB_Bg.RelativePosition_V3.Y = AnimLib::EaseOutQuad(Now - OpenTime, 105., -105., 500);
+
+						Frame_Middle_Envimix_Bg.RelativePosition_V3.Y = AnimLib::EaseOutQuad(Now - OpenTime - 500, 20., -20., 500);
+					}
+					else {
+						Frame_Car_Table.RelativePosition_V3.Y = -10.;
+						Frame_Middle_Table.RelativePosition_V3.Y = -20.;
+						Frame_Global_Table.RelativePosition_V3.Y = -10.;
+
+						Frame_Car_Bg.RelativePosition_V3.Y = -20.;
+						Frame_Middle_Bg.RelativePosition_V3.Y = -20.;
+						Frame_Global_Bg.RelativePosition_V3.Y = -20.;
+
+						Frame_Car_TimeA.RelativePosition_V3.Y = -10.;
+						Frame_Car_TeamA.RelativePosition_V3.Y = -10.;
+						Frame_Global_TimeA.RelativePosition_V3.Y = -10.;
+						Frame_Global_TeamA.RelativePosition_V3.Y = -10.;
+
+						Frame_Car_LB_Bg.RelativePosition_V3.Y = 105.;
+						Frame_Middle_LB_Bg.RelativePosition_V3.Y = 115.;
+						Frame_Global_LB_Bg.RelativePosition_V3.Y = 105.;
+
+						Frame_Middle_Envimix_Bg.RelativePosition_V3.Y = 20.;
+						
+						foreach(Control in Frame_Car_Records.Controls) {
+							Control.Hide();
+						}
+					}
+				}
+				
+				declare Offset = 0;
+				declare PreviousScore = -1;
+				foreach(I => Control in Frame_Car_Records.Controls) {
+					declare Frame = (Control as CMlFrame);
+					if(I < CarScores.count) {
+						declare Frame_Zone = (Frame.GetFirstChild("FRAME_ZONE") as CMlFrame);
+						declare Quad_Zone = (Frame.GetFirstChild("QUAD_ZONE") as CMlQuad);
+						declare Label_Rank = (Frame.GetFirstChild("LABEL_RANK") as CMlLabel);
+						declare Frame_Label_Nickname = (Frame.GetFirstChild("FRAME_LABEL_NICKNAME") as CMlFrame);
+						declare Label_Nickname = (Frame.GetFirstChild("LABEL_NICKNAME") as CMlLabel);
+						declare Label_Time = (Frame.GetFirstChild("LABEL_TIME") as CMlLabel);
+						declare Quad_Select = (Frame.GetFirstChild("QUAD_SELECT") as CMlQuad);
+						declare Quad_Echelon = (Frame.GetFirstChild("QUAD_ECHELON") as CMlQuad);
+						declare Label_Echelon = (Frame.GetFirstChild("LABEL_ECHELON") as CMlLabel);
+						declare Quad_Something = (Frame.GetFirstChild("QUAD_SOMETHING") as CMlQuad);
+						declare Quad_Status = (Frame.GetFirstChild("QUAD_STATUS") as CMlQuad);
+						
+						declare Score <=> Scores[CarScores[I]];
+						declare User <=> Score.User;
+
+						if(User.Login == FocusLogin)
+							Quad_Select.StyleSelected = True;
+						else
+							Quad_Select.StyleSelected = False;
+
+						declare netread Integer[Text] Envimix_Points for Score;
+						declare netread SRecord[Text] Envimix_BestRace for Score;
+						declare netread SRecord[Text] Envimix_BestLap for Score;
+						declare netread SRecord[Text] Envimix_PrevRace for Score;
+
+						if(Envimix_Points.existskey(TableCarName)) {
+							if(Envimix_Points[TableCarName] > 0) {
+								if(Envimix_Points[TableCarName] == PreviousScore)
+									Offset += 1;
+								else Offset = 0;
+								PreviousScore = Envimix_Points[TableCarName];
+
+								if(I - Offset == 0) Label_Rank.Value = "1st";
+								else if(I - Offset == 1) Label_Rank.Value = "2nd";
+								else if(I - Offset == 2) Label_Rank.Value = "3rd";
+								else Label_Rank.Value = TextLib::Compose("%1th", (I - Offset + 1) ^ "");
+								Label_Rank.Size.X = Label_Rank.ComputeWidth(Label_Rank.Value, True);
+								Label_Rank.Visible = True;
+
+								Frame_Label_Nickname.RelativePosition_V3.X = Label_Rank.Size.X + 2;
+							}
+							else {
+								Label_Rank.Size.X = 0.;
+								Label_Rank.Visible = False;
+								Frame_Label_Nickname.RelativePosition_V3.X = 0.;
+							}
+						}
+						else {
+							Label_Rank.Size.X = 0.;
+							Label_Rank.Visible = False;
+							Frame_Label_Nickname.RelativePosition_V3.X = 0.;
+						}
+
+						if(Envimix_BestRace.existskey(TableCarName)) {
+							Label_Time.Value = TimeToTextWithMilli(Envimix_BestRace[TableCarName].Time);
+
+							if(User.Login == FocusLogin) {
+								declare Integer PreviousCurrentCarTime for Score;
+								declare Integer PreviousCurrentCarTimeStamp for Score;
+
+								if(PreviousCurrentCarTimeStamp == 0 || Envimix_BestRace[TableCarName].Time != PreviousCurrentCarTime) {
+									if(PreviousCurrentCarTimeStamp == 0 || PreviousCurrentCarTime - Envimix_BestRace[TableCarName].Time > 0)
+										PreviousCurrentCarTimeStamp = Now;
+									PreviousCurrentCarTime = Envimix_BestRace[TableCarName].Time;
+								}
+								
+								if(User.Login == FocusLogin && Now - PreviousCurrentCarTimeStamp < 2000) {
+									declare V = (MathLib::Sin((Now-PreviousCurrentCarTimeStamp)/1000.*MathLib::PI()*4)*.5+.5)*AnimLib::EaseOutQuad(Now - PreviousCurrentCarTimeStamp - 1500, 1., -1., 500)*.5+.5;
+									Quad_Select.Colorize = <V, V, .5>;
+								}
+								else {
+									Quad_Select.Colorize = ColorLib::HexToRgb("888");
+								}
+							}
+						}
+						else
+							Label_Time.Value = "-:--.---";
+
+						declare MyCar = TableCarName;
+						if(ConnectedLogins.exists(User.Login)) {
+							declare netread Text Net_Car for GetPlayer(User.Login);
+							Quad_Status.Substyle = "";
+							if(Net_Car == "" || Net_Car != MyCar) Quad_Status.Hide();
+							else {
+								if(PodiumSequenceTime == -1) {
+									Quad_Status.ChangeImageUrl("file://Media/Images/Cars/"^Net_Car^".png");
+									if(!Net_S_EnableDefaultCar && ItemCars[Net_Car] == Net_MapPlayerModelName)
+										Quad_Status.ModulateColor = <.4,.4,.4>;
+									else Quad_Status.ModulateColor = <1.,1.,1.>;
+
+									Quad_Status.Show();
+								}
+								else {
+									Quad_Status.Hide();
+								}
+							}
+							Label_Nickname.Opacity = 1.;
+						}
+						else {
+							Quad_Status.Substyle = "Disconnected";
+							Quad_Status.ChangeImageUrl("");
+							Quad_Status.ModulateColor = <1.,1.,1.>;
+							Quad_Status.Show();
+							Label_Nickname.Opacity = .5;
+						}
+						
+						Quad_Echelon.ChangeImageUrl("file://Media/Manialinks/Common/Echelons/echelon"^EchelonToInteger(User.Echelon)^".dds");
+						if(EchelonToInteger(User.Echelon) > 0)
+							Label_Echelon.Value = EchelonToInteger(User.Echelon)^"";
+						else
+							Label_Echelon.Value = "";
+
+						declare MaxWidth = 70.;
+						MaxWidth -= Label_Time.ComputeWidth(Label_Time.Value) + Frame_Label_Nickname.RelativePosition_V3.X + 2; // 2 being additional space
+
+						//MaxWidth -= Quad_Echelon.Size.X + 1;
+						if(Quad_Status.Visible) MaxWidth -= Quad_Status.Size.X + 2;
+						
+						Label_Nickname.Parent.ClipWindowSize.X = MaxWidth;
+						Label_Nickname.Parent.ClipWindowRelativePosition.X = MaxWidth/2;
+
+						if(User.ZonePath == "" && !UseClans) {
+							Frame_Zone.Hide();
+							Quad_Echelon.Parent.Hide();
+						}
+						else {
+							declare Quad_Team = (Frame.GetFirstChild("QUAD_TEAM") as CMlQuad);
+							if(UseClans) {
+								Quad_Team.BgColor = Teams[Score.TeamNum-1].ColorPrimary;
+								Quad_Team.Show();
+							}
+							else {
+								//Quad_Select.Colorize = ColorLib::HexToRgb("048");
+								Quad_Team.Hide();
+							}
+
+							declare Zones = TextLib::Split("|", User.ZonePath);
+							if(Zones.count >= 3) Quad_Zone.ChangeImageUrl("file://ZoneFlags/Path/"^Zones[0]^"|"^Zones[1]^"|"^Zones[2]);
+							else if(Zones.count == 0) Quad_Zone.ChangeImageUrl("");
+							else if(Zones.count == 2) Quad_Zone.ChangeImageUrl("file://ZoneFlags/Path/"^Zones[0]^"|"^Zones[1]);
+							else if(Zones.count == 1) Quad_Zone.ChangeImageUrl("file://ZoneFlags/Path/"^Zones[0]);
+							Frame_Zone.Show();
+
+							if(User.Echelon == CUser::EEchelon::None)
+								Quad_Echelon.Parent.Hide();
+							else
+								Quad_Echelon.Parent.Show();
+						}
+						
+						Label_Nickname.Size.X = Label_Nickname.ComputeWidth(User.Name);
+						Label_Nickname.Value = User.Name;
+
+						if(Animate) {
+							if(OpenTime != -1) {
+								if(Now - OpenTime > I * 50 + 50) {
+									Frame_Zone.RelativePosition_V3.X = AnimLib::EaseOutQuad(Now - OpenTime - I * 50, 10., -10., 300);
+									Label_Nickname.RelativePosition_V3.X = AnimLib::EaseOutQuad(Now - OpenTime - I * 50, -Label_Nickname.Size.X, Label_Nickname.Size.X, 500);
+									Label_Time.RelativePosition_V3.X = AnimLib::EaseOutQuad(Now - OpenTime - I * 50, 25., -25., 300);
+									Quad_Status.Opacity = AnimLib::EaseOutQuad(Now - OpenTime - I * 50 - 50, 0., 1., 300);
+									Quad_Something.Opacity = AnimLib::EaseOutQuad(Now - OpenTime - I * 50 - 50, 0., 1., 300);
+									Quad_Status.RelativePosition_V3.X = MathLib::Min(MaxWidth+Quad_Status.Size.X-1+Label_Rank.Size.X, AnimLib::EaseOutQuad(Now - OpenTime - I * 50, Frame_Label_Nickname.RelativePosition_V3.X+2, Label_Nickname.Size.X+Quad_Status.Size.X/2, 500));
+									if(Label_Rank.Size.X > 0) Quad_Status.RelativePosition_V3.X += 2.;
+									Quad_Something.RelativePosition_V3.X = Quad_Echelon.RelativePosition_V3.X + Quad_Status.Size.X + 1;
+
+									Quad_Echelon.Parent.RelativePosition_V3.X = AnimLib::EaseOutQuad(Now - OpenTime - I * 50 - 250, 10., -10., 300);
+
+									Frame.Show();
+								}
+								else {
+									Frame.Hide();
+								}
+							}
+						}
+						else {
+							Frame.Show();
+						}
+					}
+					else {
+						Frame.Hide();
+					}
+				}
+
+				Offset = 0;
+				PreviousScore = -1;
+				foreach(I => Control in Frame_Global_Records.Controls) {
+					declare Frame = (Control as CMlFrame);
+					if(I < GlobalScores.count) {
+						declare Frame_Zone = (Frame.GetFirstChild("FRAME_ZONE") as CMlFrame);
+						declare Quad_Zone = (Frame.GetFirstChild("QUAD_ZONE") as CMlQuad);
+						declare Label_Rank = (Frame.GetFirstChild("LABEL_RANK") as CMlLabel);
+						declare Frame_Label_Nickname = (Frame.GetFirstChild("FRAME_LABEL_NICKNAME") as CMlFrame);
+						declare Label_Nickname = (Frame.GetFirstChild("LABEL_NICKNAME") as CMlLabel);
+						declare Label_Points = (Frame.GetFirstChild("LABEL_POINTS") as CMlLabel);
+						declare Quad_Echelon = (Frame.GetFirstChild("QUAD_ECHELON") as CMlQuad);
+						declare Label_Echelon = (Frame.GetFirstChild("LABEL_ECHELON") as CMlLabel);
+						declare Quad_Something = (Frame.GetFirstChild("QUAD_SOMETHING") as CMlQuad);
+						declare Quad_Status = (Frame.GetFirstChild("QUAD_STATUS") as CMlQuad);
+						declare Quad_Select = (Frame.GetFirstChild("QUAD_SELECT") as CMlQuad);
+
+						declare Score <=> Scores[GlobalScores[I]];
+						declare User <=> Score.User;
+
+						if(User.Login == FocusLogin)
+							Quad_Select.StyleSelected = True;
+						else
+							Quad_Select.StyleSelected = False;
+						
+						declare Integer PrevPoints for Score; // Will change instantly once difference detected
+						declare Integer PreviousPoints for Score; // Will always stay one amount back
+						declare Integer PreviousPointsTime for Score;
+
+						declare Points = MathLib::NearestInteger(AnimLib::EaseOutQuad(Now - PreviousPointsTime, PreviousPoints*1., (Score.Points-PreviousPoints)*1., 1000));
+
+						if(Points > 0) {
+							if(Points == PreviousScore)
+								Offset += 1;
+							else Offset = 0;
+							PreviousScore = Points;
+
+							if(I - Offset == 0) Label_Rank.Value = "1st";
+							else if(I - Offset == 1) Label_Rank.Value = "2nd";
+							else if(I - Offset == 2) Label_Rank.Value = "3rd";
+							else Label_Rank.Value = TextLib::Compose("%1th", (I - Offset + 1) ^ "");
+							Label_Rank.Size.X = Label_Rank.ComputeWidth(Label_Rank.Value, True);
+							Label_Rank.Visible = True;
+
+							Frame_Label_Nickname.RelativePosition_V3.X = Label_Rank.Size.X + 2;
+						}
+						else {
+							Label_Rank.Size.X = 0.;
+							Label_Rank.Visible = False;
+							Frame_Label_Nickname.RelativePosition_V3.X = 0.;
+						}
+
+						if(PodiumSequenceTime != -1 && Now - PodiumSequenceTime > 10000-200 && Score.LadderScore != -1) {
+							if(Now - PodiumSequenceTime > 10000)
+								Label_Points.Value = "$CB6"^TextLib::FormatReal(Score.LadderScore, 1, False, False)^" LP";
+							Label_Points.RelativeScale = AnimLib::EaseInQuad(Now - PodiumSequenceTime - 9800, 1., -.5, 200) + AnimLib::EaseOutQuad(Now - PodiumSequenceTime - 10000, .0, .5, 200);
+						}
+						else {
+							Label_Points.Value = ToNicerNumber(Points);
+							Label_Points.RelativeScale = 1.;
+						}
+
+						if(User.Login == FocusLogin && Now - PreviousPointsTime < 2000) {
+							declare V = (MathLib::Sin((Now-PreviousPointsTime)/1000.*MathLib::PI()*4)*.5+.5)*AnimLib::EaseOutQuad(Now - PreviousPointsTime - 1500, 1., -1., 500)*.5+.5;
+							if(Score.Points-PreviousPoints > 0) {
+								Quad_Select.Colorize = <V, V, .5>;
+							}
+							else if(Score.Points-PreviousPoints < 0) {
+								Quad_Select.Colorize = <V, .5, .5>;
+							}
+						}
+						else {
+							Quad_Select.Colorize = ColorLib::HexToRgb("888");
+						}
+						/*if(Score.IsRegisteredForLadderMatch) {
+							Quad_Ladder.Hiide();
+						}
+						else {
+							Quad_Ladder.Hide();
+						}*/
+
+						if(ConnectedLogins.exists(User.Login)) {
+							declare netread Text Net_Car for GetPlayer(User.Login);
+							Quad_Status.Style = "";
+							Quad_Status.Substyle = "";
+							if(GetPlayer(User.Login).RequestsSpectate) { // doesnt work as good
+								Quad_Status.Style = "BgRaceScore2";
+								Quad_Status.Substyle = "Spectator";
+								Quad_Status.Show();
+							}
+							else if(Net_Car == "") {
+								Quad_Status.Hide();
+							}
+							else {
+								if(PodiumSequenceTime == -1) {
+									Quad_Status.ChangeImageUrl("file://Media/Images/Cars/"^Net_Car^".png");
+									if(!Net_S_EnableDefaultCar && ItemCars[Net_Car] == Net_MapPlayerModelName)
+										Quad_Status.ModulateColor = <.4,.4,.4>;
+									else Quad_Status.ModulateColor = <1.,1.,1.>;
+									Quad_Status.Show();
+								}
+								else {
+									Quad_Status.Hide();
+								}
+							}
+							Label_Nickname.Opacity = 1.;
+						}
+						else {
+							Quad_Status.Style = "Icons64x64_2";
+							Quad_Status.Substyle = "Disconnected";
+							Quad_Status.ModulateColor = <1.,1.,1.>;
+							Quad_Status.ChangeImageUrl("");
+							Label_Nickname.Opacity = .5;
+						}
+						
+						Quad_Echelon.ChangeImageUrl("file://Media/Manialinks/Common/Echelons/echelon"^EchelonToInteger(User.Echelon)^".dds");
+						if(EchelonToInteger(User.Echelon) > 0)
+							Label_Echelon.Value = EchelonToInteger(User.Echelon)^"";
+						else
+							Label_Echelon.Value = "";
+
+						declare MaxWidth = 70.;
+						MaxWidth -= Label_Points.ComputeWidth(Label_Points.Value) + Frame_Label_Nickname.RelativePosition_V3.X + 2; // 2 being additional space
+
+						//MaxWidth -= Quad_Echelon.Size.X + 1;
+						if(Quad_Status.Visible) MaxWidth -= Quad_Status.Size.X + 2;
+						
+						Label_Nickname.Parent.ClipWindowSize.X = MaxWidth;
+						Label_Nickname.Parent.ClipWindowRelativePosition.X = MaxWidth/2;
+
+						if(User.ZonePath == "" && !UseClans) {
+							Frame_Zone.Hide();
+							Quad_Echelon.Parent.Hide();
+						}
+						else {
+							declare Quad_Team = (Frame.GetFirstChild("QUAD_TEAM") as CMlQuad);
+							if(UseClans) {
+								Quad_Team.BgColor = Teams[Score.TeamNum-1].ColorPrimary;
+								Quad_Team.Show();
+							}
+							else {
+								//Quad_Select.Colorize = ColorLib::HexToRgb("048");
+								Quad_Team.Hide();
+							}
+
+							declare Zones = TextLib::Split("|", User.ZonePath);
+							if(Zones.count >= 3) Quad_Zone.ChangeImageUrl("file://ZoneFlags/Path/"^Zones[0]^"|"^Zones[1]^"|"^Zones[2]);
+							else if(Zones.count == 0) Quad_Zone.ChangeImageUrl("");
+							else if(Zones.count == 2) Quad_Zone.ChangeImageUrl("file://ZoneFlags/Path/"^Zones[0]^"|"^Zones[1]);
+							else if(Zones.count == 1) Quad_Zone.ChangeImageUrl("file://ZoneFlags/Path/"^Zones[0]);
+							Frame_Zone.Show();
+
+							if(User.Echelon == CUser::EEchelon::None)
+								Quad_Echelon.Parent.Hide();
+							else
+								Quad_Echelon.Parent.Show();
+						}
+						
+						Label_Nickname.Size.X = Label_Nickname.ComputeWidth(User.Name);
+						Label_Nickname.Value = User.Name;
+
+						if(Animate) {
+							if(OpenTime != -1) {
+								if(Now - OpenTime > I * 50 + 50) {
+									Frame_Zone.RelativePosition_V3.X = AnimLib::EaseOutQuad(Now - OpenTime - I * 50, -10., 10., 300);
+									Label_Nickname.RelativePosition_V3.X = AnimLib::EaseOutQuad(Now - OpenTime - I * 50, -Label_Nickname.Size.X, Label_Nickname.Size.X, 500);
+									Label_Points.RelativePosition_V3.X = AnimLib::EaseOutQuad(Now - OpenTime - I * 50, 20., -20., 300);
+									Quad_Status.Opacity = AnimLib::EaseOutQuad(Now - OpenTime - I * 50 - 50, 0., 1., 300);
+									Quad_Something.Opacity = AnimLib::EaseOutQuad(Now - OpenTime - I * 50 - 50, 0., 1., 300);
+									Quad_Status.RelativePosition_V3.X = MathLib::Min(MaxWidth+Quad_Status.Size.X-1+Label_Rank.Size.X, AnimLib::EaseOutQuad(Now - OpenTime - I * 50, Frame_Label_Nickname.RelativePosition_V3.X+2, Label_Nickname.Size.X+Quad_Status.Size.X/2, 500));
+									if(Label_Rank.Size.X > 0) Quad_Status.RelativePosition_V3.X += 2.;
+									Quad_Something.RelativePosition_V3.X = Quad_Echelon.RelativePosition_V3.X + Quad_Status.Size.X + 1;
+
+									Quad_Echelon.Parent.RelativePosition_V3.X = AnimLib::EaseOutQuad(Now - OpenTime - I * 50 - 250, -10., 10., 300);
+
+									Frame.Show();
+								}
+								else {
+									Frame.Hide();
+								}
+							}
+						}
+						else {
+							Frame.Show();
+						}
+					}
+					else {
+						Frame.Hide();
+					}
+				}
+			}
+
+			if(Quad_Envimix.DownloadInProgress) {
+				Quad_Envimix_Loading.Show();
+			}
+			else {
+				Quad_Envimix_Loading.Hide();
+			}
+
+			yield;
+		}
+	}
+	--></script>
+</manialink>

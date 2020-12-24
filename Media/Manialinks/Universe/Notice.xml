@@ -1,0 +1,51 @@
+<manialink version="3">
+	<frame id="FRAME_NOTICE" pos="0 25">
+		<quad z-index="0" size="110 12" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+		<quad z-index="1" size="110 12" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+		<frame id="FRAME_CLIP_NOTICE" z-index="2" clip="True" clipsizen="102.5 10">
+			<label size="102.5 10" halign="center" valign="center" text=" You will be able to switch the car after the intro ends for everyone." textfont="RajdhaniMono" textsize="2" autonewline="1" id="LABEL_NOTICE"/>
+		</frame>
+	</frame>
+	<script><!--
+		Boolean IsVisible() {
+			declare Boolean ScoreTable_IsVisible for ClientUI;
+			return !ScoreTable_IsVisible;
+		}
+
+		main() {
+			declare Frame_Notice = (Page.GetFirstChild("FRAME_NOTICE") as CMlFrame);
+			declare Label_Notice = (Page.GetFirstChild("LABEL_NOTICE") as CMlLabel);
+
+			Frame_Notice.Visible = IsVisible();
+
+			declare netread Text Net_NoticeMessage for UI;
+
+			declare PreviousMessage = Net_NoticeMessage;
+
+			while(True) {
+				if(Net_NoticeMessage != PreviousMessage) {
+					if(Net_NoticeMessage != "") {
+						Frame_Notice.Controls[0].Size.X = 0.;
+						Frame_Notice.Controls[1].Size.X = 0.;
+						Label_Notice.Opacity = 0.;
+						AnimMgr.Add(Frame_Notice.Controls[0], "<quad size=\"110 12\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+						AnimMgr.Add(Frame_Notice.Controls[1], "<quad size=\"110 12\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+						AnimMgr.Add(Label_Notice, "<label opacity=\"1\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+					}
+
+					PreviousMessage = Net_NoticeMessage;
+				}
+
+				if(Net_NoticeMessage == "") {
+					Frame_Notice.Hide();
+				}
+				else {
+					Label_Notice.Value = Net_NoticeMessage;
+					Frame_Notice.Visible = IsVisible();
+				}
+
+				yield;
+			}
+		}
+	--></script>
+</manialink>

@@ -1,0 +1,366 @@
+#RequireContext CTmMode
+
+#Include "MathLib" as MathLib
+#Include "TextLib" as TextLib
+
+#Include "Libs/BigBang1112/UniverseMode.Script.txt" as UM
+#Include "Libs/Nadeo/Layers2.Script.txt" as Layers2
+
+#Setting S_WarmUpNb				0			as _("Number of warm-ups")
+#Setting S_WarmUpDuration	0			as _("Warm-up duration")
+#Setting S_ForceLapsNb			0			as _("Force number of laps")
+#Setting S_ChatTime				20		as _("Chat time")
+#Setting S_EnableMapIntro	False	as _("Enable map intro")
+
+***OnServerInit***
+***
+Log("UniverseModeBase", "Initializing server...");
+declare Terminate = False;
+declare ReloadMap = False;
+declare Integer[] MapQueue;
+***
+
+***BeforeMapInit***
+***
+declare netwrite Integer Net_CurrentWarmUpNb for Teams[0];
+Net_CurrentWarmUpNb = S_WarmUpNb;
+declare WarmUpStartTime = -1;
+declare IsWarmUp = Net_CurrentWarmUpNb > 0;
+declare PodiumStartTime = -1;
+
+MatchEndRequested = False;
+
+UIManager.UIAll.UISequence = CUIConfig::EUISequence::None;
+***
+
+***OnMapLoad***
+***
+declare netwrite Text Net_MapPlayerModelName for Teams[0];
+Net_MapPlayerModelName = MapPlayerModelName;
+***
+
+***OnMapIntroStart***
+***
+UIManager.UIAll.UISequence = CUIConfig::EUISequence::Intro;
+***
+
+***BeforeMapStart***
+***
+declare Barrier = Synchro_AddBarrier();
+wait(Synchro_BarrierReached(Barrier) || ServerShutdownRequested);
+***
+
+***OnMapIntroEnd***
+***
+UIManager.UIAll.UISequence = CUIConfig::EUISequence::Playing;
+***
+
+***BeforeEvent***
+***
+IsWarmUp = Net_CurrentWarmUpNb > 0;
+***
+
+***OnEvent***
+***
+switch(Event.Type) {
+	case CTmModeEvent::EType::StartLine: {
+		+++OnPlayerStart+++
+	}
+	case CTmModeEvent::EType::WayPoint: {
+		if(Event.IsEndRace || (Event.IsEndLap && IndependantLaps)) // Finish
+			+++OnPlayerFinish+++
+		else if(Event.IsEndLap) // Lap
+			+++OnPlayerLap+++
+		else // Checkpoint
+			+++OnPlayerCheckpoint+++
+	}
+	case CTmModeEvent::EType::GiveUp: {
+		+++OnPlayerGiveUp+++
+	}
+	case CTmModeEvent::EType::OnPlayerAdded: {
+		+++OnPlayerAdded+++
+	}
+	case CTmModeEvent::EType::OnPlayerRemoved: {
+		+++OnPlayerRemoved+++
+	}
+	case CTmModeEvent::EType::Stunt: {
+		+++OnStunt+++
+	}
+}
+***
+
+***OnPlayerStart***
+***
+ResetTempResult(Event);
+***
+
+***OnPlayerCheckpoint***
+***
+CheckpointTempResult(Event);
+***
+
+***OnPlayerFinish***
+***
+FinishTempResult(Event);
+***
+
+***OnPlayerLap***
+***
+CheckpointTempResult(Event);
+***
+
+***OnMapEnd***
+***
+if(ReloadMap) NextMapIndex -= 1;
+if(Reload) NextMapIndex = 0;
+***
+
+Void ToResult(CTmResult _Result, UM::SRecord _Record) {
+	_Result.Time = _Record.Time;
+	_Result.Score = _Record.Score;
+	_Result.NbRespawns = _Record.NbRespawns;
+	
+	_Result.Checkpoints.clear();
+	foreach(Checkpoint in _Record.Checkpoints)
+		_Result.Checkpoints.add(Checkpoint.Time);
+}
+
+UM::SRecord ToRecord(CTmResult _Result, Real _Distance, CTmPlayer _Player) {
+	declare UM::SRecord Record;
+	Record.Login = _Player.User.Login;
+	Record.Time = _Result.Time;
+	Record.Score = _Result.Score;
+	Record.NbRespawns = _Result.NbRespawns;
+	Record.Distance = _Distance;
+	foreach(Checkpoint in _Result.Checkpoints) {
+		declare UM::SCheckpoint C;
+		C.Time = Checkpoint;
+		Record.Checkpoints.add(C);
+	}
+	return Record;
+}
+
+Void OpenNewLadder() {
+	Ladder_CancelMatchRequest();
+	wait(!Ladder_RequestInProgress);
+	Ladder_OpenMatch_Request();
+	foreach (Score in Scores)
+		Ladder_AddPlayer(Score);
+	wait(!Ladder_RequestInProgress);
+}
+
+Void CloseLadder() {
+	Ladder_CloseMatchRequest();
+	wait(!Ladder_RequestInProgress);
+}
+
+Void CancelLadder() {
+	Ladder_CancelMatchRequest();
+	wait(!Ladder_RequestInProgress);
+}
+
+Void ResetTempResult(CTmModeEvent _Event) {
+	declare netwrite UM::SRecord TempRace for _Event.Player.Score;
+	TempRace.Time = -1;
+	TempRace.Score = -1;
+	TempRace.NbRespawns = -1;
+	TempRace.Distance = -1.;
+	TempRace.Speed = -1.;
+	TempRace.Checkpoints.clear();
+	
+	_Event.Player.CurRace.Score = 0; // nefunguje v independent
+	_Event.Distance = 0.; // nefunguje v independent
+}
+
+Void CheckpointTempResult(CTmModeEvent _Event) {
+	declare netwrite UM::SRecord TempRace for _Event.Player.Score;
+	declare UM::SCheckpoint Checkpoint;
+	if(IndependantLaps)
+		Checkpoint.Time = _Event.LapTime;
+	else
+		Checkpoint.Time = _Event.RaceTime;
+	Checkpoint.Score = _Event.StuntsScore;
+	Checkpoint.NbRespawns = _Event.NbRespawns;
+	Checkpoint.Distance = _Event.Distance;
+	Checkpoint.Speed = _Event.Speed;
+	TempRace.Checkpoints.add(Checkpoint);
+}
+
+Void FinishTempResult(CTmModeEvent _Event) {
+	declare netwrite UM::SRecord TempRace for _Event.Player.Score;
+	if(IndependantLaps)
+		TempRace.Time = _Event.LapTime;
+	else
+		TempRace.Time = _Event.RaceTime;
+	TempRace.Score = _Event.StuntsScore;
+	TempRace.NbRespawns = _Event.NbRespawns;
+	TempRace.Distance = _Event.Distance;
+	TempRace.Speed = _Event.Speed;
+	CheckpointTempResult(_Event);
+}
+
+Integer AmountOfMaps(Text _Environment) {
+	declare Amount = 0;
+	foreach(Map in MapList)
+		if(Map.CollectionName == _Environment)
+			Amount+=1;
+	return Amount;
+}
+
+Void SpawnAllWaitingPlayers(Integer _Team, Boolean _Frozen) {
+	foreach(Player in PlayersWaiting) {
+		SpawnPlayer(Player, _Team, -1);
+		if(_Frozen) Player.RaceStartTime = -1;
+	}
+}
+
+Void SpawnAllWaitingPlayers(Integer _Team, Integer _RaceStartTime) {
+	foreach(Player in PlayersWaiting) {
+		SpawnPlayer(Player, _Team, _RaceStartTime);
+	}
+}
+
+Void SpawnAllWaitingPlayers(Integer _Team) {
+	SpawnAllWaitingPlayers(_Team, False);
+}
+
+Void SpawnAllWaitingPlayers() {
+	SpawnAllWaitingPlayers(0, False);
+}
+
+Void UnspawnAllPlayers() {
+	foreach(Player in Players) {
+		UnspawnPlayer(Player);
+	}
+}
+
+Void SetCutOffTimeLimit(Integer _Value) {
+	CutOffTimeLimit = _Value;
+	declare netwrite Integer Net_CutOffTimeLimit for Teams[0];
+	Net_CutOffTimeLimit = _Value;
+}
+
+Text ReadFile(Text _FileName) {
+	declare Request = Http.CreateGet("file://Media/"^_FileName);
+	wait(Request.IsCompleted);
+	declare Result = Request.Result;
+	if(Result == "") log("Warning: File located in file://Media/"^_FileName^" does not exist or is empty.");
+	Http.Destroy(Request);
+	return Result;
+}
+
+Void Log(Text _ScriptName, Text _Text) {
+	log("""[{{{_ScriptName}}}] {{{_Text}}}""");
+}
+
+main() {
+	declare Reload = True;
+	while(Reload) {
+		Reload = False;
+		
+		+++BeforeServerInit+++
+		+++Settings+++
+		+++OnServerInit+++
+
+		+++BeforeServerStart+++
+		+++OnServerStart+++
+		while(!Reload && !Terminate && !ServerShutdownRequested) {
+			+++BeforeMapInit+++
+			+++OnMapInit+++
+			
+			+++BeforeMapLoad+++
+			RequestLoadMap();
+			while(!MapLoaded) {
+				+++WhileMapLoad+++
+				yield;
+			}
+			+++OnMapLoad+++
+			
+			if(S_EnableMapIntro) {
+				+++BeforeMapIntroStart+++
+				+++OnMapIntroStart+++
+				while(!UIManager.UIAll.UISequenceIsCompleted && !ServerShutdownRequested) {
+					+++WhileMapIntro+++
+					yield;
+				}
+				+++OnMapIntroEnd+++
+			}
+			
+			+++BeforeMapStart+++
+			+++OnMapStart+++
+			
+			if(S_WarmUpNb > 0) { // If warmups are set
+				WarmUpStartTime = Now; // Start the first warmup now
+				SetCutOffTimeLimit(WarmUpStartTime + S_WarmUpDuration * 1000 + 3000); // Set the time limit to be the warmup length
+				+++OnWarmUpStart+++
+			}
+			else +++OnGameStart+++
+
+			ReloadMap = False;
+			while(!Reload && !ReloadMap && !Terminate && !ServerShutdownRequested && !MatchEndRequested) {
+				+++BeforeEvent+++
+			
+				foreach(Event in PendingEvents) +++OnEvent+++
+				foreach(Event in UIManager.PendingEvents) +++OnUIEvent+++
+				foreach(Event in XmlRpc.PendingEvents) +++OnXmlRpcEvent+++
+				foreach(Event in Http.PendingEvents) +++OnHttpEvent+++
+				
+				+++OnLoop+++
+				
+				if(S_WarmUpNb > 0 && Net_CurrentWarmUpNb > 0) {
+					+++OnWarmUpLoop+++
+					if(Now >= CutOffTimeLimit) {
+						UnspawnAllPlayers();
+						
+						sleep(2000);
+						
+						declare Barrier = Synchro_AddBarrier();
+						wait(Synchro_BarrierReached(Barrier) || ServerShutdownRequested);
+						
+						Net_CurrentWarmUpNb -= 1;
+						if(Net_CurrentWarmUpNb == 0) { // One-run action after warmup ended
+							+++OnWarmUpEnd+++
+							+++OnGameStart+++
+						}
+						else {
+							WarmUpStartTime = Now; // Start the first warmup now
+							SetCutOffTimeLimit(WarmUpStartTime + S_WarmUpDuration * 1000 + 3000); // Set the time limit to be the warmup length
+							+++OnWarmUpNext+++
+						}
+					}
+				}
+				else {
+					+++OnGameLoop+++
+				}
+
+				+++UpdateSettings+++
+
+				yield;
+			}
+			
+			+++OnGameEnd+++
+			
+			if(!Reload && !ReloadMap && !Terminate && !ServerShutdownRequested) {
+				PodiumStartTime = Now;
+				SetCutOffTimeLimit(PodiumStartTime + S_ChatTime * 1000);
+				
+				UnspawnAllPlayers();
+				UIManager.UIAll.UISequence = CUIConfig::EUISequence::Podium;
+				
+				+++OnPodiumStart+++
+				while(!Reload && !ReloadMap && !Terminate
+				&& !ServerShutdownRequested && Now - PodiumStartTime < S_ChatTime * 1000) {
+					+++OnPodiumLoop+++
+					yield;
+				}
+				+++OnPodiumEnd+++
+			}
+			
+			+++BeforeMapEnd+++
+			+++OnMapEnd+++
+
+			RequestUnloadMap();
+			wait(!MapLoaded);
+		}
+	}
+}

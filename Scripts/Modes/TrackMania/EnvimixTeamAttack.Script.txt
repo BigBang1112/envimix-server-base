@@ -1,0 +1,349 @@
+#Extends "Modes/TrackMania/Envimix.Script.txt"
+
+#Setting S_TimeLimit								600			as	_("Time limit")
+#Setting S_CarSelectTime						10			as	_("Car select time")
+
+//#Command Command_ChangeTimeLimit (Integer) as _("Change time limit")
+
+***BeforeServerInit***
+***
+log("ENVIMIX TEAM ATTACK");
+log("Developed by BigBang1112");
+log("");
+log("This mode is part of the Envimix Server Base project.");
+log("The code is open-source, but not claimable.");
+log("Extending this script is allowed though.");
+log("Thank you for respecting.");
+log("");
+***
+
+***Settings***
+***
+declare PreviousTimeLimit = S_TimeLimit;
+declare PreviousWarmUpNb = S_WarmUpNb;
+declare PreviousWarmUpDuration = S_WarmUpDuration;
+declare PreviousForceLapsNb = S_ForceLapsNb;
+
+Log("EnvimixTeamAttack", "S_TimeLimit: "^S_TimeLimit);
+Log("EnvimixTeamAttack", "S_WarmUpNb: "^S_WarmUpNb);
+Log("EnvimixTeamAttack", "S_WarmUpDuration: "^S_WarmUpDuration);
+Log("EnvimixTeamAttack", "S_ForceLapsNb: "^S_ForceLapsNb);
+log("");
+***
+
+***UpdateSettings*** // #Command exists
+***
+if(S_TimeLimit != PreviousTimeLimit) {
+	if(S_TimeLimit == -1)
+		SetCutOffTimeLimit(-1);
+	else
+		SetCutOffTimeLimit(Now + S_TimeLimit * 1000);
+	PreviousTimeLimit = S_TimeLimit;
+	Log("EnvimixTeamAttack", "S_TimeLimit: "^S_TimeLimit);
+}
+if(S_WarmUpNb != PreviousWarmUpNb) {
+	PreviousWarmUpNb = S_WarmUpNb;
+	Log("EnvimixTeamAttack", "S_WarmUpNb: "^S_WarmUpNb);
+}
+if(S_WarmUpDuration != PreviousWarmUpDuration) {
+	PreviousWarmUpDuration = S_WarmUpDuration;
+	Log("EnvimixTeamAttack", "S_WarmUpDuration: "^S_WarmUpDuration);
+}
+if(S_ForceLapsNb != PreviousForceLapsNb) {
+	SetLaps();
+	PreviousForceLapsNb = S_ForceLapsNb;
+	Log("EnvimixTeamAttack", "S_ForceLapsNb: "^S_ForceLapsNb);
+}
+***
+
+***OnServerInit***
+***
+Users_DestroyAllFakes();
+//Users_CreateFake("longlonglonglonglong longlonglonglonglong name", 0);
+
+Layers2::Create("ScoreTable", ReadFile("Manialinks/Universe/ScoreTableTA.xml"));
+Layers2::SetType("ScoreTable", CUILayer::EUILayerType::ScoresTable);
+Layers2::Attach("ScoreTable", Null);
+UIManager.UIAll.ScoreTableOnlyManialink = True;
+
+UseClans = True;
+Teams[0].Name = "Team Red";
+Teams[0].ColorPrimary = <1.,0.,0.>;
+Teams[0].PresentationManialinkUrl = "envimix?team=red";
+Teams[1].Name = "Team Blue";
+Teams[1].ColorPrimary = <0.,0.,1.>;
+Teams[1].PresentationManialinkUrl = "envimix?team=blue";
+
+if(S_AllowRespawn) RespawnBehaviour = ::ETMRespawnBehaviour::GiveUpBeforeFirstCheckPoint;
+else RespawnBehaviour = ::ETMRespawnBehaviour::AlwaysGiveUp;
+***
+
+***OnUIEvent***
+***
+switch(Event.Type) {
+	case CUIConfigEvent::EType::OnLayerCustomEvent: {
+		declare UI <=> Event.UI;
+		declare Player = GetPlayer(UI);
+		+++UpdateSkin+++
+		switch(Event.CustomEventType) {
+			case "Car": {
+				if(Event.CustomEventData.count > 0) {
+					declare Car = Event.CustomEventData[0];
+					
+					declare netwrite Text Net_Car for Player;
+					if(DisplayedCars.exists(Car)) Net_Car = Car;
+					
+					if(Event.CustomEventData.count > 1) {
+						declare Respawn = Event.CustomEventData[1] == "True";
+						if(Respawn) {
+							declare Frozen = Event.CustomEventData.count > 2 && Event.CustomEventData[2] == "True";
+							declare Spawned = SpawnEnvimixPlayer(Player, Net_Car, Frozen);
+						}
+					}
+				}
+			}
+			case "JoinTeam": {
+				log("JoinTeam");
+			}
+		}
+	}
+}
++++OnUIChatEvent+++
+***
+
+***OnMapInit***
+***
+ClearScores();
+***
+
+***OnMapLoad***
+***	
+UseForcedClans = False; // Allow free team joining, won't be used soon
+
+SetLaps(); // Define independent laps or forced amount of laps
+
+// Pre-spawn all non-spec players with default car
+foreach(Player in PlayersWaiting) {
+	declare netwrite Text Net_Car for Player;
+	if(ItemCars.exists(MapPlayerModelName)) {
+		Net_Car = ItemCars.keyof(MapPlayerModelName);
+		if(Net_Car != "") {
+			declare Spawned = SpawnEnvimixPlayer(Player, Net_Car, True);
+			if(Spawned) log(Player.User.Name ^ " spawned");
+		}
+	}
+}
+***
+
+***OnMapIntroStart***
+***
+foreach(Player in Players) {
+	declare UI <=> UIManager.GetUI(Player);
+	NoticeMessage(UI, "You will be able to switch the car after the intro ends for everyone.");
+}
+***
+
+***OnMapIntroEnd***
+***
+foreach(Player in Players) {
+	declare UI <=> UIManager.GetUI(Player);
+	NoticeMessage(UI, "");
+}
+***
+
+***OnGameStart***
+***
+declare netwrite Boolean Net_CarSelectionMode for Teams[0];
+Net_CarSelectionMode = True; // Period to select a starting car once the map is fully loaded
+
+foreach(Player in Players) {
+	declare UI <=> UIManager.GetUI(Player);
+	NoticeMessage(UI, "$ff0Select your starting car!$g\nYou will be able to change it anytime later.");
+}
+
+SetCutOffTimeLimit(Now + S_CarSelectTime * 1000); // Set the countdown
+
+OpenNewLadder(); // Might be after car select time instead
+
+while(CutOffTimeLimit - Now > 0) { // Loop during the countdown
+	foreach(Event in UIManager.PendingEvents) {
+		switch(Event.Type) {
+			case CUIConfigEvent::EType::OnLayerCustomEvent: {
+				declare UI <=> Event.UI;
+				declare Player = GetPlayer(UI);
+				+++UpdateSkin+++
+				switch(Event.CustomEventType) {
+					case "JoinTeam": {
+						log("JoinTeam");
+					}
+				}
+			}
+		}
+		+++OnUIChatEvent+++
+	}
+	
+	foreach(Player in Players) {
+		declare UI <=> UIManager.GetUI(Player);
+		declare netread Text Net_Client_Car for UI;
+		declare netwrite Text Net_Car for Player;
+		if(Net_Client_Car != Net_Car) {
+			if(DisplayedCars.exists(Net_Client_Car))
+				Net_Car = Net_Client_Car;
+		
+			declare Spawned = SpawnEnvimixPlayer(Player, Net_Car, True);
+			
+			if(!S_EnableDefaultCar && ItemCars[Net_Car] == GetDefaultCar())
+				NoticeMessage(UI, "Default car is currently disabled.\n$ff0Please select another car.");
+			else
+				NoticeMessage(UI, "You have selected $ff0" ^ Net_Car ^ "$g!\nPlease wait before the game starts.");
+		}
+	}
+	
+	yield;
+}
+
+Net_CarSelectionMode = False;
+
+foreach(Player in Players) {
+	declare UI <=> UIManager.GetUI(Player);
+	NoticeMessage(UI, "");
+}
+
+if(S_TimeLimit < 0)
+	SetCutOffTimeLimit(-1);
+else
+	SetCutOffTimeLimit(Now + S_TimeLimit * 1000 + 3000);
+
+foreach(Player in Players) {
+	declare UI <=> UIManager.GetUI(Player); // Alias for player's UI
+	NoticeMessage(UI, "");
+
+	declare netwrite Text Net_Car for Player;
+	if(Net_Car != "") {
+		declare Spawned = SpawnEnvimixPlayer(Player, Net_Car, CutOffTimeLimit - S_TimeLimit * 1000);
+		if(Spawned) log(Player.User.Name ^ " spawned");
+		
+		if(!S_EnableDefaultCar && ItemCars[Net_Car] == GetDefaultCar())
+			NoticeMessage(UI, "Default car is currently disabled.\n$ff0Please select another car.");
+		else
+			NoticeMessage(UI, "");
+	}
+}
+
+/*declare Integer[Text] PlayerTeams;
+declare Integer[Integer] PlayerCounts;
+foreach(Score in Scores) {
+	PlayerTeams[Score.User.Login] = Score.TeamNum;
+	if(!PlayerCounts.existskey(Score.TeamNum))
+		PlayerCounts[Score.TeamNum] = 0;
+	PlayerCounts[Score.TeamNum] += 1;
+}
+
+if(PlayerCounts.existskey(1) && PlayerCounts.existskey(2)) {
+	if(MathLib::Abs(PlayerCounts[1]-PlayerCounts[2]) > 1) {
+		ServerAdmin.AutoTeamBalance();
+	}
+}
+
+declare Barrier_Start = Synchro_AddBarrier();
+wait(Synchro_BarrierReached(Barrier_Start));
+
+foreach(Score in Scores) {
+	if(PlayerTeams.existskey(Score.User.Login)) {
+		if(PlayerTeams[Score.User.Login] != Score.TeamNum) {
+			log(Score.User.Login ^ " has been autobalanced from " ^ PlayerTeams[Score.User.Login] ^ " to " ^ Score.TeamNum);
+		}
+	}
+}*/
+
+UseForcedClans = True;
+***
+
+***UpdateSkin***
+***
+switch(Event.CustomEventType) {
+	case "Skin": {
+		if(Event.CustomEventData.count > 0) {
+			declare _Car = Event.CustomEventData[0];
+			
+			declare netwrite Text Net_Car for Player;
+			if(DisplayedCars.exists(_Car) && Net_Car == _Car) {
+				if(Event.CustomEventData.count > 1) {
+					declare Skin = Event.CustomEventData[1];
+					UpdateSkin(Player, Skin);
+				}
+			}
+		}
+	}
+}
+***
+
+***RespawnAllWaiting***
+***
+foreach(Player in PlayersWaiting) { // In game loop and in time attack, this means when full respawn
+	declare UI <=> UIManager.GetUI(Player); // Alias for player's UI
+	declare netwrite Text Net_Car for Player; // The actual car of the player
+	declare netread Text Net_Client_Car for UI; // Car that player wishes
+	
+	// Since we're in time attack mode, we only check if the player's choice is available
+	if(GetAllCars().existskey(Net_Client_Car)) {
+		Net_Car = Net_Client_Car; // Apply the client choice
+		declare Spawned = SpawnEnvimixPlayer(Player, Net_Car);
+		if(Spawned) log(Player.User.Name ^ " spawned"); // TODO: Needs tweaking if default car is disabled
+		if(!S_EnableDefaultCar && ItemCars[Net_Car] == GetDefaultCar())
+			NoticeMessage(UI, "Default car is currently disabled.\n$ff0Please select another car.");
+		else
+			NoticeMessage(UI, "");
+	}
+	else if(Net_Client_Car == "") { // Special check for no car selected
+		
+	}
+}
+***
+
+***OnWarmUpLoop***
+***
++++RespawnAllWaiting+++
+***
+
+***OnGameLoop***
+***
+foreach(Spectator in Spectators) {
+	declare UI <=> UIManager.GetUI(Spectator);
+	NoticeMessage(UI, "");
+}
+
++++RespawnAllWaiting+++
+
+if(!IsWarmUp && CutOffTimeLimit != -1 && CutOffTimeLimit < Now)
+	MatchEndRequested = True;
+***
+
+***OnGameEnd***
+***
+Ladder_ComputeRank(::ETmScoreSortOrder::TotalPoints);
+
+foreach(Score in Scores) {
+	Score.LadderRankSortValue = -1 - Score.Points;
+	Score.LadderMatchScoreValue = Score.Points*1.;
+	foreach(Score in Scores) log("Ladder: " ^ Score.User.Login ^ " " ^ Score.LadderMatchScoreValue ^ " " ^ Score.LadderRankSortValue ^ " " ^ Score.User.ReferenceScore);
+}
+
+CloseLadder();
+***
+
+***OnPodiumLoop***
+***
+foreach(Event in UIManager.PendingEvents) +++OnUIChatEvent+++
+***
+
+***OnMapEnd***
+***
+SetCutOffTimeLimit(-1);
+***
+
+Void SetLaps() {
+	IndependantLaps = (S_ForceLapsNb == 0);
+	if(S_ForceLapsNb > 0) NbLaps = S_ForceLapsNb;
+	else NbLaps = -1;
+}

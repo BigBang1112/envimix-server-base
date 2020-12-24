@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<manialink version="3">
+	<frame id="FRAME_CHAT">
+		<frame pos="-157.5 -87.5">
+			<frame pos="0 0" id="FRAME_CHAT_TYPE" hidden="1">
+				<quad z-index="0" size="80 6" style="Bgs1" substyle="BgCardList" valign="bottom"/>
+				<quad z-index="1" size="80 6" style="Bgs1" substyle="BgGradV" valign="bottom"/>
+				<entry pos="4 3" z-index="3" size="72 4" textfont="RajdhaniMono" textsize="0.9" textcolor="EEE" autonewline="1" valign="center2" id="ENTRY_CHAT_TYPE"/>
+			</frame>
+		</frame>
+		<framemodel id="FRAMEMODEL_MESSAGE">
+			<quad z-index="0" size="80 6" style="Bgs1" substyle="BgCardList" opacity=".25"/>
+			<quad z-index="1" size="80 6" style="Bgs1" substyle="BgGradV"/>
+			<frame z-index="3" clip="True" clipposn="40 -3" clipsizen="75 7">
+				<label pos="4 -1.7" z-index="3" size="70 6" text="$<$i$o$n$fffBIGBANG1112$> : " textfont="RajdhaniMono" textsize="0.9" textcolor="EEE" id="LABEL_NICKNAME"/>
+				<label pos="21 -1.7" z-index="3" size="55 6" text="Hello this is a random chat mesesage and its truly kek" textfont="RajdhaniMono" textsize="0.9" textcolor="EEE" id="LABEL_CONTENT"/>
+			</frame>
+		</framemodel>
+		<frame pos="-157.5 -75" id="FRAME_MESSAGES">
+			<frameinstance modelid="FRAMEMODEL_MESSAGE" pos="0 0" hidden="1" data-timestamp="-1"/>
+			<frameinstance modelid="FRAMEMODEL_MESSAGE" pos="0 6.5" hidden="1" data-timestamp="-1"/>
+			<frameinstance modelid="FRAMEMODEL_MESSAGE" pos="0 13" hidden="1" data-timestamp="-1"/>
+			<frameinstance modelid="FRAMEMODEL_MESSAGE" pos="0 19.5" hidden="1" data-timestamp="-1"/>
+			<frameinstance modelid="FRAMEMODEL_MESSAGE" pos="0 26" hidden="1" data-timestamp="-1"/>
+		</frame>
+	</frame>
+	<script><!--
+		#Include "TextLib" as TextLib
+
+		#Struct SChatMessage {
+			Text Login;
+			Text Nickname;
+			Text Content;
+			Integer Timestamp;
+		}
+
+		Boolean IsVisible() {
+			declare Boolean ScoreTable_IsVisible for ClientUI;
+			return !IsInGameMenuDisplayed && !ScoreTable_IsVisible;
+		}
+
+		Boolean IsEnterPressed() {
+			return IsKeyPressed(109) && !IsInGameMenuDisplayed;
+		}
+
+		main() {
+			declare Frame_Chat = (Page.GetFirstChild("FRAME_CHAT") as CMlFrame);
+			declare Frame_Chat_Type = (Page.GetFirstChild("FRAME_CHAT_TYPE") as CMlFrame);
+			declare Entry_Chat_Type = (Page.GetFirstChild("ENTRY_CHAT_TYPE") as CMlEntry);
+			declare Frame_Messages = (Page.GetFirstChild("FRAME_MESSAGES") as CMlFrame);
+
+			declare PreviousKeyReturn = IsEnterPressed();
+			declare PreviousIsInGameMenuDisplayed = IsInGameMenuDisplayed;
+			declare Wait = -1;
+			declare PreviousNewMessage = 0;
+
+			declare netread Integer Net_Chat_NewMessage for Teams[0];
+			declare netread SChatMessage[] Net_Chat_Messages for Teams[0];
+
+			declare Integer[Integer] MessageTimestamps;
+
+			declare MessageLifetime = 60000;
+
+			while(True) {
+				foreach(Event in PendingEvents) {
+					switch(Event.Type) {
+						case CMlScriptEvent::Type::MenuNavigation: {
+							switch(Event.MenuNavAction) {
+								case CMlScriptEvent::EMenuNavAction::Cancel: {
+									Entry_Chat_Type.Value = "";
+
+									AnimMgr.Add(Frame_Chat_Type, "<frame hidden=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+									AnimMgr.Add(Frame_Chat_Type.Controls[0], "<quad size=\"0 6\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+									AnimMgr.Add(Frame_Chat_Type.Controls[1], "<quad size=\"0 6\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+									Frame_Chat_Type.Controls[2].Hide();
+
+									EnableMenuNavigationInputs = False;
+								}
+							}
+						}
+					}
+				}
+
+				if(IsInGameMenuDisplayed != PreviousIsInGameMenuDisplayed) {
+					if(IsInGameMenuDisplayed) {
+						Wait = -1;
+					}
+					else {
+						Wait = Now;
+					}
+					
+					PreviousIsInGameMenuDisplayed = IsInGameMenuDisplayed;
+				}
+
+				Frame_Chat.Visible = IsVisible();
+
+				if(Net_Chat_NewMessage != PreviousNewMessage) {
+					PreviousNewMessage = Net_Chat_NewMessage;
+
+					foreach(Index => Control in Frame_Messages.Controls) {
+						declare Frame = (Control as CMlFrame);
+						if(Net_Chat_Messages.count > Index) {
+							declare Label_Nickname = (Frame.GetFirstChild("LABEL_NICKNAME") as CMlLabel);
+							declare Label_Content = (Frame.GetFirstChild("LABEL_CONTENT") as CMlLabel);
+
+							Label_Nickname.Opacity = 0.;
+							Label_Content.Opacity = 0.;
+
+							AnimMgr.Add(Label_Nickname, "<label opacity=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+							AnimMgr.Add(Label_Content, "<label opacity=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+
+							declare Msg = Net_Chat_Messages[Index];
+
+							Label_Nickname.Value = Msg.Nickname;
+							Label_Content.Value = " : " ^ Msg.Content;
+
+							if(Index == 0) {
+								MessageTimestamps[Msg.Timestamp] = CurrentTime;
+								Frame.Controls[0].Size.X = 0.;
+								Frame.Controls[1].Size.X = 0.;
+								AnimMgr.Add(Frame.Controls[0], "<quad size=\"80 6\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+								AnimMgr.Add(Frame.Controls[1], "<quad size=\"80 6\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+							}
+							else {
+								Frame.Controls[0].Size.X = 80.;
+								Frame.Controls[1].Size.X = 80.;
+							}
+							Frame.DataAttributeSet("timestamp", Msg.Timestamp^"");
+
+							Label_Nickname.Size.X = Label_Nickname.ComputeWidth(Label_Nickname.Value);
+							Label_Content.RelativePosition_V3.X = 4 + Label_Nickname.Size.X;
+							Label_Content.Size.X = Label_Content.ComputeWidth(Label_Content.Value);
+
+							if(MessageTimestamps.existskey(Msg.Timestamp))
+								Frame.Show();
+							else
+								Frame.Hide();
+						}
+						else {
+							Frame.Hide();
+						}
+					}
+				}
+
+				foreach(Index => Control in Frame_Messages.Controls) {
+					declare Frame = (Control as CMlFrame);
+
+					declare Timestamp = TextLib::ToInteger(Frame.DataAttributeGet("timestamp"));
+					if(MessageTimestamps.existskey(Timestamp)) {
+						if(CurrentTime - MessageTimestamps[Timestamp] > MessageLifetime) {
+							AnimMgr.Add(Frame.Controls[0], "<quad size=\"0 6\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+							AnimMgr.Add(Frame.Controls[1], "<quad size=\"0 6\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+							AnimMgr.Add(Frame, "<frame hidden=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+
+							declare Label_Nickname = (Frame.GetFirstChild("LABEL_NICKNAME") as CMlLabel);
+							declare Label_Content = (Frame.GetFirstChild("LABEL_CONTENT") as CMlLabel);
+
+							AnimMgr.Add(Label_Nickname, "<label opacity=\"0\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+							AnimMgr.Add(Label_Content, "<label opacity=\"0\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+
+							MessageTimestamps.removekey(Timestamp);
+						}
+					}
+					else {
+						
+					}
+				}
+
+				if(EnableMenuNavigationInputs && !Entry_Chat_Type.IsFocused && !IsEnterPressed()) {
+					Entry_Chat_Type.Value = "";
+
+					AnimMgr.Add(Frame_Chat_Type, "<frame hidden=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.Add(Frame_Chat_Type.Controls[0], "<quad size=\"0 6\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.Add(Frame_Chat_Type.Controls[1], "<quad size=\"0 6\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+					Frame_Chat_Type.Controls[2].Hide();
+
+					EnableMenuNavigationInputs = False;
+				}
+
+				if(IsEnterPressed() != PreviousKeyReturn) {
+					if(IsEnterPressed() && Now - Wait > 200) {
+						EnableMenuNavigationInputs = !EnableMenuNavigationInputs;
+						//Frame_Chat_Type.Visible = !Frame_Chat_Type.Visible;
+						if(EnableMenuNavigationInputs) {
+							Frame_Chat_Type.Show();
+							Frame_Chat_Type.Controls[0].Size.X = 0.;
+							Frame_Chat_Type.Controls[1].Size.X = 0.;
+							Frame_Chat_Type.Controls[2].Size.X = 0.;
+							AnimMgr.Add(Frame_Chat_Type.Controls[0], "<quad size=\"80 6\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+							AnimMgr.Add(Frame_Chat_Type.Controls[1], "<quad size=\"80 6\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+							AnimMgr.Add(Frame_Chat_Type.Controls[2], "<entry size=\"72 4\" hidden=\"0\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+
+							Entry_Chat_Type.StartEdition();
+						}
+						else {
+							if(Entry_Chat_Type.Value != "") {
+								SendCustomEvent("ChatMessage", [Entry_Chat_Type.Value]);
+							}
+							Entry_Chat_Type.Value = "";
+
+							AnimMgr.Add(Frame_Chat_Type, "<frame hidden=\"1\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+							AnimMgr.Add(Frame_Chat_Type.Controls[0], "<quad size=\"0 6\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+							AnimMgr.Add(Frame_Chat_Type.Controls[1], "<quad size=\"0 6\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+							Frame_Chat_Type.Controls[2].Hide();
+						}
+					}
+					PreviousKeyReturn = IsEnterPressed();
+				}
+
+				yield;
+			}
+		}
+	--></script>
+</manialink>

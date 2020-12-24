@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<manialink version="3">
+<frame pos="157.5 -40" id="FRAME_TIMELIMIT">
+	<frame pos="-26.25 0">
+		<quad z-index="0" size="52.5 10" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+		<quad z-index="1" size="52.5 10" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+		<quad z-index="2" size="50 8.5" valign="center" halign="center" style="Bgs1" substyle="BgWindow4" colorize="FC6" opacity=".25" id="QUAD_MODE" hidden="1"/>
+		<frame z-index="3" id="FRAME_TIMELIMIT_LABEL" clip="True" clipsizen="40 9">
+			<label size="32.5 5" text="0:00" halign="center" valign="center2" textfont="RajdhaniMono" pos="0 -.45" textsize="4.5" id="LABEL_TIMELIMIT"/>
+		</frame>
+	</frame>
+</frame>
+<script><!--
+
+	#Include "TextLib" as TextLib
+	#Include "MathLib" as MathLib
+	#Include "AnimLib" as AnimLib
+	#Include "ColorLib" as ColorLib
+
+	CTmMlPlayer GetPlayer() {
+		if (GUIPlayer != Null) return GUIPlayer;
+		return InputPlayer;
+	}
+
+	Boolean IsVisible() {
+		declare Boolean ScoreTable_IsVisible for ClientUI;
+		return !IsInGameMenuDisplayed && !ScoreTable_IsVisible;
+	}
+
+	main() {
+		declare Frame_TimeLimit = (Page.GetFirstChild("FRAME_TIMELIMIT") as CMlFrame);
+		declare Frame_TimeLimit_Label = (Page.GetFirstChild("FRAME_TIMELIMIT_LABEL") as CMlFrame);
+		declare Label_TimeLimit = (Page.GetFirstChild("LABEL_TIMELIMIT") as CMlLabel);
+		declare Quad_Mode = (Page.GetFirstChild("QUAD_MODE") as CMlQuad);
+
+		declare Start = Now;
+		
+		Frame_TimeLimit.Visible = IsVisible();
+		declare PreviousIsVisible = IsVisible();
+
+		declare PreviousIsInMenu = IsInGameMenuDisplayed;
+
+		declare netread Boolean Net_CarSelectionMode for Teams[0];
+		declare netread Integer Net_CurrentWarmUpNb for Teams[0];
+
+		declare netread Integer Net_CutOffTimeLimit for Teams[0];
+		declare PreviousCutOffTimeLimit = Net_CutOffTimeLimit;
+
+		wait(GetPlayer() != Null);
+
+		while(True) {
+			foreach(Event in PendingEvents) {
+				switch(Event.Type) {
+					case CMlScriptEvent::Type::MouseClick: {
+						
+					}
+				}
+			}
+
+			if(IsVisible() != PreviousIsVisible) {
+				if(IsVisible()) {
+					declare Frame = (Frame_TimeLimit.Controls[0] as CMlFrame);
+					Frame.Controls[0].Size.X = 0.;
+					Frame.Controls[1].Size.X = 0.;
+					Frame.Controls[2].Size.X = 0.;
+					Label_TimeLimit.Opacity = 0.;
+
+					AnimMgr.Add(Frame.Controls[0], "<quad size=\"0 10\"/>", 100, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.Add(Frame.Controls[1], "<quad size=\"0 10\"/>", 100, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.Add(Frame.Controls[2], "<quad size=\"0 8.5\"/>", 100, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.Add(Label_TimeLimit, "<label opacity=\"0\"/>", 100, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.AddChain(Frame.Controls[0], "<quad size=\"52.5 10\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.AddChain(Frame.Controls[1], "<quad size=\"52.5 10\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.AddChain(Frame.Controls[2], "<quad size=\"50 8.5\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.AddChain(Label_TimeLimit, "<label opacity=\"1\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+				}
+				PreviousIsVisible = IsVisible();
+			}
+
+			if(Net_CurrentWarmUpNb > 0) {
+				Quad_Mode.Colorize = ColorLib::HexToRgb("FC6");
+				Quad_Mode.Show();
+			}
+			else if(Net_CarSelectionMode) {
+				Quad_Mode.Colorize = ColorLib::HexToRgb("6F6");
+				Quad_Mode.Show();
+			}
+			else
+				Quad_Mode.Hide();
+
+			if(Net_CutOffTimeLimit != PreviousCutOffTimeLimit) {
+				PreviousCutOffTimeLimit = Net_CutOffTimeLimit;
+				Label_TimeLimit.Opacity = 0.;
+				AnimMgr.Add(Label_TimeLimit, """<label opacity="1"/>""", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+			}
+
+			Frame_TimeLimit.Visible = IsVisible();
+
+			Frame_TimeLimit_Label.ClipWindowSize.X = AnimLib::EaseOutQuad(Now-Start-100, 0.0, 40.0, 300);
+
+			declare TimeLeft = Net_CutOffTimeLimit - GameTime;
+			
+			declare LastMinute = (60000-TimeLeft)/60000.;
+			if(60000-TimeLeft < 0) LastMinute = 1.;
+
+			if(Net_CutOffTimeLimit <= 0)
+				Label_TimeLimit.Value = "-:--";
+			else if(TimeLeft + 1 < 0)
+				Label_TimeLimit.Value = "0:00";
+			else
+				Label_TimeLimit.Value = TextLib::TimeToText(TimeLeft + 1);
+			
+			if(TimeLeft >= 0 && TimeLeft < 60000)
+				Label_TimeLimit.RelativeScale = (MathLib::Sin(Now/1000.*MathLib::PI()*2*1.5-MathLib::PI()/2)+1)/2*LastMinute*.1+1;
+			else
+				Label_TimeLimit.RelativeScale = 1.;
+
+			yield;
+		}
+	}
+
+	--></script>
+</manialink>

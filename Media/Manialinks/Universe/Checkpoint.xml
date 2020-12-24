@@ -1,0 +1,290 @@
+<manialink version="3">
+	<frame>
+		<frame id="FRAME_CHECKPOINT">
+			<frame pos="0 58" id="FRAME_LAP" hidden="1" clip="True" clipsizen="40 7">
+				<frame z-index="-1" id="FRAME_BACKGROUND">
+					<quad z-index="0" size="20 6" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+					<quad z-index="1" size="20 6" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+					<quad z-index="2" size="20 6" valign="center" halign="center" style="Bgs1" substyle="BgWindow4" modulatecolor="FB0" opacity=".5" id="QUAD_COLOR"/>
+				</frame>
+				<label pos="0 -0.2" z-index="0" size="20 6" text="0:00.000" valign="center2" textsize="1.3" textfont="RajdhaniMono" halign="center" id="LABEL_TIME"/>
+			</frame>
+			<frame pos="0 50" id="FRAME_CHECKPOINT_TIME">
+				<frame z-index="-1" id="FRAME_BACKGROUND">
+					<quad z-index="0" size="40 9" bgcolor="FFFA" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+					<quad z-index="1" size="40 9" bgcolor="FFFA" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+				</frame>
+				<frame clip="True" clipsizen="40 6" id="FRAME_INNER_CHECKPOINT_TIME">
+					<label pos="0 -0.4" z-index="0" size="35 6" text="0:00.000" valign="center2" textsize="4" textfont="RajdhaniMono" halign="center" id="LABEL_CHECKPOINT_TIME"/>
+				</frame>
+			</frame>
+			<frame pos="0 42" hidden="0" id="FRAME_DIFFERENCES">
+				<frame>
+					<frame pos="5 0" id="FRAME_RECORDTYPE" clip="True" clipsizen="60 6">
+						<frame z-index="-1" id="FRAME_BACKGROUND">
+							<quad z-index="0" size="30 6" bgcolor="FFFA" valign="center" halign="right" style="Bgs1" substyle="BgCardList"/>
+							<quad z-index="1" size="30 6" bgcolor="FFFA" valign="center" halign="right" style="Bgs1" substyle="BgGradV"/>
+						</frame>
+						<label pos="-15 -0.2" z-index="0" size="25 6" textprefix="$t" text="Personal Record" valign="center2" textsize="1" textfont="RajdhaniMono" halign="center" translate="1"/>
+					</frame>
+					<frame pos="5 0" id="FRAME_TIME" clip="True" clipsizen="40 6">
+						<frame z-index="-1" id="FRAME_BACKGROUND">
+							<quad z-index="0" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgCardList"/>
+							<quad z-index="1" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgGradV"/>
+							<quad z-index="2" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgWindow4" modulatecolor="03F" opacity=".5" id="QUAD_COLOR"/>
+						</frame>
+						<label pos="10 -0.2" z-index="0" size="20 6" text="-0:00.000" valign="center2" textsize="1.3" textfont="RajdhaniMono" halign="center" id="LABEL_TIME"/>
+					</frame>
+				</frame>
+				<frame pos="0 -6" hidden="1">
+					<frame pos="5 0" id="FRAME_RECORDTYPE" clip="True" clipsizen="60 6">
+						<frame z-index="-1" id="FRAME_BACKGROUND">
+							<quad z-index="0" size="30 6" bgcolor="FFFA" valign="center" halign="right" style="Bgs1" substyle="BgCardList"/>
+							<quad z-index="1" size="30 6" bgcolor="FFFA" valign="center" halign="right" style="Bgs1" substyle="BgGradV"/>
+						</frame>
+						<label pos="-15 -0.2" z-index="0" size="25 6" text="$o$n$iBIGBANG1112" valign="center2" textsize="1" textfont="RajdhaniMono" halign="center"/>
+					</frame>
+					<frame pos="5 0" id="FRAME_TIME" clip="True" clipsizen="40 6">
+						<frame z-index="-1" id="FRAME_BACKGROUND">
+							<quad z-index="0" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgCardList"/>
+							<quad z-index="1" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgGradV"/>
+							<quad z-index="2" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgWindow4" modulatecolor="03F" opacity=".5" id="QUAD_COLOR"/>
+						</frame>
+						<label pos="10 -0.2" z-index="0" size="20 6" text="-0:00.000" valign="center2" textsize="1.3" textfont="RajdhaniMono" halign="center" id="LABEL_TIME"/>
+					</frame>
+				</frame>
+				<frame pos="0 -12" hidden="1">
+					<frame pos="5 0" id="FRAME_RECORDTYPE" clip="True" clipsizen="60 6">
+						<frame z-index="-1" id="FRAME_BACKGROUND">
+							<quad z-index="0" size="30 6" bgcolor="FFFA" valign="center" halign="right" style="Bgs1" substyle="BgCardList"/>
+							<quad z-index="1" size="30 6" bgcolor="FFFA" valign="center" halign="right" style="Bgs1" substyle="BgGradV"/>
+						</frame>
+						<label pos="-15 -0.2" z-index="0" size="25 6" text="$o$n$iBIGBANG1112" valign="center2" textsize="1" textfont="RajdhaniMono" halign="center"/>
+					</frame>
+					<frame pos="5 0" id="FRAME_TIME" clip="True" clipsizen="40 6">
+						<frame z-index="-1" id="FRAME_BACKGROUND">
+							<quad z-index="0" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgCardList"/>
+							<quad z-index="1" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgGradV"/>
+							<quad z-index="2" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgWindow4" modulatecolor="03F" opacity=".5" id="QUAD_COLOR"/>
+						</frame>
+						<label pos="10 -0.2" z-index="0" size="20 6" text="-0:00.000" valign="center2" textsize="1.3" textfont="RajdhaniMono" halign="center" id="LABEL_TIME"/>
+					</frame>
+				</frame>
+				<frame pos="0 -18" hidden="1">
+					<frame pos="5 0" id="FRAME_RECORDTYPE" clip="True" clipsizen="60 6">
+						<frame z-index="-1" id="FRAME_BACKGROUND">
+							<quad z-index="0" size="30 6" bgcolor="FFFA" valign="center" halign="right" style="Bgs1" substyle="BgCardList"/>
+							<quad z-index="1" size="30 6" bgcolor="FFFA" valign="center" halign="right" style="Bgs1" substyle="BgGradV"/>
+						</frame>
+						<label pos="-15 -0.2" z-index="0" size="25 6" text="$o$n$iBIGBANG1112" valign="center2" textsize="1" textfont="RajdhaniMono" halign="center"/>
+					</frame>
+					<frame pos="5 0" id="FRAME_TIME" clip="True" clipsizen="40 6">
+						<frame z-index="-1" id="FRAME_BACKGROUND">
+							<quad z-index="0" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgCardList"/>
+							<quad z-index="1" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgGradV"/>
+							<quad z-index="2" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgWindow4" modulatecolor="03F" opacity=".5" id="QUAD_COLOR"/>
+						</frame>
+						<label pos="10 -0.2" z-index="0" size="20 6" text="-0:00.000" valign="center2" textsize="1.3" textfont="RajdhaniMono" halign="center" id="LABEL_TIME"/>
+					</frame>
+				</frame>
+				<frame pos="0 -24" hidden="1">
+					<frame pos="5 0" id="FRAME_RECORDTYPE" clip="True" clipsizen="60 6">
+						<frame z-index="-1" id="FRAME_BACKGROUND">
+							<quad z-index="0" size="30 6" bgcolor="FFFA" valign="center" halign="right" style="Bgs1" substyle="BgCardList"/>
+							<quad z-index="1" size="30 6" bgcolor="FFFA" valign="center" halign="right" style="Bgs1" substyle="BgGradV"/>
+						</frame>
+						<label pos="-15 -0.2" z-index="0" size="25 6" text="$o$n$iBIGBANG1112" valign="center2" textsize="1" textfont="RajdhaniMono" halign="center"/>
+					</frame>
+					<frame pos="5 0" id="FRAME_TIME" clip="True" clipsizen="40 6">
+						<frame z-index="-1" id="FRAME_BACKGROUND">
+							<quad z-index="0" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgCardList"/>
+							<quad z-index="1" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgGradV"/>
+							<quad z-index="2" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgWindow4" modulatecolor="03F" opacity=".5" id="QUAD_COLOR"/>
+						</frame>
+						<label pos="10 -0.2" z-index="0" size="20 6" text="-0:00.000" valign="center2" textsize="1.3" textfont="RajdhaniMono" halign="center" id="LABEL_TIME"/>
+					</frame>
+				</frame>
+				<frame pos="0 -30" hidden="1">
+					<frame pos="5 0" id="FRAME_RECORDTYPE" clip="True" clipsizen="60 6">
+						<frame z-index="-1" id="FRAME_BACKGROUND">
+							<quad z-index="0" size="30 6" bgcolor="FFFA" valign="center" halign="right" style="Bgs1" substyle="BgCardList"/>
+							<quad z-index="1" size="30 6" bgcolor="FFFA" valign="center" halign="right" style="Bgs1" substyle="BgGradV"/>
+						</frame>
+						<label pos="-15 -0.2" z-index="0" size="25 6" text="$o$n$iBIGBANG1112" valign="center2" textsize="1" textfont="RajdhaniMono" halign="center"/>
+					</frame>
+					<frame pos="5 0" id="FRAME_TIME" clip="True" clipsizen="40 6">
+						<frame z-index="-1" id="FRAME_BACKGROUND">
+							<quad z-index="0" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgCardList"/>
+							<quad z-index="1" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgGradV"/>
+							<quad z-index="2" size="20 6" valign="center" halign="left" style="Bgs1" substyle="BgWindow4" modulatecolor="03F" opacity=".5" id="QUAD_COLOR"/>
+						</frame>
+						<label pos="10 -0.2" z-index="0" size="20 6" text="-0:00.000" valign="center2" textsize="1.3" textfont="RajdhaniMono" halign="center" id="LABEL_TIME"/>
+					</frame>
+				</frame>
+			</frame>
+		</frame>
+	</frame>
+	<script><!--
+		#Include "TextLib" as TextLib
+		#Include "MathLib" as MathLib
+		#Include "AnimLib" as AnimLib
+
+		Text TimeToTextWithMilli(Integer _Time) {
+			return TextLib::TimeToText(_Time, True) ^ MathLib::Abs(_Time % 10);
+		}
+
+		CTmMlPlayer GetPlayer() {
+			if (GUIPlayer != Null) return GUIPlayer;
+			return InputPlayer;
+		}
+
+		main() {
+			declare Frame_Checkpoint = (Page.GetFirstChild("FRAME_CHECKPOINT") as CMlFrame);
+			declare Label_Checkpoint_Time = (Page.GetFirstChild("LABEL_CHECKPOINT_TIME") as CMlLabel);
+			declare Frame_Differences = (Page.GetFirstChild("FRAME_DIFFERENCES") as CMlFrame);
+			declare Frame_Checkpoint_Time = (Page.GetFirstChild("FRAME_CHECKPOINT_TIME") as CMlFrame);
+
+			declare Frame_Lap = (Page.GetFirstChild("FRAME_LAP") as CMlFrame);
+			declare Label_Lap_Time = (Frame_Lap.GetFirstChild("LABEL_TIME") as CMlLabel);
+
+			declare CheckpointShowTime = -1;
+			Frame_Checkpoint.Hide();
+
+			declare Boolean ScoreTable_IsVisible for ClientUI;
+
+			wait(GetPlayer() != Null);
+
+			while(True) {
+				foreach(Event in PendingEvents) {
+					switch(Event.Type) {
+						case CMlScriptEvent::Type::MouseClick: {
+							
+						}
+					}
+				}
+
+				foreach(Event in RaceEvents) {
+					switch(Event.Type) {
+						case CTmRaceClientEvent::EType::WayPoint: {
+							if(Event.Player.User.Login == GetPlayer().User.Login) {
+								declare Rank = TextLib::GetTranslatedText("1st");
+								if(IndependantLaps)
+									Label_Checkpoint_Time.SetText(TimeToTextWithMilli(Event.LapTime));
+								else
+									Label_Checkpoint_Time.SetText(TimeToTextWithMilli(Event.RaceTime));
+
+								if(Event.IsEndLap) Audio.PlaySoundEvent(CAudioManager::ELibSound::Checkpoint, 1, 1.);
+								else Audio.PlaySoundEvent(CAudioManager::ELibSound::Checkpoint, 0, 1.);
+								Frame_Checkpoint.Show();
+
+								foreach(Control in (Frame_Checkpoint_Time.GetFirstChild("FRAME_BACKGROUND") as CMlFrame).Controls) {
+									Control.Size.X = 0.;
+									AnimMgr.Add(Control, """<quad size="40 9"/>""", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+								}
+								(Page.GetFirstChild("FRAME_INNER_CHECKPOINT_TIME") as CMlFrame).ClipWindowSize.X = 0.;
+
+								CheckpointShowTime = Now;
+
+								if(Event.RaceTime != Event.LapTime && !IndependantLaps) {
+									Label_Lap_Time.SetText(TimeToTextWithMilli(Event.LapTime));
+									Frame_Lap.Show();
+								}
+								else Frame_Lap.Hide();
+
+								if(Event.Player.Score.BestRace.Checkpoints.count > 0) {
+									declare Frame_Time = ((Frame_Differences.Controls[0] as CMlFrame).GetFirstChild("FRAME_TIME") as CMlFrame);
+									declare Label_Time = (Frame_Time.GetFirstChild("LABEL_TIME") as CMlLabel);
+									declare Quad_Color = ((Frame_Time.GetFirstChild("FRAME_BACKGROUND") as CMlFrame).GetFirstChild("QUAD_COLOR") as CMlQuad);
+
+									declare Integer Difference;
+									if(IndependantLaps)
+										Difference = Event.LapTime - Event.Player.Score.BestRace.Checkpoints[Event.CheckpointInLap]; // Time difference
+									else
+										Difference = Event.RaceTime - Event.Player.Score.BestRace.Checkpoints[Event.CheckpointInRace]; // Time difference
+
+									if(Difference > 0) {
+										Label_Time.SetText("+"^TimeToTextWithMilli(Difference));
+										Quad_Color.ModulateColor = <1.,.1,0.>;
+									}
+									else if(Difference == 0) {
+										Label_Time.SetText(TimeToTextWithMilli(Difference));
+										Quad_Color.ModulateColor = <1.,.0,1.>;
+									}
+									else {
+										Label_Time.SetText(TimeToTextWithMilli(Difference));
+										Quad_Color.ModulateColor = <0.,.1,1.>;
+									}
+
+									Frame_Differences.Show();
+								}
+								else {
+									Frame_Differences.Hide();
+								}
+							}
+						}
+					}
+				}
+
+				if(CheckpointShowTime != -1) {
+					declare Time = Now - CheckpointShowTime;
+					if(Time > 2700) {
+						(Page.GetFirstChild("FRAME_INNER_CHECKPOINT_TIME") as CMlFrame).ClipWindowSize.X = AnimLib::EaseOutQuad(Time-2700, 40.0, -40.0, 300);
+
+						foreach(Control in (Frame_Checkpoint_Time.GetFirstChild("FRAME_BACKGROUND") as CMlFrame).Controls) {
+							Control.Size.X = AnimLib::EaseOutQuad(Time-2700, 40.0, -40.0, 300);
+						}
+
+						declare Frame_Lap = (Page.GetFirstChild("FRAME_LAP") as CMlFrame);
+						foreach(Control in (Frame_Lap.GetFirstChild("FRAME_BACKGROUND") as CMlFrame).Controls)
+							Control.Size.X = AnimLib::EaseOutQuad(Time-2800, 20.0, -20.0, 300);
+						Frame_Lap.ClipWindowSize.X = AnimLib::EaseOutQuad(Time-2800, 20.0, -20.0, 300);
+
+						for(I, 0, (Page.GetFirstChild("FRAME_DIFFERENCES") as CMlFrame).Controls.count-1) {
+							declare Frame = ((Page.GetFirstChild("FRAME_DIFFERENCES") as CMlFrame).Controls[I] as CMlFrame);
+
+							declare Frame_RecordType = (Frame.GetFirstChild("FRAME_RECORDTYPE") as CMlFrame);
+							foreach(Control in (Frame_RecordType.GetFirstChild("FRAME_BACKGROUND") as CMlFrame).Controls)
+								Control.Size.X = AnimLib::EaseOutQuad(Time-2800-I*100, 30.0, -30.0, 300);
+							Frame_RecordType.ClipWindowSize.X = AnimLib::EaseOutQuad(Time-2800-I*100, 60.0, -60.0, 300);
+
+							declare Frame_Time = (Frame.GetFirstChild("FRAME_TIME") as CMlFrame);
+							foreach(Control in (Frame_Time.GetFirstChild("FRAME_BACKGROUND") as CMlFrame).Controls)
+								Control.Size.X = AnimLib::EaseOutQuad(Time-2800-I*100, 20.0, -20.0, 300);
+							Frame_Time.ClipWindowSize.X = AnimLib::EaseOutQuad(Time-2800-I*100, 40.0, -40.0, 300);
+						}
+						if(Time > 3600) {
+							Frame_Checkpoint.Hide();
+							CheckpointShowTime = -1;
+						}
+					}
+					else {
+						(Page.GetFirstChild("FRAME_INNER_CHECKPOINT_TIME") as CMlFrame).ClipWindowSize.X = AnimLib::EaseOutQuad(Time, 0.0, 40.0, 300);
+
+						declare Frame_Lap = (Page.GetFirstChild("FRAME_LAP") as CMlFrame);
+						foreach(Control in (Frame_Lap.GetFirstChild("FRAME_BACKGROUND") as CMlFrame).Controls)
+							Control.Size.X = AnimLib::EaseOutQuad(Time-100, 0.0, 20.0, 300);
+						Frame_Lap.ClipWindowSize.X = AnimLib::EaseOutQuad(Time-100, 0.0, 20.0, 300);
+
+						for(I, 0, (Page.GetFirstChild("FRAME_DIFFERENCES") as CMlFrame).Controls.count-1) {
+							declare Frame = ((Page.GetFirstChild("FRAME_DIFFERENCES") as CMlFrame).Controls[I] as CMlFrame);
+							
+							declare Frame_RecordType = (Frame.GetFirstChild("FRAME_RECORDTYPE") as CMlFrame);
+							foreach(Control in (Frame_RecordType.GetFirstChild("FRAME_BACKGROUND") as CMlFrame).Controls)
+								Control.Size.X = AnimLib::EaseOutQuad(Time-100-I*100, 0.0, 30.0, 300);
+							Frame_RecordType.ClipWindowSize.X = AnimLib::EaseOutQuad(Time-100-I*100, 0.0, 60.0, 300);
+
+							declare Frame_Time = (Frame.GetFirstChild("FRAME_TIME") as CMlFrame);
+							foreach(Control in (Frame_Time.GetFirstChild("FRAME_BACKGROUND") as CMlFrame).Controls)
+								Control.Size.X = AnimLib::EaseOutQuad(Time-100-I*100, 0.0, 20.0, 300);
+							Frame_Time.ClipWindowSize.X = AnimLib::EaseOutQuad(Time-100-I*100, 0.0, 40.0, 300);
+						}
+					}
+				}
+
+				Frame_Checkpoint.Parent.Visible = !ScoreTable_IsVisible;
+
+				yield;
+			}
+		}
+	--></script>
+</manialink>

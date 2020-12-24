@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<manialink version="3">
+	<frame pos="-157.5 87.5" id="FRAME_RANKINGS_CAR">
+		<frame pos="26.25 -3">
+			<frame id="FRAME_RANKINGS_CAR_PLAYER_BG">
+				<quad z-index="0" size="52.5 6" halign="center" valign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="52.5 6" halign="center" valign="center" style="Bgs1InRace" substyle="BgGradV"/>
+			</frame>
+			<frame z-index="1" id="FRAME_LABEL_PLAYER" clip="True" clipsizen="52.5 6">
+				<label pos="0 0.2" z-index="0" size="47 5" text="$aaa[unknown]" valign="center" textfont="RajdhaniMono" textsize="1.5" translate="1" halign="center" id="LABEL_PLAYER"/>
+			</frame>
+		</frame>
+		<framemodel id="FRAMEMODEL_CAR">
+			<frame clip="True" clipposn="26.25" clipsizen="52.5 5.6">
+				<frame id="FRAME_INNER">
+					<frame>
+						<frame>
+							<quad z-index="0" size="22.5 6" valign="center" style="Bgs1" substyle="BgCardList" />
+							<quad z-index="1" size="22.5 6" valign="center" style="Bgs1InRace" substyle="BgGradV"/>
+							<quad z-index="2" size="22.5 6" valign="center" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" colorize="036" opacity=".75"/>
+						</frame>
+						<frame z-index="1" pos="2.5">
+							<label pos="0 0.3" z-index="0" size="24 5" text="$aaa[unknown]" valign="center" textfont="Oswald" textsize="2" id="LABEL_CAR"/>
+						</frame>
+					</frame>
+					<frame pos="22.5">
+						<frame>
+							<quad z-index="0" size="20 6" valign="center" style="Bgs1" substyle="BgCardList" />
+							<quad z-index="1" size="20 6" valign="center" style="Bgs1InRace" substyle="BgGradV"/>
+							<quad z-index="2" size="20 6" valign="center" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" colorize="036" opacity=".75"/>
+						</frame>
+						<frame z-index="1" pos="10">
+							<label pos="0 0.3" z-index="0" size="15 5" text="-:--.---" halign="center" valign="center" textfont="OswaldMono" textsize="1.75" id="LABEL_TIME"/>
+						</frame>
+					</frame>
+					<frame pos="42.5">
+						<frame>
+							<quad z-index="0" size="10 6" valign="center" style="Bgs1" substyle="BgCardList" />
+							<quad z-index="1" size="10 6" valign="center" style="Bgs1InRace" substyle="BgGradV"/>
+							<quad z-index="2" size="10 6" valign="center" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" colorize="036" opacity=".75"/>
+						</frame>
+						<frame z-index="1" pos="5">
+							<label pos="0 0.3" z-index="0" size="7.5 5" text="1st" halign="center" valign="center" textfont="RajdhaniMono" textsize="1.5" translate="1" id="LABEL_RANK"/>
+						</frame>
+					</frame>
+				</frame>
+			</frame>
+		</framemodel>
+		<frame pos="0 -9.5" id="FRAME_CARS">
+			<frameinstance modelid="FRAMEMODEL_CAR"/>
+			<frameinstance modelid="FRAMEMODEL_CAR" pos="0 -6.5"/>
+			<frameinstance modelid="FRAMEMODEL_CAR" pos="0 -13"/>
+			<frameinstance modelid="FRAMEMODEL_CAR" pos="0 -19.5"/>
+			<frameinstance modelid="FRAMEMODEL_CAR" pos="0 -26"/>
+			<frameinstance modelid="FRAMEMODEL_CAR" pos="0 -32.5"/>
+			<frameinstance modelid="FRAMEMODEL_CAR" pos="0 -39"/>
+			<frameinstance modelid="FRAMEMODEL_CAR" pos="0 -45.5"/>
+			<frameinstance modelid="FRAMEMODEL_CAR" pos="0 -52"/>
+			<frameinstance modelid="FRAMEMODEL_CAR" pos="0 -58.5"/>
+		</frame>
+	</frame>
+	<script><!--
+		#Include "TextLib" as TextLib
+		#Include "MathLib" as MathLib
+		#Include "AnimLib" as AnimLib
+
+		#Struct SCheckpoint {
+			Integer Time;
+			Integer Score;
+			Integer NbRespawns;
+			Real Distance;
+			Real Speed;
+		}
+
+		#Struct SRecord {
+			Text Login;
+			Integer Time;
+			Integer Score;
+			Integer NbRespawns;
+			Real Distance;
+			Real Speed;
+			SCheckpoint[] Checkpoints;
+		}
+
+		CTmMlPlayer GetPlayer() {
+			if (GUIPlayer != Null) return GUIPlayer;
+			return InputPlayer;
+		}
+
+		Boolean IsVisible() {
+			declare Boolean ScoreTable_IsVisible for ClientUI;
+			return !IsInGameMenuDisplayed && !ScoreTable_IsVisible;
+		}
+
+		Text TimeToTextWithMilli(Integer _Time) {
+			return TextLib::TimeToText(_Time, True) ^ MathLib::Abs(_Time % 10);
+		}
+
+		Void SetSlidingText(CMlFrame _Frame, Text _Value) {
+			declare L1 = (_Frame.Controls[0] as CMlLabel);
+			L1.Value = _Value;
+			L1.Size.X = L1.ComputeWidth(_Value);
+
+			declare L2 = (_Frame.Controls[1] as CMlLabel);
+			L2.Value = _Value;
+			L2.Size.X = L2.ComputeWidth(_Value);
+		}
+
+		Void MoveSlidingText(CMlFrame _Frame, Integer _Distance, Real _Speed) {
+			declare L1 = (_Frame.Controls[0] as CMlLabel);
+			declare L2 = (_Frame.Controls[1] as CMlLabel);
+
+			if(_Frame.ClipWindowSize.X < L1.Size.X) {		
+				L1.RelativePosition_V3.X -= Period*_Speed;
+				L2.RelativePosition_V3.X -= Period*_Speed;
+				L2.Show();
+
+				if(_Speed > 0) {
+					if(L1.RelativePosition_V3.X + L1.Size.X < 0 || L1.RelativePosition_V3.X + L1.Size.X > L2.RelativePosition_V3.X)
+						L1.RelativePosition_V3.X = L2.RelativePosition_V3.X+L2.Size.X+_Distance;
+					if(L2.RelativePosition_V3.X + L2.Size.X < 0 || L1.RelativePosition_V3.X + L1.Size.X < L2.RelativePosition_V3.X)
+						L2.RelativePosition_V3.X = L1.RelativePosition_V3.X+L1.Size.X+_Distance;
+				}
+				else if(_Speed < 0) {
+					if(L1.RelativePosition_V3.X - L1.Size.X > 0 || L1.RelativePosition_V3.X - L1.Size.X < L2.RelativePosition_V3.X)
+						L1.RelativePosition_V3.X = L2.RelativePosition_V3.X-L2.Size.X-_Distance;
+					if(L2.RelativePosition_V3.X - L2.Size.X > 0 || L1.RelativePosition_V3.X - L1.Size.X > L2.RelativePosition_V3.X)
+						L2.RelativePosition_V3.X = L1.RelativePosition_V3.X-L1.Size.X-_Distance;
+				}
+			}
+			else {
+				L2.Hide();
+				L1.RelativePosition_V3.X = 0.;
+			}
+		}
+
+		main() {
+			declare Frame_Rankings_Car = (Page.GetFirstChild("FRAME_RANKINGS_CAR") as CMlFrame);
+			declare Frame_Label_Player = (Page.GetFirstChild("FRAME_LABEL_PLAYER") as CMlFrame);
+			declare Frame_Rankings_Car_Player_Bg = (Page.GetFirstChild("FRAME_RANKINGS_CAR_PLAYER_BG") as CMlFrame);
+			declare Label_Player = (Page.GetFirstChild("LABEL_PLAYER") as CMlLabel);
+			declare Frame_Cars = (Page.GetFirstChild("FRAME_CARS") as CMlFrame);
+
+			Frame_Rankings_Car.Visible = IsVisible();
+			declare PreviousVisible = Frame_Rankings_Car.Visible;
+
+			declare VisibleTime = -1;
+
+			wait(GetPlayer() != Null);
+
+			declare netread Text[] DisplayedCars for Teams[0];
+
+			while(True) {
+				Label_Player.Value = GetPlayer().User.Name;
+
+				declare Integer[Text][Text] Ranker;
+				if(GetPlayer().Score != Null) {
+					foreach(Score in Scores) {
+						declare netread SRecord[Text] Envimix_BestRace for Score;
+						foreach(Car => Time in Envimix_BestRace) {
+							if(!Ranker.existskey(Car)) Ranker[Car] = [];
+							Ranker[Car][Score.User.Login] = Envimix_BestRace[Car].Time;
+						}
+					}
+				}
+				declare Integer[Text] Ranks;
+				foreach(Car => Times in Ranker) {
+					declare Offset = 0;
+					declare PrevTime = 0;
+					declare Index = 1;
+					foreach(Login => Time in Times.sort()) {
+						if(Time == PrevTime) Offset += 1;
+						if(Login == GetPlayer().User.Login)
+							Ranks[Car] = Index - Offset;
+						PrevTime = Time;
+						Index += 1;
+					}
+				}
+
+				foreach(Index => Control in Frame_Cars.Controls) {
+					declare Frame = (Control as CMlFrame);
+					if(DisplayedCars.count > Index) {
+						declare Label_Car = (Frame.GetFirstChild("LABEL_CAR") as CMlLabel);
+						declare Label_Time = (Frame.GetFirstChild("LABEL_TIME") as CMlLabel);
+						declare Label_Rank = (Frame.GetFirstChild("LABEL_RANK") as CMlLabel);
+
+						declare Car = DisplayedCars[Index];
+						Label_Car.Value = Car;
+
+						if(GetPlayer().Score != Null) {
+							declare netread SRecord[Text] Envimix_BestRace for GetPlayer().Score;
+							if(Envimix_BestRace.existskey(Car) && Envimix_BestRace[Car].Time != -1) {
+								Label_Time.Value = TimeToTextWithMilli(Envimix_BestRace[Car].Time);
+
+								if(Ranks.existskey(Car)) {
+									declare Rank = Ranks[Car];
+									if(Rank == 0) Label_Rank.Value = "";
+									else if(Rank == 1) Label_Rank.Value = "1st";
+									else if(Rank == 2) Label_Rank.Value = "2nd";
+									else if(Rank == 3) Label_Rank.Value = "3rd";
+									else Label_Rank.Value = TextLib::Compose("%1th", Rank ^ "");
+								}
+								else {
+									Label_Rank.Value = "";
+								}
+							}
+							else {
+								Label_Time.Value = "-:--.---";
+								Label_Rank.Value = "";
+							}
+						}
+
+						Frame.Show();
+					}
+					else {
+						Frame.Hide();
+					}
+				}
+
+				Frame_Rankings_Car.Visible = IsVisible();
+
+				if(Frame_Rankings_Car.Visible != PreviousVisible) {
+					if(Frame_Rankings_Car.Visible) {
+						foreach(Control in Frame_Rankings_Car_Player_Bg.Controls) {
+							Control.Size.X = 0.;
+							AnimMgr.Add(Control, "<quad size=\"52.5 6\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+						}
+						foreach(Index => Control in Frame_Cars.Controls) {
+							declare Frame = ((Control as CMlFrame).GetFirstChild("FRAME_INNER") as CMlFrame);
+							Frame.RelativePosition_V3.Y = 6.;
+							AnimMgr.Add(Frame, "<frame pos=\"0 6\"/>", 100 * Index + 100, CAnimManager::EAnimManagerEasing::QuadOut);
+							AnimMgr.AddChain(Frame, "<frame pos=\"0 0\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+						}
+						VisibleTime = Now;
+					}
+					PreviousVisible = Frame_Rankings_Car.Visible;
+				}
+
+				if(VisibleTime == -1) {
+					Frame_Label_Player.ClipWindowSize.X = 50.;
+				}
+				else {
+					Frame_Label_Player.ClipWindowSize.X = AnimLib::EaseOutQuad(Now - VisibleTime, 0., 50., 300);
+				}
+
+				yield;
+			}
+		}
+	--></script>
+</manialink>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<manialink version="3">
+<frame pos="157.5 -52.5" id="FRAME_SCORE">
+	<frame pos="-26.25">
+		<quad z-index="0" size="52.5 12.5" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+		<quad z-index="1" size="52.5 12.5" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+		<frame z-index="3" clip="True" clipsizen="50 12" id="FRAME_INNER_SCORE">
+			<label size="25 5" text="Best Time" valign="center2" textfont="RajdhaniMono" pos="-22.5 2" textsize="1.5" translate="1"/>
+			<label size="20 5" text="-:--.---" halign="right" valign="center2" textfont="RajdhaniMono" pos="22.5 2" textsize="2.25" id="LABEL_BESTTIME"/>
+			<label size="25 5" text="Last Time" valign="center2" textfont="RajdhaniMono" pos="-22.5 -2.5" textsize="1.5" translate="1"/>
+			<label size="20 5" text="-:--.---" halign="right" valign="center2" textfont="RajdhaniMono" pos="22.5 -2.5" textsize="2.25" id="LABEL_LASTTIME"/>
+		</frame>
+	</frame>
+</frame>
+<script><!--
+
+	#Include "TextLib" as TextLib
+	#Include "MathLib" as MathLib
+	#Include "AnimLib" as AnimLib
+	#Include "ColorLib" as ColorLib
+
+	CTmMlPlayer GetPlayer() {
+		if (GUIPlayer != Null) return GUIPlayer;
+		return InputPlayer;
+	}
+
+	Boolean IsVisible() {
+		declare Boolean ScoreTable_IsVisible for ClientUI;
+		return !IsInGameMenuDisplayed && !ScoreTable_IsVisible;
+	}
+
+	Text TimeToTextWithMilli(Integer _Time) {
+		return TextLib::TimeToText(_Time, True) ^ MathLib::Abs(_Time % 10);
+	}
+
+	main() {
+		declare Frame_Score = (Page.GetFirstChild("FRAME_SCORE") as CMlFrame);
+		declare Frame_Inner_Score = (Page.GetFirstChild("FRAME_INNER_SCORE") as CMlFrame);
+		declare Label_BestTime = (Page.GetFirstChild("LABEL_BESTTIME") as CMlLabel);
+		declare Label_LastTime = (Page.GetFirstChild("LABEL_LASTTIME") as CMlLabel);
+
+		declare Start = Now;
+		
+		Frame_Score.Visible = IsVisible();
+		declare PreviousIsVisible = IsVisible();
+
+		declare VisibleTime = -1;
+
+		wait(GetPlayer() != Null);
+
+		while(True) {
+			foreach(Event in PendingEvents) {
+				switch(Event.Type) {
+					case CMlScriptEvent::Type::MouseClick: {
+						
+					}
+				}
+			}
+
+			if(IsVisible() != PreviousIsVisible) {
+				if(IsVisible()) {
+					declare Frame = (Frame_Score.Controls[0] as CMlFrame);
+					Frame.Controls[0].Size.X = 0.;
+					Frame.Controls[1].Size.X = 0.;
+
+					AnimMgr.Add(Frame.Controls[0], "<quad size=\"0 12.5\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.Add(Frame.Controls[1], "<quad size=\"0 12.5\"/>", 200, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.AddChain(Frame.Controls[0], "<quad size=\"52.5 12.5\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.AddChain(Frame.Controls[1], "<quad size=\"52.5 12.5\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+
+					VisibleTime = Now;
+				}
+				PreviousIsVisible = IsVisible();
+			}
+
+			if(VisibleTime == -1) {
+				Frame_Inner_Score.ClipWindowSize.X = 50.;
+			}
+			else {
+				Frame_Inner_Score.ClipWindowSize.X = AnimLib::EaseOutQuad(Now - VisibleTime - 200, 0., 50., 300);
+			}
+
+			declare Score <=> GetPlayer().Score;
+			if(Score == Null) {
+				Label_BestTime.Value = "-:--.---";
+				Label_LastTime.Value = "-:--.---";
+			}
+			else {
+				if(Score.BestRace.Time < 0)
+					Label_BestTime.Value = "-:--.---";
+				else Label_BestTime.Value = TimeToTextWithMilli(Score.BestRace.Time);
+				if(Score.PrevRace.Time < 0)
+					Label_LastTime.Value = "-:--.---";
+				else Label_LastTime.Value = TimeToTextWithMilli(Score.PrevRace.Time);
+			}
+
+			Frame_Score.Visible = IsVisible();
+
+			yield;
+		}
+	}
+
+	--></script>
+</manialink>

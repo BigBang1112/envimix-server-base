@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<manialink version="3">
+	<frame pos="157.5 50" id="FRAME_ENVIMANIA">
+		<frame pos="-26.25 -2">
+			<frame id="FRAME_ENVIMANIA_TITLE_BG">
+				<quad z-index="0" size="52.5 8" halign="center" valign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="52.5 8" halign="center" valign="center" style="Bgs1InRace" substyle="BgGradV"/>
+			</frame>
+			<frame z-index="1" clip="True" clipsizen="45 4" id="FRAME_LABEL_CAR">
+				<label pos="0 0.2" z-index="0" size="47 5" text="ENVIMANIA" valign="center" textfont="RajdhaniMono" textsize="2.5" translate="1" halign="center" id="LABEL_CAR"/>
+			</frame>
+		</frame>
+		<frame pos="0 -6">
+			<frame id="FRAME_ENVIMANIA_RECORDS_BG" pos="-26.25">
+				<quad z-index="0" size="52.5 77.5" style="Bgs1" substyle="BgCardList" halign="center"/>
+				<quad z-index="1" size="52.5 77.5" style="Bgs1InRace" substyle="BgGradV" halign="center"/>
+			</frame>
+			<framemodel id="FRAMEMODEL_RECORD">
+				<label pos="0 0.3" z-index="0" size="5 5" text="1st" valign="center" textfont="RajdhaniMono" textsize="2" translate="1" id="LABEL_RANK"/>
+				<frame pos="5 0.3" z-index="0">
+					<label size="25 5" text="$aaa[unknown]" valign="center" textfont="Oswald" textsize="2" id="LABEL_NICKNAME"/>
+				</frame>
+				<label pos="46 0.3" z-index="0" size="15 5" text="-:--.---" halign="right" valign="center" textfont="OswaldMono" textsize="1.75" id="LABEL_TIME"/>
+			</framemodel>
+			<frame pos="-49.5 -3.5" z-index="3" id="FRAME_RECORDS" hidden="1">
+				<frameinstance modelid="FRAMEMODEL_RECORD"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -5"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -10"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -15"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -20"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -25"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -30"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -35"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -40"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -45"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -50"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -55"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -60"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -65"/>
+				<frameinstance modelid="FRAMEMODEL_RECORD" pos="0 -70"/>
+			</frame>
+		</frame>
+	</frame>
+	<script><!--
+		#Include "TextLib" as TextLib
+		#Include "MathLib" as MathLib
+		#Include "AnimLib" as AnimLib
+
+		#Struct SCheckpoint {
+			Integer Time;
+			Integer Score;
+			Integer NbRespawns;
+			Real Distance;
+			Real Speed;
+		}
+
+		#Struct SRecord {
+			Text Login;
+			Integer Time;
+			Integer Score;
+			Integer NbRespawns;
+			Real Distance;
+			Real Speed;
+			SCheckpoint[] Checkpoints;
+		}
+
+		CTmMlPlayer GetPlayer() {
+			if (GUIPlayer != Null) return GUIPlayer;
+			return InputPlayer;
+		}
+
+		Text TimeToTextWithMilli(Integer _Time) {
+			return TextLib::TimeToText(_Time, True) ^ MathLib::Abs(_Time % 10);
+		}
+
+		Boolean IsVisible() {
+			declare Boolean ScoreTable_IsVisible for ClientUI;
+			return !IsInGameMenuDisplayed && !ScoreTable_IsVisible;
+		}
+
+		main() {
+			declare Frame_Envimania = (Page.GetFirstChild("FRAME_ENVIMANIA") as CMlFrame);
+			declare Frame_Envimania_Title_Bg = (Page.GetFirstChild("FRAME_ENVIMANIA_TITLE_BG") as CMlFrame);
+			declare Frame_Label_Car = (Page.GetFirstChild("FRAME_LABEL_CAR") as CMlFrame);
+			declare Frame_Envimania_Records_Bg = (Page.GetFirstChild("FRAME_ENVIMANIA_RECORDS_BG") as CMlFrame);
+
+			Frame_Envimania.Visible = IsVisible();
+			declare PreviousVisible = Frame_Envimania.Visible;
+
+			declare VisibleTime = -1;
+
+			wait(GetPlayer() != Null);
+
+			while(True) {
+				Frame_Envimania.Visible = IsVisible();
+
+				if(Frame_Envimania.Visible != PreviousVisible) {
+					if(Frame_Envimania.Visible) {
+						foreach(Control in Frame_Envimania_Title_Bg.Controls) {
+							Control.Size.X = 0.;
+							AnimMgr.Add(Control, "<quad size=\"52.5 8\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+						}
+						foreach(Control in Frame_Envimania_Records_Bg.Controls) {
+							Control.Size.X = 0.;
+							AnimMgr.Add(Control, "<quad size=\"52.5 77.5\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+						}
+						VisibleTime = Now;
+					}
+					PreviousVisible = Frame_Envimania.Visible;
+				}
+
+				if(VisibleTime == -1) {
+					Frame_Label_Car.ClipWindowSize.X = 45.;
+				}
+				else {
+					Frame_Label_Car.ClipWindowSize.X = AnimLib::EaseOutQuad(Now - VisibleTime, 0., 45., 300);
+				}
+
+				yield;
+			}
+		}
+	--></script>
+</manialink>

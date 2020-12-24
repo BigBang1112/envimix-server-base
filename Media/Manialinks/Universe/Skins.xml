@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<manialink version="3">
+	<frame>
+		<quad pos="0 0" z-index="-2" size="320 180" halign="center" valign="center" style="Bgs1" substyle="BgEmpty" id="QUAD_BACKGROUND"/>
+		<frame id="FRAME_SKINS">
+			<frame z-index="-1" pos="-110">
+				<quad z-index="0" size="80 160" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+				<quad z-index="1" size="80 160" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+			</frame>
+			<label pos="-110 75" z-index="0" size="70 15" text="Choose skin" textsize="12" textfont="Oswald" valign="top" textemboss="1" translate="1" halign="center"/>
+			<label z-index="0" pos="-110 61" size="70 7" textprefix="$o" text="$aaa[unknown]" textsize="7" textfont="Oswald" valign="top" textemboss="1" halign="center"/>
+			<frame pos="-110 50">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_BUTTON_CONTINUE" halign="center"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Choose" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<framemodel id="FRAMEMODEL_SKIN">
+				<quad z-index="0" size="77 15" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_BUTTON_MANAGESERVER" halign="center" pos="-1.5"/>
+				<quad z-index="1" size="12.5 12.5" bgcolor="FFF" halign="center" valign="center" pos="-30 -7.5"/>
+				<label pos="-20 -8" z-index="1" size="55 10" text="Default" valign="center2" textfont="RajdhaniMono" textcolor="EEE" textsize="4" textprefix="$t"/>
+				<quad z-index="0" size="78 14.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="-2 -0.25"/>
+			</framemodel>
+			<frame pos="-110 39" z-index="1">
+				<quad size="80 105" halign="center" style="Bgs1" substyle="BgGradV" z-index="-1"/>
+				<frame>
+					<frameinstance modelid="FRAMEMODEL_SKIN"/>
+					<frameinstance modelid="FRAMEMODEL_SKIN" pos="0 -15"/>
+					<frameinstance modelid="FRAMEMODEL_SKIN" pos="0 -30"/>
+					<frameinstance modelid="FRAMEMODEL_SKIN" pos="0 -45"/>
+					<frameinstance modelid="FRAMEMODEL_SKIN" pos="0 -60"/>
+					<frameinstance modelid="FRAMEMODEL_SKIN" pos="0 -75"/>
+					<frameinstance modelid="FRAMEMODEL_SKIN" pos="0 -90"/>
+				</frame>
+			</frame>
+			<frame pos="-110 -68">
+				<quad z-index="0" size="80 10" style="Bgs1InRace" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5" id="QUAD_BUTTON_EXIT" halign="center"/>
+				<label pos="-35 -5.25" z-index="1" size="70 10" textprefix="  $t" text="Back" valign="center2" textfont="RajdhaniMono" textcolor="EEE" translate="1"/>
+				<quad z-index="0" size="80 9.5" style="Bgs1InRace" substyle="BgGradV" halign="center" pos="0 -0.25"/>
+			</frame>
+			<frame pos="55 -65" hidden="1">
+				<quad z-index="-1" size="30 30" halign="center" valign="center" image="file://Media/Images/CircleBlack.png" opacity=".5"/>
+				<quad z-index="0" size="30 30" image="file://Media/Images/MoonBlack.png" halign="center" valign="center" opacity=".5"/>
+				<quad z-index="0" size="60 60" halign="center" valign="center" style="Bgs1" substyle="Glow" hidden="1"/>
+			</frame>
+			<frame z-index="2" id="FRAME_TOOLTIP" hidden="1">
+				<quad pos="0 0" z-index="-1" size="43.5 6" style="Bgs1" substyle="BgCardOnline" colorize="000" id="QUAD_TOOLTIP"/>
+				<label pos="2 -3.1" z-index="0" size="43.5 6" text="https://discord.gg/v6TW88m" valign="center2" textsize="1.5" textfont="BiryaniDemiBold" id="LABEL_TEXT"/>
+			</frame>
+		</frame>
+		<frame id="FRAME_QUICKTIP" hidden="1">
+			<quad z-index="0" size="80 8" valign="center" halign="center" style="Bgs1" substyle="BgCardList"/>
+			<quad z-index="1" size="80 8" valign="center" halign="center" style="Bgs1" substyle="BgGradV"/>
+			<label pos="0 0.3" z-index="2" size="75 4" halign="center" valign="center" text="YOU CAN USE SCROLLWHEEL TO SELECT A CAR" textfont="RajdhaniMono" textsize="1.5"/>
+		</frame>
+		<frame id="FRAME_VEHICLE_LIST">
+			<frame clip="True" clipposn="62 0" clipsizen="50 160">
+				<frame id="FRAME_ARROW">
+					<label pos="62 -0.3" z-index="0" size="20 20" text="" halign="center" valign="center" textsize="10" textemboss="1" textcolor="EEE" id="LABEL_ARROW"/>
+					<label pos="62 -0.3" z-index="1" size="20 20" text="🔒" halign="center" valign="center2" textsize="8" textemboss="1" textcolor="222" id="LABEL_LOCK" hidden="1"/>
+				</frame>
+			</frame>
+			<frame pos="110" clip="True" clipsizen="220 160" id="FRAME_VEHICLES">
+				<frame id="FRAME_INNER_VEHICLES"/>
+			</frame>
+		</frame>
+	</frame>
+	<script><!--
+		#Include "TextLib" as TextLib
+		#Include "MathLib" as MathLib
+
+		CTmMlPlayer GetPlayer() {
+			if (GUIPlayer != Null) return GUIPlayer;
+			return InputPlayer;
+		}
+
+		Text TimeToTextWithMilli(Integer _Time) {
+			return TextLib::TimeToText(_Time, True) ^ MathLib::Abs(_Time % 10);
+		}
+
+		***UpdateVehicles***
+		***
+		declare Frame_Inner_Vehicles = (Page.GetFirstChild("FRAME_INNER_VEHICLES") as CMlFrame);
+		for(I, 0, Frame_Inner_Vehicles.Controls.count - 1) {
+			declare Frame = (Frame_Inner_Vehicles.Controls[I] as CMlFrame);
+			declare Quad_Vehicle = (Frame.GetFirstChild("QUAD_VEHICLE") as CMlQuad);
+			declare Label_Default = (Frame.GetFirstChild("LABEL_DEFAULT") as CMlLabel);
+			declare Label_Vehicle = (Frame.GetFirstChild("LABEL_VEHICLE") as CMlLabel);
+			if(DisplayedCars.exists(Net_Car) && I == VehicleIndex) {
+				Quad_Vehicle.StyleSelected = True;
+			}
+			else {
+				Quad_Vehicle.StyleSelected = False;
+			}
+
+			if(DisplayedCars.existskey(I)) {
+				if(ItemCars[DisplayedCars[I]] == Net_MapPlayerModelName) {
+					if(Net_S_EnableDefaultCar) {
+						Label_Vehicle.Opacity = 1.;
+						Label_Default.Opacity = 1.;
+					}
+					else {
+						Label_Vehicle.Opacity = .5;
+						Label_Default.Opacity = .5;
+					}
+					Label_Default.Show();
+				}
+				else {
+					Label_Vehicle.Opacity = 1.;
+					Label_Default.Hide();
+				}
+			}
+		}
+		***
+
+		Void SetSlidingText(CMlFrame _Frame, Text _Value) {
+			declare L1 = (_Frame.Controls[0] as CMlLabel);
+			L1.Value = _Value;
+			L1.Size.X = L1.ComputeWidth(_Value);
+
+			declare L2 = (_Frame.Controls[1] as CMlLabel);
+			L2.Value = _Value;
+			L2.Size.X = L2.ComputeWidth(_Value);
+		}
+
+		Void MoveSlidingText(CMlFrame _Frame, Integer _Distance, Real _Speed) {
+			declare L1 = (_Frame.Controls[0] as CMlLabel);
+			declare L2 = (_Frame.Controls[1] as CMlLabel);
+
+			if(_Frame.ClipWindowSize.X < L1.Size.X) {		
+				L1.RelativePosition_V3.X -= Period*_Speed;
+				L2.RelativePosition_V3.X -= Period*_Speed;
+				L2.Show();
+
+				if(_Speed > 0) {
+					if(L1.RelativePosition_V3.X + L1.Size.X < 0 || L1.RelativePosition_V3.X + L1.Size.X > L2.RelativePosition_V3.X)
+						L1.RelativePosition_V3.X = L2.RelativePosition_V3.X+L2.Size.X+_Distance;
+					if(L2.RelativePosition_V3.X + L2.Size.X < 0 || L1.RelativePosition_V3.X + L1.Size.X < L2.RelativePosition_V3.X)
+						L2.RelativePosition_V3.X = L1.RelativePosition_V3.X+L1.Size.X+_Distance;
+				}
+				else if(_Speed < 0) {
+					if(L1.RelativePosition_V3.X - L1.Size.X > 0 || L1.RelativePosition_V3.X - L1.Size.X < L2.RelativePosition_V3.X)
+						L1.RelativePosition_V3.X = L2.RelativePosition_V3.X-L2.Size.X-_Distance;
+					if(L2.RelativePosition_V3.X - L2.Size.X > 0 || L1.RelativePosition_V3.X - L1.Size.X > L2.RelativePosition_V3.X)
+						L2.RelativePosition_V3.X = L1.RelativePosition_V3.X-L1.Size.X-_Distance;
+				}
+			}
+			else {
+				L2.Hide();
+				L1.RelativePosition_V3.X = 0.;
+			}
+		}
+
+		Boolean IsCarLocked() {
+			declare netread Integer Net_CutOffTimeLimit for Teams[0];
+			return (GetPlayer().RaceStartTime > 0 && GameTime - GetPlayer().RaceStartTime >= 0) || UI.UISequence == CUIConfig::EUISequence::Intro;
+			//return (InputPlayer.RaceStartTime > 0 && GameTime - InputPlayer.RaceStartTime >= 0)
+			//	|| (Net_CutOffTimeLimit == -1 && InputPlayer.RaceStartTime == 0);  - issues with disabled default car and no time limit
+		}
+
+		main() {
+			declare PreviousMapUid = "";
+			declare PreviousCar = "";
+
+			declare IsMenuOpen = False;
+			declare ShowMenuLittleLater = -1;
+
+			//EnableMenuNavigation(True, True, Page.GetFirstChild("QUAD_BUTTON_CONTINUE"), 50);
+			EnableMenuNavigationInputs = True;
+
+			declare Quad_Background = (Page.GetFirstChild("QUAD_BACKGROUND") as CMlQuad);
+			declare Frame_Button_Spectator = (Page.GetFirstChild("FRAME_BUTTON_SPECTATOR") as CMlFrame);
+			declare Frame_Players = (Page.GetFirstChild("FRAME_PLAYERS") as CMlFrame);
+
+			declare Quad_Envimix = (Page.GetFirstChild("QUAD_ENVIMIX") as CMlQuad);
+			declare Quad_Envimix_Loading = (Page.GetFirstChild("QUAD_ENVIMIX_LOADING") as CMlQuad);
+
+			declare Label_ServerName = (Page.GetFirstChild("LABEL_SERVERNAME") as CMlLabel);
+			declare Label_Mode = (Page.GetFirstChild("LABEL_MODE") as CMlLabel);
+			declare Label_PlayerCount = (Page.GetFirstChild("LABEL_PLAYERCOUNT") as CMlLabel);
+			declare Label_SpectatorCount = (Page.GetFirstChild("LABEL_SPECTATORCOUNT") as CMlLabel);
+			declare Label_PB_Nickname = (Page.GetFirstChild("LABEL_PB_NICKNAME") as CMlLabel);
+			declare Label_PB_Time = (Page.GetFirstChild("LABEL_PB_TIME") as CMlLabel);
+			declare Label_TimeLimit = (Page.GetFirstChild("LABEL_TIMELIMIT") as CMlLabel);
+
+			declare Frame_Label_MapName = (Page.GetFirstChild("FRAME_LABEL_MAPNAME") as CMlFrame);
+
+			Page.GetClassChildren("LOADING", Page.MainFrame, True);
+
+			(Frame_Button_Spectator.GetFirstChild("LABEL") as CMlLabel).Value = "  $t" ^ TextLib::GetTranslatedText("Spectator");
+			
+			while(!IsInGameMenuDisplayed) {
+				yield;
+				ShowInGameMenu();
+			}
+
+			wait(GetPlayer() != Null);
+
+			declare netread Boolean Net_S_EnableDefaultCar for Teams[0];
+			declare PreviousEnableDefaultCar = Net_S_EnableDefaultCar;
+			declare netread Text Net_MapPlayerModelName for Teams[0];
+			declare netread Integer Net_CutOffTimeLimit for Teams[0];
+			
+			wait(Net_MapPlayerModelName != "");
+
+			declare netwrite Text Net_Client_Car for UI;
+
+			Frame_Button_Spectator.DataAttributeSet("checked", IsSpectatorClient^"");
+			if(IsSpectatorClient) {
+				Frame_Button_Spectator.DataAttributeSet("startanimate", ""^Now);
+				(Frame_Button_Spectator.GetFirstChild("LABEL") as CMlLabel).Value = "  $t" ^ TextLib::GetTranslatedText("Spectator");
+			}
+			else {
+				Frame_Button_Spectator.DataAttributeSet("startanimate", "-1");
+				(Frame_Button_Spectator.GetFirstChild("LABEL") as CMlLabel).Value = "  $t" ^ TextLib::GetTranslatedText("Spectator");
+			}
+
+			declare UserShift = 0;
+
+			// Vehicle stuff
+			declare netread Text[] DisplayedCars for Teams[0];
+			declare netread Text[Text] ItemCars for Teams[0];
+			declare Frame_Vehicle_List = (Page.GetFirstChild("FRAME_VEHICLE_LIST") as CMlFrame);
+			declare Frame_Vehicles = (Page.GetFirstChild("FRAME_VEHICLES") as CMlFrame);
+			declare Label_Lock = (Page.GetFirstChild("LABEL_LOCK") as CMlLabel);
+			declare Frame_Quicktip = (Page.GetFirstChild("FRAME_QUICKTIP") as CMlFrame);
+			declare Frame_Arrow = (Page.GetFirstChild("FRAME_ARROW") as CMlFrame);
+			declare VehicleIndex = 0;
+			declare PreviousVehicleIndex = VehicleIndex;
+			declare MapVehicleIndex = 0;
+			if(DisplayedCars.count > 0) {
+				Frame_Vehicles.ScrollActive = True;
+				Frame_Vehicles.ScrollMax = <0., (DisplayedCars.count - MapVehicleIndex - 1) * 20.>;
+				Frame_Vehicles.ScrollMin = <0., -MapVehicleIndex * 20.>;
+				Frame_Vehicles.ScrollGridSnap = True;
+				Frame_Vehicles.ScrollGrid = <0., 20.>;
+			}
+
+			Page.GetFirstChild("FRAME_MENU").RelativePosition_V3.X = -110.;
+			Frame_Vehicle_List.RelativePosition_V3.X = 110.;
+
+			if(ItemCars.exists(Net_MapPlayerModelName))
+				Net_Client_Car = ItemCars.keyof(Net_MapPlayerModelName);
+			else
+				Net_Client_Car = "";
+			if(DisplayedCars.exists(Net_Client_Car))
+				VehicleIndex = DisplayedCars.keyof(Net_Client_Car);
+			else
+				VehicleIndex = 0;
+
+			while(VehicleIndex > 0 && Frame_Vehicles.ScrollOffset.Y != VehicleIndex * 20.) {
+				yield;
+				Frame_Vehicles.ScrollOffset.Y = VehicleIndex * 20.;
+			}
+			
+			declare PreviousScrollOffset = Frame_Vehicles.ScrollOffset.Y;
+
+			declare netread Text Net_Car for GetPlayer();
+			+++UpdateVehicles+++
+
+			while(True) {
+				if(ShowMenuLittleLater != -1 && Now - ShowMenuLittleLater > 100) {
+					ShowInGameMenu();
+					ShowMenuLittleLater = -1;
+				}
+
+				foreach(Event in PendingEvents) {
+					switch(Event.Type) {
+						case CMlScriptEvent::Type::MouseOver: {
+							switch(Event.ControlId) {
+								case "QUAD_BUTTON_CONTINUE": {
+									Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+								}
+								case "QUAD_BUTTON_SPECTATOR": {
+									Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+								}
+								case "QUAD_BUTTON_MANAGESERVER": {
+									Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+								}
+								case "QUAD_BUTTON_EXIT": {
+									Audio.PlaySoundEvent(CAudioManager::ELibSound::Focus, 2, 1.0);
+								}
+							}
+						}
+						case CMlScriptEvent::Type::MouseOut: {
+							
+						}
+						case CMlScriptEvent::Type::MouseClick: {
+							declare Parent <=> Event.Control.Parent;
+							switch(Event.ControlId) {
+								case "QUAD_BUTTON_CONTINUE": {
+									CloseInGameMenu(::EInGameMenuResult::Resume);
+								}
+								case "QUAD_BUTTON_SPECTATOR": {
+									if(Parent.DataAttributeGet("checked") == "True") {
+										RequestSpectatorClient(False);
+										Parent.DataAttributeSet("startanimate", "-1");
+										(Parent.GetFirstChild("LABEL") as CMlLabel).Value = "  $t" ^ TextLib::GetTranslatedText("Spectator");
+										Parent.DataAttributeSet("checked", "False");
+									}
+									else {
+										RequestSpectatorClient(True);
+										Parent.DataAttributeSet("startanimate", ""^Now);
+										(Parent.GetFirstChild("LABEL") as CMlLabel).Value = "  $t" ^ TextLib::GetTranslatedText("Spectator");
+										Parent.DataAttributeSet("checked", "True");
+									}
+								}
+								case "QUAD_BUTTON_MANAGESERVER": {
+									CloseInGameMenu(::EInGameMenuResult::ServerSettings);
+								}
+								case "QUAD_BUTTON_EXIT": {
+									CloseInGameMenu(::EInGameMenuResult::Quit);
+								}
+								case "QUAD_BUTTON_ADVANCED": {
+									CloseInGameMenu(::EInGameMenuResult::AdvancedMenu);
+								}
+								case "QUAD_VEHICLE": {
+									PreviousVehicleIndex = VehicleIndex;
+									declare Index = TextLib::ToInteger(Event.Control.Parent.DataAttributeGet("id"));
+									Frame_Vehicles.Scroll(<0., (Index - PreviousVehicleIndex) * 1.>);
+									if(PreviousVehicleIndex - Index == 0) {
+										if(DisplayedCars.existskey(Index)) {
+											SendCustomEvent("Car", [DisplayedCars[Index], "True"]);
+											CloseInGameMenu(CMlScriptIngame::EInGameMenuResult::Resume);
+										}
+									}
+									else {
+										if(!Frame_Quicktip.Visible) {
+											foreach(Control in Frame_Quicktip.Controls) {
+												if(Control is CMlQuad) (Control as CMlQuad).Opacity = 0.;
+												if(Control is CMlLabel) (Control as CMlLabel).Opacity = 0.;
+												AnimMgr.Flush(Control);
+												AnimMgr.Add(Control, "<control opacity=\"1\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+											}
+										}
+										AnimMgr.Flush(Frame_Quicktip);
+										Frame_Quicktip.Show();
+										AnimMgr.Add(Frame_Quicktip, "<frame hidden=\"1\"/>", Now+2000, 300, CAnimManager::EAnimManagerEasing::QuadOut);
+									}
+									+++UpdateVehicles+++
+								}
+							}
+						}
+						case CMlScriptEvent::Type::PluginCustomEvent: {
+							switch(Event.CustomEventType) {
+								case "Open": {
+									
+								}
+								case "Navigation": {
+									
+								}
+								case "Exit": {
+									
+								}
+								case "UpdateLoadedGhosts": {
+									
+								}
+								case "Show": {
+									
+								}
+							}
+						}
+						case CMlScriptEvent::Type::MenuNavigation: {
+							switch(Event.MenuNavAction) {
+								case CMlScriptEvent::EMenuNavAction::Cancel: {
+									if(UI.UISequence == CUIConfig::EUISequence::Intro) {
+										CloseInGameMenu(::EInGameMenuResult::Resume);
+										ShowMenuLittleLater = Now;
+									}
+									else
+										CloseInGameMenu(::EInGameMenuResult::Resume);
+								}
+								case CMlScriptEvent::EMenuNavAction::Select: {
+									
+								}
+								case CMlScriptEvent::EMenuNavAction::Up: {
+									
+								}
+								case CMlScriptEvent::EMenuNavAction::Down: {
+									
+								}
+								case CMlScriptEvent::EMenuNavAction::Left: {
+									
+								}
+								case CMlScriptEvent::EMenuNavAction::Right: {
+									
+								}
+							}
+						}
+					}
+				}
+
+				declare netread Text Net_Car for GetPlayer();
+				Net_Client_Car = DisplayedCars[VehicleIndex];
+
+				if(IsMenuOpen != IsMenuNavigationForeground) {
+					IsMenuOpen = IsMenuNavigationForeground;
+					if(IsMenuOpen) {
+						ShowMenuLittleLater = -1;
+						Page.GetFirstChild("FRAME_MENU").RelativePosition_V3.X = -110.;
+						AnimMgr.Add(Page.GetFirstChild("FRAME_MENU"), "<frame pos=\"0 0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+						Frame_Vehicle_List.RelativePosition_V3.X = 110.;
+						AnimMgr.Add(Frame_Vehicle_List, "<frame pos=\"0 0\"/>", 500, CAnimManager::EAnimManagerEasing::QuadOut);
+					}
+					else {
+						if(Net_CutOffTimeLimit != -1 && GetPlayer().RaceStartTime > Net_CutOffTimeLimit) {
+							SendCustomEvent("Car", [DisplayedCars[VehicleIndex], "True"]);
+						}
+					}
+				}
+
+				if(Net_S_EnableDefaultCar != PreviousEnableDefaultCar) {
+					+++UpdateVehicles+++
+					PreviousEnableDefaultCar = Net_S_EnableDefaultCar;
+				}
+
+				/*if(ShowMenuLittleLater != -1 && Now - ShowMenuLittleLater > 150) {
+					ShowInGameMenu();
+					ShowMenuLittleLater = -1;
+				}*/
+
+				if(Map.MapInfo.MapUid != PreviousMapUid) {
+					SetSlidingText(Frame_Label_MapName, Map.MapInfo.Name);
+					if(Map.MapType == "Envimix" || Map.MapType == "TrackMania\\Envimix") {
+						SetSlidingText((Page.GetFirstChild("FRAME_LABEL_MAPTYPE") as CMlFrame), "$ff0ENVIMIX MAP");
+					}
+					else SetSlidingText((Page.GetFirstChild("FRAME_LABEL_MAPTYPE") as CMlFrame), "$aaaNON-ENVIMIX MAP");
+					PreviousMapUid = Map.MapInfo.Name;
+				}
+
+				MoveSlidingText(Frame_Label_MapName, 10, -.01);
+
+				if(Net_Car != PreviousCar) {
+					declare netread Text Net_Car for GetPlayer();
+					SetSlidingText((Page.GetFirstChild("FRAME_LABEL_CAR") as CMlFrame), Net_Car);
+					PreviousCar = Net_Car;
+				}
+
+				if(Frame_Button_Spectator.DataAttributeGet("checked") == "True") {
+					declare StartTime = TextLib::ToInteger(Frame_Button_Spectator.DataAttributeGet("startanimate"));
+					Frame_Button_Spectator.GetFirstChild("LABEL").RelativeScale = (MathLib::Sin((Now-StartTime)/1000.*MathLib::PI()*2-MathLib::PI()/2)+1)/2*.1+1;
+				}
+				else {
+					Frame_Button_Spectator.GetFirstChild("LABEL").RelativeScale = 1.;
+				}
+
+				Label_PB_Nickname.Value = GetPlayer().User.Name;
+				if(GetPlayer().Score == Null || GetPlayer().Score.BestRace.Time < 0)
+					Label_PB_Time.Value = "-.--.---";
+				else
+					Label_PB_Time.Value = TimeToTextWithMilli(GetPlayer().Score.BestRace.Time);
+
+				Label_ServerName.Value = Playground.ServerInfo.ServerName;
+				Label_Mode.Value = Playground.ServerInfo.ModeName;
+				if(Playground.ServerInfo.IsPrivate)
+					Label_PlayerCount.Value = Playground.ServerInfo.PlayerCount ^ "/" ^ Playground.ServerInfo.MaxPlayerCount ^ "$ff0🔒";
+				else
+					Label_PlayerCount.Value = Playground.ServerInfo.PlayerCount ^ "/" ^ Playground.ServerInfo.MaxPlayerCount;
+				if(Playground.ServerInfo.IsPrivateForSpectator)
+					Label_SpectatorCount.Value = Playground.ServerInfo.SpectatorCount ^ "/" ^ Playground.ServerInfo.MaxSpectatorCount ^ "$ff0🔒";
+				else
+					Label_SpectatorCount.Value = Playground.ServerInfo.SpectatorCount ^ "/" ^ Playground.ServerInfo.MaxSpectatorCount;
+				
+				if(Net_CutOffTimeLimit == -1)
+					Label_TimeLimit.Value = "-:--";
+				else
+					Label_TimeLimit.Value = TextLib::TimeToText(Net_CutOffTimeLimit - GameTime);
+
+				if(Players.count > 5) {
+					Frame_Players.RelativePosition_V3.Y += 0.01;
+					if(Frame_Players.RelativePosition_V3.Y > 3.5) {
+						Frame_Players.RelativePosition_V3.Y = 0.;
+						UserShift += 1;
+						//UserShift = UserShift % Players.count;
+					}
+				}
+				else {
+					UserShift = 0;
+					Frame_Players.RelativePosition_V3.Y = 0.;
+				}
+
+				for(I, 0, Frame_Players.Controls.count - 1) {
+					declare Label = (Frame_Players.Controls[I] as CMlLabel);
+					if(Players.existskey(I+UserShift)) {
+						declare Player <=> Players[I+UserShift];
+						Label.Value = Player.User.Name;
+						Label.Show();
+					}
+					else {
+						if(Players.count > 5) {
+							declare Player <=> Players[(I + UserShift) % 5];
+							Label.Value = Player.User.Name;
+							Label.Show();
+						}
+						else
+							Label.Hide();
+					}
+				}
+
+				if(Frame_Vehicles.ScrollOffset.Y != PreviousScrollOffset) {
+					declare Difference = Frame_Vehicles.ScrollOffset.Y - PreviousScrollOffset;
+					declare IndexChange = MathLib::NearestInteger(Difference / 20);
+					VehicleIndex += IndexChange;
+					PreviousScrollOffset = Frame_Vehicles.ScrollOffset.Y;
+				}
+
+				if(VehicleIndex != PreviousVehicleIndex) {
+					+++UpdateVehicles+++
+					PreviousVehicleIndex = VehicleIndex;
+					if((GetPlayer().RaceStartTime == 0 || GameTime - GetPlayer().RaceStartTime < 0) && DisplayedCars.existskey(VehicleIndex)) {
+						SendCustomEvent("Car", [DisplayedCars[VehicleIndex], "True", "True"]);
+					}
+				}
+
+				Quad_Background.Visible = IsCarLocked();
+				Label_Lock.Visible = IsCarLocked();
+
+				if(IsCarLocked() && DisplayedCars.exists(Net_Car)) {
+					Frame_Arrow.RelativePosition_V3.Y = Frame_Vehicles.ScrollAnimOffset.Y + DisplayedCars.keyof(Net_Car)*-20.;
+				}
+				else {
+					Frame_Arrow.RelativePosition_V3.Y = Frame_Vehicles.ScrollAnimOffset.Y - Frame_Vehicles.ScrollOffset.Y;
+				}
+
+				if(Quad_Envimix.DownloadInProgress) {
+					Quad_Envimix_Loading.Show();
+				}
+				else {
+					Quad_Envimix_Loading.Hide();
+				}
+
+				foreach(Control in Page.GetClassChildren_Result) {
+					if(Control.Visible) Control.RelativeRotation += Period*.2;
+				}
+
+				yield;
+			}
+		}
+	--></script>
+</manialink>

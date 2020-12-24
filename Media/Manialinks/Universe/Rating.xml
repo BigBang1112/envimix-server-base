@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<manialink version="3">
+<frame pos="157.5 57.5" id="FRAME_RATING">
+	<quad z-index="0" size="52.5 10" valign="center" halign="right" style="Bgs1" substyle="BgCardList"/>
+	<quad z-index="1" size="52.5 10" valign="center" halign="right" style="Bgs1" substyle="BgGradV"/>
+	<frame z-index="3" pos="-26.25" clip="True" clipsizen="50 10">
+		<gauge pos="-25 2" z-index="0" size="37 7" valign="center" drawbg="0" id="GAUGE_DIFFICULTY"/>
+		<label pos="23.5 2" z-index="0" size="12.5 5" text="$oDifficulty" valign="center" textsize="1" textfont="Oswald" halign="right" id="LABEL_DIFFICULTY"/>
+		<gauge pos="-25 -2" z-index="0" size="37 7" valign="center" drawbg="0" id="GAUGE_QUALITY"/>
+		<label pos="23.5 -1.7" z-index="0" size="12.5 5" text="$oQuality" valign="center" textsize="1" textfont="Oswald" halign="right" id="LABEL_QUALITY"/>
+	</frame>
+</frame>
+<script><!--
+
+	#Include "TextLib" as TextLib
+	#Include "MathLib" as MathLib
+	#Include "AnimLib" as AnimLib
+	#Include "ColorLib" as ColorLib
+
+	CTmMlPlayer GetPlayer() {
+		if (GUIPlayer != Null) return GUIPlayer;
+		return InputPlayer;
+	}
+
+	Boolean IsVisible() {
+		declare Boolean ScoreTable_IsVisible for ClientUI;
+		return !IsInGameMenuDisplayed && !ScoreTable_IsVisible;
+	}
+
+	Text TimeToTextWithMilli(Integer _Time) {
+		return TextLib::TimeToText(_Time, True) ^ MathLib::Abs(_Time % 10);
+	}
+
+	main() {
+		declare Frame_Rating = (Page.GetFirstChild("FRAME_RATING") as CMlFrame);
+		declare Gauge_Difficulty = (Page.GetFirstChild("GAUGE_DIFFICULTY") as CMlGauge);
+		declare Gauge_Quality = (Page.GetFirstChild("GAUGE_QUALITY") as CMlGauge);
+		declare Label_Difficulty = (Page.GetFirstChild("LABEL_DIFFICULTY") as CMlLabel);
+		declare Label_Quality = (Page.GetFirstChild("LABEL_QUALITY") as CMlLabel);
+
+		declare Start = Now;
+		
+		Frame_Rating.Visible = IsVisible();
+		declare PreviousVisible = Frame_Rating.Visible;
+
+		wait(GetPlayer() != Null);
+
+		while(True) {
+			foreach(Event in PendingEvents) {
+				switch(Event.Type) {
+					case CMlScriptEvent::Type::MouseClick: {
+						
+					}
+				}
+			}
+
+			Frame_Rating.Visible = IsVisible();
+
+			if(Frame_Rating.Visible != PreviousVisible) {
+				if(Frame_Rating.Visible) {
+					(Frame_Rating.Controls[0] as CMlQuad).Size.X = 0.;
+					(Frame_Rating.Controls[1] as CMlQuad).Size.X = 0.;
+					AnimMgr.Add(Frame_Rating.Controls[0], "<quad size=\"52.5 10\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.Add(Frame_Rating.Controls[1], "<quad size=\"52.5 10\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+
+					Gauge_Difficulty.Size.X = 0.;
+					AnimMgr.Add(Gauge_Difficulty, "<gauge size=\"0 7\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.AddChain(Gauge_Difficulty, "<gauge size=\"37 7\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+					
+					Gauge_Quality.Size.X = 0.;
+					AnimMgr.Add(Gauge_Quality, "<gauge size=\"0 7\"/>", 350, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.AddChain(Gauge_Quality, "<gauge size=\"37 7\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+
+					Label_Difficulty.RelativePosition_V3.X = 40.;
+					Label_Quality.RelativePosition_V3.X = 40.;
+					AnimMgr.Add(Label_Difficulty, "<label pos=\"23.5 2\"/>", 300, CAnimManager::EAnimManagerEasing::QuadOut);
+					AnimMgr.Add(Label_Quality, "<label pos=\"23.5 -1.7\"/>", 350, CAnimManager::EAnimManagerEasing::QuadOut);
+				}
+				PreviousVisible = Frame_Rating.Visible;
+			}
+
+			yield;
+		}
+	}
+
+	--></script>
+</manialink>

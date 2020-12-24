@@ -1,0 +1,832 @@
+#Extends "Modes/TrackMania/UniverseModeBase.Script.txt"
+
+#Const CompatibleMapTypes	"Race"
+
+#Struct SSkin {
+	Text File;
+	Text Icon;
+}
+
+#Struct SChatMessage {
+	Text Login;
+	Text Nickname;
+	Text Content;
+	Integer Timestamp;
+}
+
+#Setting S_EnableTM2Cars					True					as _("Enable TM2 cars")
+#Setting S_EnableUnitedCars			False					as _("Enable United cars")
+#Setting S_EnableDefaultCar			False					as _("Enable default car")
+#Setting S_EnableCustomCars			False					as _("Enable custom cars")
+#Setting S_EnableStadiumEnvimix	False					as _("* Enable Stadium envimix")	// Wrong usage can crash scripts
+#Setting S_UseUnitedModels				False					as _("* Use United models")	// Wrong usage can crash scripts
+#Setting S_VehicleFolder					"Vehicles/"		as _("* Vehicle folder")	// Wrong usage can crash scripts
+#Setting S_VehicleFileFormat			"%1.Item.Gbx"	as _("* Vehicle file format")	// Wrong usage can crash scripts
+#Setting S_CarsFile							"Cars.json"		as _("* Cars.json file")
+#Setting S_SkinsFile							""	as _("* Skins.json file")
+#Setting S_UseSkillpoints				False					as _("Use skillpoints")
+#Setting S_UseLadder							True					as _("Use ladder")
+#Setting S_AllowRespawn					True					as _("Allow respawn")
+
+***BeforeServerInit***
+***
+log("ENVIMIX MODE BASE");
+log("Developed by BigBang1112");
+log("");
+log("This mode base is part of the Envimix Server Base project.");
+log("The code is open-source, but not claimable.");
+log("Extending this script is allowed though.");
+log("Thank you for respecting.");
+log("");
+***
+
+***Settings***
+***
+declare PreviousEnableTM2Cars = S_EnableTM2Cars;
+declare PreviousEnableUnitedCars = S_EnableUnitedCars;
+declare PreviousEnableDefaultCar = S_EnableDefaultCar;
+declare PreviousEnableCustomCars = S_EnableCustomCars;
+declare PreviousEnableStadiumEnvimix = S_EnableStadiumEnvimix;
+declare PreviousUseUnitedModels = S_UseUnitedModels;
+declare PreviousVehicleFolder = S_VehicleFolder;
+declare PreviousVehicleFileFormat = S_VehicleFileFormat;
+declare PreviousCarsFile = S_CarsFile;
+declare PreviousSkinsFile = S_SkinsFile;
+declare PreviousChatTime = S_ChatTime;
+declare PreviousUseSkillpoints = S_UseSkillpoints;
+declare PreviousUseLadder = S_UseLadder;
+
+Log("Envimix", "S_EnableTM2Cars: "^S_EnableTM2Cars);
+Log("Envimix", "S_EnableUnitedCars: "^S_EnableUnitedCars);
+Log("Envimix", "S_EnableDefaultCar: "^S_EnableDefaultCar);
+Log("Envimix", "S_EnableCustomCars: "^S_EnableCustomCars);
+Log("Envimix", "S_EnableStadiumEnvimix: "^S_EnableStadiumEnvimix);
+Log("Envimix", "S_UseUnitedModels: "^S_UseUnitedModels);
+Log("Envimix", "S_VehicleFolder: "^S_VehicleFolder);
+Log("Envimix", "S_VehicleFileFormat: "^S_VehicleFileFormat);
+Log("Envimix", "S_CarsFile: "^S_CarsFile);
+Log("Envimix", "S_SkinsFile: "^S_SkinsFile);
+Log("Envimix", "S_ChatTime: "^S_ChatTime);
+Log("Envimix", "S_UseSkillpoints: "^S_UseSkillpoints);
+Log("Envimix", "S_UseLadder: "^S_UseLadder);
+log("");
+
+declare netwrite Boolean Net_S_EnableTM2Cars for Teams[0];
+declare netwrite Boolean Net_S_EnableUnitedCars for Teams[0];
+declare netwrite Boolean Net_S_EnableDefaultCar for Teams[0];
+declare netwrite Boolean Net_S_EnableCustomCars for Teams[0];
+declare netwrite Boolean Net_S_EnableStadiumEnvimix for Teams[0];
+declare netwrite Boolean Net_S_UseUnitedModels for Teams[0];
+declare netwrite Text Net_S_VehicleFolder for Teams[0];
+declare netwrite Text Net_S_VehicleFileFormat for Teams[0];
+declare netwrite Text Net_S_CarsFile for Teams[0];
+declare netwrite Text Net_S_SkinsFile for Teams[0];
+declare netwrite Integer Net_S_ChatTime for Teams[0];
+declare netwrite Boolean Net_S_UseSkillpoints for Teams[0];
+declare netwrite Boolean Net_S_UseLadder for Teams[0];
+***
+
+***UpdateSettings***
+***
+if(S_EnableTM2Cars != PreviousEnableTM2Cars) {
+	PreviousEnableTM2Cars = S_EnableTM2Cars;
+	Net_S_EnableTM2Cars = S_EnableTM2Cars;
+	Reload = True;
+	Log("Envimix", "S_EnableTM2Cars: " ^ S_EnableTM2Cars);
+}
+if(S_EnableUnitedCars != PreviousEnableUnitedCars) {
+	PreviousEnableUnitedCars = S_EnableUnitedCars;
+	Net_S_EnableUnitedCars = S_EnableUnitedCars;
+	Reload = True;
+	Log("Envimix", "S_EnableUnitedCars: " ^ S_EnableUnitedCars);
+}
+if(S_EnableDefaultCar != PreviousEnableDefaultCar) {
+	PreviousEnableDefaultCar = S_EnableDefaultCar;
+	Net_S_EnableDefaultCar = S_EnableDefaultCar;
+	if(!S_EnableDefaultCar) {
+		foreach(Player in Players) {
+			declare netwrite Text Net_Car for Player;
+			if(ItemCars[Net_Car] == GetDefaultCar())
+				Player.RaceStartTime = -1;
+		}
+	}
+	Log("Envimix", "S_EnableDefaultCar: " ^ S_EnableDefaultCar);
+}
+if(S_EnableCustomCars != PreviousEnableCustomCars) {
+	PreviousEnableCustomCars = S_EnableCustomCars;
+	Net_S_EnableCustomCars = S_EnableCustomCars;
+	Reload = True;
+	Log("Envimix", "S_EnableCustomCars: " ^ S_EnableCustomCars);
+}
+if(S_EnableStadiumEnvimix != PreviousEnableStadiumEnvimix) {
+	PreviousEnableStadiumEnvimix = S_EnableStadiumEnvimix;
+	Net_S_EnableStadiumEnvimix = S_EnableStadiumEnvimix;
+	Log("Envimix", "S_EnableStadiumEnvimix: " ^ S_EnableStadiumEnvimix);
+}
+if(S_UseUnitedModels != PreviousUseUnitedModels) {
+	PreviousUseUnitedModels = S_UseUnitedModels;
+	Net_S_UseUnitedModels = S_UseUnitedModels;
+	Reload = True;
+	Log("Envimix", "S_UseUnitedModels: " ^ S_UseUnitedModels);
+}
+if(S_VehicleFolder != PreviousVehicleFolder) {
+	PreviousVehicleFolder = S_VehicleFolder;
+	Net_S_VehicleFolder = S_VehicleFolder;
+	Reload = True;
+	Log("Envimix", "S_VehicleFolder: " ^ S_VehicleFolder);
+}
+if(S_VehicleFileFormat != PreviousVehicleFileFormat) {
+	PreviousVehicleFileFormat = S_VehicleFileFormat;
+	Net_S_VehicleFileFormat = S_VehicleFileFormat;
+	Reload = True;
+	Log("Envimix", "S_VehicleFileFormat: " ^ S_VehicleFileFormat);
+}
+if(S_CarsFile != PreviousCarsFile) {
+	PreviousCarsFile = S_CarsFile;
+	Net_S_CarsFile = S_CarsFile;
+	Reload = True;
+	Log("Envimix", "S_CarsFile: " ^ S_CarsFile);
+}
+if(S_SkinsFile != PreviousSkinsFile) {
+	PreviousSkinsFile = S_SkinsFile;
+	Net_S_SkinsFile = S_SkinsFile;
+	Reload = True;
+	Log("Envimix", "S_SkinsFile: " ^ S_SkinsFile);
+}
+if(S_ChatTime != PreviousChatTime) {
+	PreviousChatTime = S_ChatTime;
+	Net_S_ChatTime = S_ChatTime;
+	Log("Envimix", "S_ChatTime: " ^ S_ChatTime);
+}
+if(S_UseSkillpoints != PreviousUseSkillpoints) {
+	PreviousUseSkillpoints = S_UseSkillpoints;
+	Net_S_UseSkillpoints = S_UseSkillpoints;
+	Log("Envimix", "S_UseSkillpoints: " ^ S_UseSkillpoints);
+}
+if(S_UseLadder != PreviousUseLadder) {
+	PreviousUseLadder = S_UseLadder;
+	Net_S_UseLadder = S_UseLadder;
+	Log("Envimix", "S_UseLadder: " ^ S_UseLadder);
+}
+***
+
+***OnServerInit***
+***
+Log("Envimix", "Initializing server...");
+
+UIManager.UIAll.OverlayHide321Go = True;
+UIManager.UIAll.OverlayHideChrono = True;
+UIManager.UIAll.OverlayHideBackground = True;
+UIManager.UIAll.OverlayHideCheckPointTime = True;
+UIManager.UIAll.OverlayHideChat = False;
+UIManager.UIAll.OverlayChatOffset = <0.,.15>;
+UIManager.UIAll.OverlayChatHideAvatar = True;
+UIManager.UIAll.OverlayHideCountdown = True;
+UIManager.UIAll.OverlayHideSpeedAndDist = True;
+UIManager.UIAll.OverlayHidePosition = True;
+UIManager.UIAll.OverlayHideMapInfo = True;
+UIManager.UIAll.OverlayHideRoundScores = True;
+UIManager.UIAll.OverlayHidePersonnalBestAndRank = True;
+UIManager.UIAll.OverlayHideCheckPointList = True;
+UIManager.UIAll.OverlayHideEndMapLadderRecap = True;
+
+declare TM2CarNames = ["CanyonCar", "StadiumCar", "ValleyCar", "LagoonCar"];
+declare UnitedCarNames = ["DesertCar", "SnowCar", "RallyCar", "IslandCar", "BayCar", "CoastCar"];
+
+declare Ident[Text][Text] Cars for This;
+declare Ident[Text][Text] SpecialCars for This;
+declare Ident[Text][Text] UnitedCars for This;
+declare Ident[Text][Text] CustomCars for This;
+
+declare netwrite Text[] DisplayedCars for Teams[0];
+declare netwrite Text[Text] ItemCars for Teams[0];
+
+Cars.clear();
+SpecialCars.clear();
+UnitedCars.clear();
+CustomCars.clear();
+DisplayedCars.clear();
+
+Log("Envimix", """Reading {{{S_SkinsFile}}}...""");
+
+declare netwrite SSkin[Text][Text] Skins for Teams[0];
+declare SkinContent = ReadFile(S_SkinsFile);
+if(SkinContent == "") Log("Envimix", """NOTE: {{{S_SkinsFile}}} is empty or nonexisting. Skin system is going to be disabled.""");
+else {
+	if(!Skins.fromjson(SkinContent)) {
+		Skins.clear();
+		Log("Envimix", """NOTE: {{{S_SkinsFile}}} has a JSON issue. Skin system is going to be disabled.""");
+	}
+}
+
+ItemList_Begin();
+if(S_EnableTM2Cars) {
+	foreach(Car in TM2CarNames) {
+		declare ItemName = Car;
+		Log("Envimix", """Adding {{{ItemName}}}...""");
+		Cars[Car] = [];
+		Cars[Car][""] = ItemList_Add(ItemName);
+		if(Skins.existskey(Car)) {
+			foreach(Name => Skin in Skins[Car]) {
+				Log("Envimix", """Adding {{{ItemName}}} with skin {{{Skin.File}}}...""");
+				Cars[Car][Name] = ItemList_AddWithSkin(ItemName, "Skins/Models/"^Skin.File);
+			}
+		}
+		ItemCars[Car] = ItemName;
+		
+		if(S_EnableStadiumEnvimix && Car != "StadiumCar") {
+			ItemName = S_VehicleFolder ^ TextLib::Replace(S_VehicleFileFormat, "%1", Car);
+			SpecialCars[Car] = [];
+			SpecialCars[Car][""] = ItemList_Add(ItemName);
+			if(Skins.existskey(Car)) {
+				foreach(Name => Skin in Skins[Car]) {
+					Log("Envimix", """Adding {{{ItemName}}} with skin {{{Skin.File}}}...""");
+					SpecialCars[Car][Name] = ItemList_AddWithSkin(ItemName, "Skins/Models/"^Skin.File);
+				}
+			}
+		}
+	}
+}
+if(S_EnableUnitedCars) {
+	foreach(Car in UnitedCarNames) {
+		declare ItemName = Car;
+		if(S_UseUnitedModels) ItemName = S_VehicleFolder ^ TextLib::Replace(S_VehicleFileFormat, "%1", Car);
+		Log("Envimix", """Adding {{{ItemName}}}...""");
+		UnitedCars[Car] = [];
+		UnitedCars[Car][""] = ItemList_Add(ItemName);
+		if(Skins.existskey(Car)) {
+			foreach(Name => Skin in Skins[Car]) {
+				Log("Envimix", """Adding {{{ItemName}}} with skin {{{Skin.File}}}...""");
+				UnitedCars[Car][Name] = ItemList_AddWithSkin(ItemName, "Skins/Models/"^Skin.File);
+			}
+		}
+		ItemCars[Car] = ItemName;
+	}
+}
+ItemList_End();
+
+Log("Envimix", """All items successfully added!""");
+
+foreach(Name => Car in Cars) DisplayedCars.add(Name);
+foreach(Name => Car in UnitedCars) DisplayedCars.add(Name);
+foreach(Name => Car in CustomCars) DisplayedCars.add(Name);
+
+Log("Envimix", """Creating manialinks...""");
+
+Layers2::Create("Dashboard", ReadFile("Manialinks/Universe/Dashboard.xml"));
+Layers2::Attach("Dashboard", Null);
+Layers2::Create("Checkpoint", ReadFile("Manialinks/Universe/Checkpoint.xml"));
+Layers2::Attach("Checkpoint", Null);
+Layers2::Create("321Go", ReadFile("Manialinks/Universe/321Go.xml"));
+Layers2::Attach("321Go", Null);
+Layers2::Create("Status", ReadFile("Manialinks/Universe/Status.xml"));
+Layers2::Attach("Status", Null);
+Layers2::Create("Map", ReadFile("Manialinks/Universe/Map.xml"));
+Layers2::Attach("Map", Null);
+Layers2::Create("RankingsCar", ReadFile("Manialinks/Universe/RankingsCar.xml"));
+Layers2::Attach("RankingsCar", Null);
+Layers2::Create("LiveRankingsCar", ReadFile("Manialinks/Universe/LiveRankingsCar.xml"));
+Layers2::Attach("LiveRankingsCar", Null);
+Layers2::Create("Chat", ReadFile("Manialinks/Universe/Chat.xml"));
+//Layers2::Attach("Chat", Null);
+Layers2::Create("Rating", ReadFile("Manialinks/Universe/Rating.xml"));
+Layers2::Attach("Rating", Null);
+Layers2::Create("Envimania", ReadFile("Manialinks/Universe/Envimania.xml"));
+Layers2::Attach("Envimania", Null);
+Layers2::Create("TimeLimit", ReadFile("Manialinks/Universe/TimeLimit.xml"));
+Layers2::Attach("TimeLimit", Null);
+Layers2::Create("Score", ReadFile("Manialinks/Universe/Score.xml"));
+Layers2::Attach("Score", Null);
+Layers2::Create("Notice", ReadFile("Manialinks/Universe/Notice.xml"));
+Layers2::Attach("Notice", Null);
+Layers2::Create("PrePostLoading", ReadFile("Manialinks/Universe/PrePostLoading.xml"));
+Layers2::Attach("PrePostLoading", Null);
+Layers2::Create("Loading", "");
+Layers2::SetType("Loading", CUILayer::EUILayerType::LoadingScreen);
+Layers2::Attach("Loading", Null);
+
+declare MenuML = ReadFile("Manialinks/Universe/Menu.xml");
+declare VehicleML = """<quad z-index="-1" pos="0 {{{-DisplayedCars.count*20/2}}}" size="320 {{{DisplayedCars.count*20+160}}}" halign="center" valign="center" style="Bgs1InRace" substyle="BgEmpty" scriptevents="1"/>
+<frame id="FRAME_INNER_VEHICLES">""";
+for(I, 0, DisplayedCars.count-1) {
+	declare Vehicle = DisplayedCars[I];
+	VehicleML ^= """<frame pos="0 {{{-I*20}}}" data-id="{{{I}}}">
+		<frame z-index="0" id="FRAME_BACKGROUND">
+			<quad z-index="0" size="80 19" valign="center" halign="center" style="Bgs1" substyle="BgCardList" opacity="1"/>
+			<quad z-index="1" size="80 19" valign="center" halign="center" style="Bgs1" substyle="BgGradV" opacity="1"/>
+		</frame>
+		<quad z-index="1" size="80 19" id="QUAD_VEHICLE" valign="center" halign="center" style="Bgs1" substyle="BgCardInventoryItem" scriptevents="1" modulatecolor="036" opacity=".5"/>
+		<label pos="0 -0.5" z-index="2" size="70 10" text="{{{Vehicle}}}" halign="center" valign="center2" textsize="6" textfont="RajdhaniMono" id="LABEL_VEHICLE"/>
+		<label pos="37.5 -8" z-index="2" size="75 5" text="Default" textprefix="$t" halign="right" valign="bottom" textfont="Oswald" textsize="2" textcolor="FF0" id="LABEL_DEFAULT" translate="1" hidden="1"/>
+		
+		<quad pos="35 5" z-index="3" size="7.5 7.5" halign="center" valign="center" style="BgRaceScore2" substyle="Fame" id="QUAD_STAR" hidden="1"/>
+	</frame>""";
+}
+VehicleML ^= "</frame>";
+MenuML = TextLib::Replace(MenuML, """<frame id="FRAME_INNER_VEHICLES"/>""", VehicleML);
+
+Layers2::Create("Menu", MenuML);
+Layers2::SetType("Menu", CUILayer::EUILayerType::InGameMenu);
+Layers2::Attach("Menu", Null);
+
+//Layers2::Create("OpenMenu", ReadFile("Manialinks/Universe/OpenMenu.xml"));
+
+Log("Envimix", """All manialinks successfully created!""");
+
+foreach(Player in AllPlayers) {
+	declare UI <=> UIManager.GetUI(Player);
+	declare netwrite Integer Net_PrepareLoading for UI;
+	Net_PrepareLoading = -1;
+}
+***
+
+***OnServerStart***
+***
+SetCutOffTimeLimit(-1);
+
+UiRounds = True;
+Scores_Sort(::ETmScoreSortOrder::TotalPoints);
+
+if(!S_EnableStadiumEnvimix) {
+	declare AmountOfStadiumMaps = AmountOfMaps("Stadium");
+	if(AmountOfStadiumMaps == MapList.count) {
+		Log("Envimix", "PROBLEM: Current map list contains only Stadium maps. Make sure you have enabled S_EnableStadiumEnvimix or choose a different map list. Terminating the server...");
+		sleep(5000);
+		Terminate = True;
+	}
+	else if(AmountOfStadiumMaps > 0) {
+		Log("Envimix", "NOTE: Current map list contains one or more Stadium maps. They are going to be skipped. To allow Stadium envimix, enable setting S_EnableStadiumEnvimix and make sure you provide the cars in the Items/"^S_VehicleFolder^" folder.");
+	}
+}
+***
+
+***OnMapLoad***
+***
+if(!S_EnableStadiumEnvimix) {
+	if(Map.MapInfo.CollectionName == "Stadium") {
+		Log("Envimix", "PROBLEM: Stadium environment is not currently supported. You can enable Stadium envimix by setting S_EnableStadiumEnvimix to True. Make sure you provide the cars in the Items/"^S_VehicleFolder^" folder.");
+		MatchEndRequested = True;
+	}
+}
+***
+
+***OnMapStart***
+***
+Log("Envimix", """Starting map {{{TextLib::StripFormatting(Map.MapInfo.Name)}}}...""");
+***
+
+***OnMapEnd***
+***
+Log("Envimix", """Ending map {{{TextLib::StripFormatting(Map.MapInfo.Name)}}}...""");
+
+foreach(Player in Players) {
+	UnspawnPlayer(Player);
+}
+
+if(!Reload) {
+	if(MapQueue.count > 0) {
+		declare MapInfo <=> MapList[MapQueue[0]];
+		if(!S_EnableStadiumEnvimix && MapInfo.CollectionName == "Stadium") {
+			Log("Envimix", "Skipping " ^ MapInfo.Name ^ ": Stadium environment");
+		}
+		else
+			NextMapIndex = MapQueue[0];
+		declare Removed = MapQueue.removekey(0);
+	}
+	
+	while(!S_EnableStadiumEnvimix) {
+		declare MapInfo <=> MapList[NextMapIndex];
+		if(MapInfo.CollectionName == "Stadium") NextMapIndex += 1;
+		else break;
+		Log("Envimix", "Skipping " ^ MapInfo.Name ^ ": Stadium environment");
+		yield;
+	}
+}
+***
+
+/****WhileMapIntro***
+***
+foreach(Event in UIManager.PendingEvents) +++OnUIEvent+++
+****/
+
+***OnWarmUpStart***
+***
+Log("Envimix", "Starting warm-up...");
+SpawnAllEnvimixPlayers();
+***
+
+***OnWarmUpNext***
+***
+Log("Envimix", "Next warm-up...");
+SpawnAllEnvimixPlayers();
+***
+
+Void SendMessage(SChatMessage _Message) {
+	declare netwrite Integer Net_Chat_NewMessage for Teams[0];
+	declare netwrite SChatMessage[] Net_Chat_Messages for Teams[0];
+	
+	Net_Chat_NewMessage = Now;
+	Net_Chat_Messages.addfirst(_Message);
+	
+	log(_Message.Login ^ ": " ^ _Message.Content);
+}
+
+***OnUIChatEvent***
+***
+switch(Event.Type) {
+	case CUIConfigEvent::EType::OnLayerCustomEvent: {
+		declare UI <=> Event.UI;
+		declare Player = GetPlayer(UI);
+		switch(Event.CustomEventType) {
+			case "ChatMessage": {
+				if(Event.CustomEventData.count > 0) {
+					declare Msg = Event.CustomEventData[0];
+					
+					if(Msg != "") {
+						declare SChatMessage ChatMsg;
+						ChatMsg.Login = Player.User.Login;
+						ChatMsg.Nickname = Player.User.Name;
+						ChatMsg.Content = Msg;
+						ChatMsg.Timestamp = Now;
+						
+						SendMessage(ChatMsg);
+					}
+				}
+			}
+		}
+	}
+}
+***
+
+***OnPlayerCheckpoint***
+***
+declare netwrite UM::SRecord TempRace for Event.Player.Score;
+log(TempRace);
+***
+
+***OnPlayerLap***
+***
+if(IndependantLaps) {
+	Event.Player.Score.PrevRace = Event.Player.Score.TempResult;
+}
+***
+
+***OnPlayerFinish***
+***
+declare netwrite UM::SRecord TempRace for Event.Player.Score;
+
+declare netwrite Text Net_Car for Event.Player;
+
+declare netwrite UM::SRecord[Text] Envimix_BestRace for Event.Player.Score;
+declare netwrite UM::SRecord[Text] Envimix_PrevRace for Event.Player.Score;
+
+declare TempResult <=> Event.Player.Score.TempResult;
+
+Envimix_PrevRace[Net_Car] = TempRace;
+ToResult(Event.Player.Score.PrevRace, TempRace);
+
+if(!Envimix_BestRace.existskey(Net_Car) || Envimix_BestRace[Net_Car].Time == -1) {
+	Envimix_BestRace[Net_Car] = TempRace;
+	ToResult(Event.Player.Score.BestRace, TempRace);
+	log("first finish");
+}
+else if(TempRace.Time < Envimix_BestRace[Net_Car].Time) {
+	Envimix_BestRace[Net_Car] = TempRace;
+	ToResult(Event.Player.Score.BestRace, TempRace);
+	log("improvement");
+}
+else if(TempRace.Time == Envimix_BestRace[Net_Car].Time) {
+	log("equal");
+}
+
+ResetTempResult(Event);
+
+UpdateScores();
+***
+
+***OnPlayerAdded***
+***
+declare SChatMessage ChatMsg;
+ChatMsg.Login = Event.Player.User.Login;
+ChatMsg.Content = Event.Player.User.Name ^ " has joined the server";
+ChatMsg.Timestamp = Now;
+
+SendMessage(ChatMsg);
+UIManager.UIAll.SendChat("$<" ^ Event.Player.User.Name ^ "$> has joined the server");
+***
+
+***OnPlayerRemoved***
+***
+declare SChatMessage ChatMsg;
+ChatMsg.Login = Event.User.Login;
+ChatMsg.Content = Event.User.Name ^ " has left the server";
+ChatMsg.Timestamp = Now;
+
+SendMessage(ChatMsg);
+UIManager.UIAll.SendChat("$<" ^ Event.User.Name ^ "$> has left the server");
+***
+
+***OnMapLoad***
+***
+UIManager.HoldLoadingScreen = False;
+
+foreach(Player in AllPlayers) {
+	declare UI <=> UIManager.GetUI(Player);
+	declare netwrite Integer Net_PrepareLoading for UI;
+	Net_PrepareLoading = -1;
+}
+***
+
+***BeforeMapEnd***
+***
+foreach(Player in AllPlayers) {
+	declare UI <=> UIManager.GetUI(Player);
+	declare netwrite Integer Net_PrepareLoading for UI;
+	Net_PrepareLoading = Now;
+}
+
+sleep(1500);
+UIManager.HoldLoadingScreen = True;
+***
+
+Text GetDefaultCar() {
+	return MapPlayerModelName;
+}
+
+Ident[Text][Text] GetAllCars() {
+	declare Ident[Text][Text] Cars for This;
+	declare Ident[Text][Text] SpecialCars for This;
+	declare Ident[Text][Text] UnitedCars for This;
+	declare Ident[Text][Text] CustomCars for This;
+	
+	declare Ident[Text][Text] AllCars;
+	foreach(Car => Model in Cars) AllCars[Car] = Model;
+	if(Map != Null && Map.CollectionName == "Stadium")
+		foreach(Car => Model in SpecialCars) AllCars[Car] = Model;
+	foreach(Car => Model in UnitedCars) AllCars[Car] = Model;
+	foreach(Car => Model in CustomCars) AllCars[Car] = Model;
+	return AllCars;
+}
+
+Boolean SpawnEnvimixPlayer(CTmPlayer _Player, Text _Car, Integer _RaceStartTime) {
+	declare AllCars = GetAllCars();
+	if(_Player == Null || !AllCars.existskey(_Car)) return False;
+	declare UI = UIManager.GetUI(_Player);
+	
+	declare Skin = "";
+	declare netread Text[Text] Net_UserSkins for UIManager.GetUI(_Player);
+	if(Net_UserSkins.existskey(_Car) && AllCars[_Car].existskey(Net_UserSkins[_Car]))
+		Skin = Net_UserSkins[_Car];
+	
+	_Player.ForceModelId = AllCars[_Car][Skin];
+	
+	declare netwrite Text Net_Car for _Player;
+	Net_Car = _Car;
+	
+	declare netwrite UM::SRecord[Text] Envimix_BestRace for _Player.Score;
+	if(Envimix_BestRace.existskey(Net_Car))
+		ToResult(_Player.Score.BestRace, Envimix_BestRace[Net_Car]);
+	else
+		_Player.Score.BestRace = Null;
+	declare netwrite UM::SRecord[Text] Envimix_PrevRace for _Player.Score;
+	if(Envimix_PrevRace.existskey(Net_Car))
+		ToResult(_Player.Score.PrevRace, Envimix_PrevRace[Net_Car]);
+	else
+		_Player.Score.PrevRace = Null;
+			
+	declare netwrite Text[Text] ItemCars for Teams[0];
+	declare netwrite Text[] DisplayedCars for Teams[0];
+	
+	declare netwrite SSkin[Text][Text] Skins for Teams[0];
+	
+	declare Text[] SortedNames;
+	if(Skins.existskey(_Car)) {
+		foreach(Name => Skin in Skins[_Car])
+			SortedNames.add(_Car);
+		SortedNames = SortedNames.sort();
+	}
+	
+	declare Spawned = True;
+	
+	declare RST = _RaceStartTime;
+	if(RST == -2) RST = -1;
+	SpawnPlayer(_Player, _Player.CurrentClan, RST);
+	if(_RaceStartTime == -2) {
+		if(CutOffTimeLimit < 0)
+			_Player.RaceStartTime = Now + 9999999 + DisplayedCars.keyof(_Car) * 3000 + 3000;
+		else
+			_Player.RaceStartTime = CutOffTimeLimit + DisplayedCars.keyof(_Car) * 3000 + 3000;
+		Spawned = False;
+	}
+	else if(!S_EnableDefaultCar) {
+		if(ItemCars[Net_Car] == GetDefaultCar()) {
+			_Player.RaceStartTime = -1;
+			Spawned = False;
+		}
+	}
+	
+	Ladder_AddPlayer(_Player.Score);
+	return Spawned;
+}
+
+Boolean SpawnEnvimixPlayer(CTmPlayer _Player, Text _Car, Boolean _Frozen) {
+	if(_Frozen) return SpawnEnvimixPlayer(_Player, _Car, -2);
+	return SpawnEnvimixPlayer(_Player, _Car, -1);
+}
+
+Boolean SpawnEnvimixPlayer(CTmPlayer _Player, Text _Car) {
+	return SpawnEnvimixPlayer(_Player, _Car, False);
+}
+
+Void SpawnAllEnvimixPlayers(Text _Car, Boolean _Frozen) {
+	foreach(Player in PlayersWaiting) {
+		declare netwrite Text Net_Car for Player = _Car;
+		declare Spawned = SpawnEnvimixPlayer(Player, Net_Car, _Frozen);
+	}
+}
+
+Void SpawnAllEnvimixPlayers(Boolean _Frozen) {
+	foreach(Player in PlayersWaiting) {
+		declare UI <=> UIManager.GetUI(Player);
+		declare netwrite Text Net_Car for Player;
+		declare Spawned = SpawnEnvimixPlayer(Player, Net_Car, _Frozen);
+	}
+}
+
+Void SpawnAllEnvimixPlayers() {
+	SpawnAllEnvimixPlayers(False);
+}
+
+Void UpdateSkin(CTmPlayer _Player, Text _Skin) {
+	declare netwrite Text Net_Car for _Player;
+	declare netwrite Text[] DisplayedCars for Teams[0];
+	declare netwrite SSkin[Text][Text] Skins for Teams[0];
+	
+	declare AllCars = GetAllCars();
+	
+	declare Text[] SortedNames;
+	if(Skins.existskey(Net_Car)) {
+		foreach(Name => Skin in Skins[Net_Car])
+			SortedNames.add(Name);
+		SortedNames = SortedNames.sort();
+	}
+	
+	declare Skin = "";
+	if(AllCars[Net_Car].existskey(_Skin))
+		Skin = _Skin;
+	
+	_Player.ForceModelId = AllCars[Net_Car][Skin];
+	
+	if(Skin == "") {
+		if(CutOffTimeLimit < 0) _Player.RaceStartTime = Now + 9999999 + DisplayedCars.keyof(Net_Car) * 3000 + 3000;
+		else _Player.RaceStartTime = CutOffTimeLimit + DisplayedCars.keyof(Net_Car) * 3000 + 3000;
+	}
+	else {
+		if(CutOffTimeLimit < 0) _Player.RaceStartTime = Now + 9999999 + DisplayedCars.keyof(Net_Car) * 3000 + (SortedNames.keyof(Skin)+1) * 3000 + 3000;
+		else _Player.RaceStartTime = CutOffTimeLimit + DisplayedCars.keyof(Net_Car) * 3000 + (SortedNames.keyof(Skin)+1) * 3000 + 3000;
+	}
+}
+
+CTmResult[] GetRecords(Boolean _ReferenceCondition, Boolean _SimilarityCondition) {
+	return [];
+}
+
+UM::SRecord[] GetBestRecords(Text _Car) {
+	declare UM::SRecord[] Records;
+	declare UM::SRecord Record;
+	Record.Time = -1;
+	foreach(Score in Scores) {
+		declare netwrite UM::SRecord[Text] Envimix_BestRace for Score;
+		if(Envimix_BestRace.existskey(_Car))
+			if(Record.Time == -1 || Envimix_BestRace[_Car].Time < Record.Time)
+				Record = Envimix_BestRace[_Car];
+	}
+	if(Record.Time != -1) {
+		foreach(Score in Scores) {
+			declare netwrite UM::SRecord[Text] Envimix_BestRace for Score;
+			if(Envimix_BestRace.existskey(_Car))
+				if(Envimix_BestRace[_Car].Time == Record.Time)
+					Records.add(Envimix_BestRace[_Car]);
+		}
+	}
+	return Records;
+}
+
+Integer GetBestTime(Text _Car) {
+	declare Time = -1;
+	declare Records = GetBestRecords(_Car);
+	if(Records.count > 0) Time = Records[0].Time;
+	return Time;
+}
+
+UM::SRecord[] GetWorstRecords(Text _Car) {
+	declare UM::SRecord[] Records;
+	return Records;
+}
+
+Integer GetWorstTime(Text _Car) {
+	declare Time = -1;
+	declare Records = GetWorstRecords(_Car);
+	if(Records.count > 0) Time = Records[0].Time;
+	return Time;
+}
+
+UM::SRecord[] GetRecords(Text _Car) {
+	declare UM::SRecord[] Records;
+	foreach(Score in Scores) {
+		declare netwrite UM::SRecord[Text] Envimix_BestRace for Score;
+		if(Envimix_BestRace.existskey(_Car) && Envimix_BestRace[_Car].Time != -1)
+			Records.add(Envimix_BestRace[_Car]);
+	}
+	return Records;
+}
+
+Real[Text] GetPlayerWRPB(CTmScore _Score) {
+	declare Real[Text] WRPBs;
+	foreach(Car => Model in GetAllCars()) {
+		declare BestTime = GetBestTime(Car);
+		declare netwrite UM::SRecord[Text] Envimix_BestRace for _Score;
+		declare WRPB = 0.;
+		if(Envimix_BestRace.existskey(Car)) {
+			if(Envimix_BestRace[Car].Time == 0)
+				WRPB = 1.;
+			else
+				WRPB = BestTime/MathLib::ToReal(Envimix_BestRace[Car].Time);
+		}
+		WRPBs[Car] = WRPB;
+	}
+	return WRPBs;
+}
+
+Integer[Text] GetPlayerActivityPoints(CTmScore _Score) {
+	declare Integer[Text] ActivityPoints;
+	foreach(Car => WRPB in GetPlayerWRPB(_Score)) {
+		declare Records = GetRecords(Car);
+		if(Records.count > 0 && WRPB > 0)
+			ActivityPoints[Car] = MathLib::NearestInteger(1000*MathLib::Exp(GetRecords(Car).count*(WRPB - 1)));
+		else
+			ActivityPoints[Car] = 0;
+	}
+	return ActivityPoints;
+}
+
+Integer[Text] GetPlayerSkillpoints(CTmScore _Score) {
+	return [];
+}
+
+Real GetPlayerWRPB(CTmScore _Score, Text _Car) {
+	return GetPlayerWRPB(_Score)[_Car];
+}
+
+Integer GetPlayerActivityPoints(CTmScore _Score, Text _Car) {
+	return GetPlayerActivityPoints(_Score)[_Car];
+}
+
+Integer GetPlayerSkillpoints(CTmScore _Score, Text _Car) {
+	return -1;
+}
+
+Void UpdateScores() {
+	foreach(I => Score in ClanScores) ClanScores[I] = 0;
+	foreach(Score in Scores) {
+		declare netwrite Integer[Text] Envimix_Points for Score;
+		Envimix_Points = GetPlayerActivityPoints(Score);
+		Score.Points = 0;
+		foreach(Points in Envimix_Points) Score.Points += Points;
+		ClanScores[Score.TeamNum] += Score.Points;
+	}
+	Scores_Sort(::ETmScoreSortOrder::TotalPoints);
+}
+
+Void ClearScores() {
+	foreach(Score in Scores) {
+		declare netwrite Integer[Text] Envimix_Points for Score;
+		declare netwrite UM::SRecord[Text] Envimix_BestRace for Score;
+		declare netwrite UM::SRecord[Text] Envimix_BestLap for Score;
+		declare netwrite UM::SRecord[Text] Envimix_PrevRace for Score;
+		Envimix_Points.clear();
+		Envimix_BestRace.clear();
+		Envimix_BestLap.clear();
+		Envimix_PrevRace.clear();
+	}
+	Scores_Clear();
+}
+
+Void PrepareScore(CTmScore _Score) {
+	declare netwrite Integer[Text] Envimix_Points for _Score;
+	declare netwrite UM::SRecord[Text] Envimix_BestRace for _Score;
+	declare netwrite UM::SRecord[Text] Envimix_BestLap for _Score;
+	declare netwrite UM::SRecord[Text] Envimix_PrevRace for _Score;
+}
+
+Void NoticeMessage(CUIConfig[] _UI, Text _Text) {
+	foreach(UI in _UI) {
+		declare netwrite Text Net_NoticeMessage for UI;
+		Net_NoticeMessage = _Text;
+	}
+}
+
+Void NoticeMessage(CUIConfig _UI, Text _Text) {
+	declare netwrite Text Net_NoticeMessage for _UI;
+	Net_NoticeMessage = _Text;
+}
