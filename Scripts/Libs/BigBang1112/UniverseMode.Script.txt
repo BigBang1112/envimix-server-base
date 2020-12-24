@@ -1,0 +1,17 @@
+#Struct SCheckpoint {
+	Integer Time;
+	Integer Score;
+	Integer NbRespawns;
+	Real Distance;
+	Real Speed;
+}
+
+#Struct SRecord {
+	Text Login;
+	Integer Time;
+	Integer Score;
+	Integer NbRespawns;
+	Real Distance;
+	Real Speed;
+	SCheckpoint[] Checkpoints;
+}
