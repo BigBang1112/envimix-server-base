@@ -80,7 +80,7 @@ More explanations soon.
     - S_UseUnitedModels
     - S_VehicleFolder
     - S_VehicleFileFormat
-    - S_CarsFile (unused)
+    - S_CarsFile
     - S_SkinsFile (Skins.json file providing a set of skins taken from the title pack)
     - S_UseSkillpoints (unused)
     - S_UseLadder
