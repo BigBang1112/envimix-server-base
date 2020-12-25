@@ -11,7 +11,7 @@ log("ENVIMIX TEAM ATTACK");
 log("Developed by BigBang1112");
 log("");
 log("This mode is part of the Envimix Server Base project.");
-log("The code is open-source, but not claimable.");
+log("The code is fully open-source licensed in public domain.");
 log("Extending this script is allowed though.");
 log("Thank you for respecting.");
 log("");

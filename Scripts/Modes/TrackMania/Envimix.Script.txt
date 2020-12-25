@@ -34,7 +34,7 @@ log("ENVIMIX MODE BASE");
 log("Developed by BigBang1112");
 log("");
 log("This mode base is part of the Envimix Server Base project.");
-log("The code is open-source, but not claimable.");
+log("The code is fully open-source licensed in public domain.");
 log("Extending this script is allowed though.");
 log("Thank you for respecting.");
 log("");
@@ -207,15 +207,18 @@ UnitedCars.clear();
 CustomCars.clear();
 DisplayedCars.clear();
 
-Log("Envimix", """Reading {{{S_SkinsFile}}}...""");
-
 declare netwrite SSkin[Text][Text] Skins for Teams[0];
-declare SkinContent = ReadFile(S_SkinsFile);
-if(SkinContent == "") Log("Envimix", """NOTE: {{{S_SkinsFile}}} is empty or nonexisting. Skin system is going to be disabled.""");
-else {
-	if(!Skins.fromjson(SkinContent)) {
-		Skins.clear();
-		Log("Envimix", """NOTE: {{{S_SkinsFile}}} has a JSON issue. Skin system is going to be disabled.""");
+
+if (S_SkinsFile != "") {
+	Log("Envimix", """Reading {{{S_SkinsFile}}}...""");
+
+	declare SkinContent = ReadFile(S_SkinsFile);
+	if(SkinContent == "") Log("Envimix", """NOTE: {{{S_SkinsFile}}} is empty or nonexisting. Skin system is going to be disabled.""");
+	else {
+		if(!Skins.fromjson(SkinContent)) {
+			Skins.clear();
+			Log("Envimix", """NOTE: {{{S_SkinsFile}}} has a JSON issue. Skin system is going to be disabled.""");
+		}
 	}
 }
 
