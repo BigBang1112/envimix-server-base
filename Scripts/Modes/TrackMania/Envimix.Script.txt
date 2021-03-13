@@ -18,10 +18,10 @@
 #Setting S_EnableUnitedCars     False         as _("Enable United cars")
 #Setting S_EnableDefaultCar     False         as _("Enable default car")
 #Setting S_EnableCustomCars     False         as _("Enable custom cars")
-#Setting S_EnableStadiumEnvimix False         as _("* Enable Stadium envimix")	// Wrong usage can crash scripts
-#Setting S_UseUnitedModels      False         as _("* Use United models")	// Wrong usage can crash scripts
-#Setting S_VehicleFolder        "Vehicles/"   as _("* Vehicle folder")	// Wrong usage can crash scripts
-#Setting S_VehicleFileFormat    "%1.Item.Gbx" as _("* Vehicle file format")	// Wrong usage can crash scripts
+#Setting S_EnableStadiumEnvimix False         as _("* Enable Stadium envimix") // Wrong usage can crash scripts
+#Setting S_UseUnitedModels      False         as _("* Use United models")      // Wrong usage can crash scripts
+#Setting S_VehicleFolder        "Vehicles/"   as _("* Vehicle folder")         // Wrong usage can crash scripts
+#Setting S_VehicleFileFormat    "%1.Item.Gbx" as _("* Vehicle file format")    // Wrong usage can crash scripts
 #Setting S_CarsFile             "Cars.json"   as _("* Cars.json file")
 #Setting S_SkinsFile            ""            as _("* Skins.json file")
 #Setting S_UseSkillpoints       False         as _("Use skillpoints")
