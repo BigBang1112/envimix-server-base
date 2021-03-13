@@ -14,29 +14,29 @@
 	Integer Timestamp;
 }
 
-#Setting S_EnableTM2Cars					True					as _("Enable TM2 cars")
-#Setting S_EnableUnitedCars			False					as _("Enable United cars")
-#Setting S_EnableDefaultCar			False					as _("Enable default car")
-#Setting S_EnableCustomCars			False					as _("Enable custom cars")
-#Setting S_EnableStadiumEnvimix	False					as _("* Enable Stadium envimix")	// Wrong usage can crash scripts
-#Setting S_UseUnitedModels				False					as _("* Use United models")	// Wrong usage can crash scripts
-#Setting S_VehicleFolder					"Vehicles/"		as _("* Vehicle folder")	// Wrong usage can crash scripts
-#Setting S_VehicleFileFormat			"%1.Item.Gbx"	as _("* Vehicle file format")	// Wrong usage can crash scripts
-#Setting S_CarsFile							"Cars.json"		as _("* Cars.json file")
-#Setting S_SkinsFile							""	as _("* Skins.json file")
-#Setting S_UseSkillpoints				False					as _("Use skillpoints")
-#Setting S_UseLadder							True					as _("Use ladder")
-#Setting S_AllowRespawn					True					as _("Allow respawn")
+#Setting S_EnableTM2Cars        True          as _("Enable TM2 cars")
+#Setting S_EnableUnitedCars     False         as _("Enable United cars")
+#Setting S_EnableDefaultCar     False         as _("Enable default car")
+#Setting S_EnableCustomCars     False         as _("Enable custom cars")
+#Setting S_EnableStadiumEnvimix False         as _("* Enable Stadium envimix")	// Wrong usage can crash scripts
+#Setting S_UseUnitedModels      False         as _("* Use United models")	// Wrong usage can crash scripts
+#Setting S_VehicleFolder        "Vehicles/"   as _("* Vehicle folder")	// Wrong usage can crash scripts
+#Setting S_VehicleFileFormat    "%1.Item.Gbx" as _("* Vehicle file format")	// Wrong usage can crash scripts
+#Setting S_CarsFile             "Cars.json"   as _("* Cars.json file")
+#Setting S_SkinsFile            ""            as _("* Skins.json file")
+#Setting S_UseSkillpoints       False         as _("Use skillpoints")
+#Setting S_UseLadder            True          as _("Use ladder")
+#Setting S_AllowRespawn         True          as _("Allow respawn")
 
 ***BeforeServerInit***
 ***
 log("ENVIMIX MODE BASE");
 log("Developed by BigBang1112");
+log("https://github.com/BigBang1112/envimix-server-base");
 log("");
 log("This mode base is part of the Envimix Server Base project.");
-log("The code is fully open-source licensed in public domain.");
-log("Extending this script is allowed though.");
-log("Thank you for respecting.");
+log("The code is avaiable open-source in public domain.");
+log("Thank you for using ESB!");
 log("");
 ***
 

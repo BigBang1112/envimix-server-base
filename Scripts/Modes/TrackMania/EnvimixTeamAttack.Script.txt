@@ -1,7 +1,7 @@
 #Extends "Modes/TrackMania/Envimix.Script.txt"
 
-#Setting S_TimeLimit								600			as	_("Time limit")
-#Setting S_CarSelectTime						10			as	_("Car select time")
+#Setting S_TimeLimit     600 as _("Time limit")
+#Setting S_CarSelectTime 10  as _("Car select time")
 
 //#Command Command_ChangeTimeLimit (Integer) as _("Change time limit")
 
@@ -9,11 +9,11 @@
 ***
 log("ENVIMIX TEAM ATTACK");
 log("Developed by BigBang1112");
+log("https://github.com/BigBang1112/envimix-server-base");
 log("");
-log("This mode is part of the Envimix Server Base project.");
-log("The code is fully open-source licensed in public domain.");
-log("Extending this script is allowed though.");
-log("Thank you for respecting.");
+log("This mode base is part of the Envimix Server Base project.");
+log("The code is avaiable open-source in public domain.");
+log("Thank you for using ESB!");
 log("");
 ***
 
